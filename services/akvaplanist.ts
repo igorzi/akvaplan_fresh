@@ -149,19 +149,6 @@ export const boardURL = (
 ) =>
   `https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=${kid}&sokeverdi=937375158&spraak=${spraak}`;
 
-//@todo Get director from service
-export const admDir = {
-  "id": "mkr",
-  "given": "Merete",
-  "family": "Kristiansen",
-  "position": {
-    "no": "Administrerende direktør",
-    "en": "Managing Director",
-  },
-  "tel": "+4797518909",
-  "email": "mkr@akvaplan.niva.no",
-};
-
 export const akvaplan = {
   name: "Akvaplan-niva",
   tel: "+47 77 75 03 00",

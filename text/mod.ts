@@ -18,7 +18,7 @@ export const normalize = (s: string) =>
 
 export const languages = new Set(tr.keys());
 
-let _siteLang = null;
+let _siteLang = "no";
 
 export const getSiteLang = () => _siteLang ?? getLangAttr();
 
@@ -43,7 +43,7 @@ export const acceptsNordic = (
   acceptLanguages: readonly string[] | Set<string>,
 ) => new Set([...acceptLanguages].map((lang) => nordic.has(lang))).has(true);
 
-export const getLangFromURL = (url: URL | string): string | null => {
+export const getLangFromURL = (url: URL | string): string => {
   const segm = new URL(url).pathname.split("/")?.slice(1, 2)?.at(0);
   switch (segm) {
     case "nb":
@@ -53,7 +53,7 @@ export const getLangFromURL = (url: URL | string): string | null => {
     case "en":
       return "en";
     default:
-      return null;
+      return _siteLang;
   }
 };
 

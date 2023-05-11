@@ -40,7 +40,8 @@ export function Footer({ lang }) {
       >
         <ThemeSwitcher mini />
       </div>
-      <div
+      {
+        /* <div
         style={{
           background: "var(--surface0)",
           display: "grid",
@@ -50,7 +51,8 @@ export function Footer({ lang }) {
           padding: "0.5rem",
         }}
       >
-      </div>
+      </div> */
+      }
     </footer>
   );
 }

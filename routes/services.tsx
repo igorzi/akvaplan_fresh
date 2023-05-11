@@ -69,13 +69,8 @@ export default function Services(
         <link rel="stylesheet" href={asset("/css/article.css")} />
         <script src={asset("/@nrk/core-scroll.min.js")} />
       </Head>
+
       <h1>{title}</h1>
-      {
-        /* <HScrollWithDynamicImage
-        scrollerId=""
-        images={services}
-      /> */
-      }
 
       <HScroll maxVisibleChildren={6.5}>
         {services.map(ArticleSquare)}

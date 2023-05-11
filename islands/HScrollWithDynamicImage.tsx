@@ -42,7 +42,7 @@ export default function HScrollWithDynamicImage({ scrollerId, images }: Props) {
         <h2>{bigImage.title}</h2>
       </div>
       <div className="dynamic-scroll-container">
-        <HScroll scrollerId={scrollerId}>
+        <HScroll scrollerId={scrollerId} maxVisibleChildren={5}>
           {images.map((image) => (
             <ScrollImage
               image={image}

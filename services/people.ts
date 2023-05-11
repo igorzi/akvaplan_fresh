@@ -52,18 +52,18 @@ export const personInAuthors = (person) => ({ family, given }) => {
   const initials = personInitials.map((ini) => ini.join(""));
 
   const initialsAreMatching = initials.includes(authorInitials.join(""));
-  // if (!initialsAreMatching) {
-  //   console.warn(
-  //     JSON.stringify({
-  //       person: { initials, family: person.family, given: person.given },
-  //       candidate: {
-  //         rejected: !initialsAreMatching,
-  //         family,
-  //         given,
-  //       },
-  //     }),
-  //   );
-  // }
+  if (!initialsAreMatching) {
+    console.warn(
+      JSON.stringify({
+        person: { initials, family: person.family, given: person.given },
+        candidate: {
+          rejected: !initialsAreMatching,
+          family,
+          given,
+        },
+      }),
+    );
+  }
   return fam &&
     (given === person.given || n(given) === n(person.given) ||
       initialsAreMatching);

@@ -124,7 +124,7 @@ export default function DoiPublication(
           </h2>
           {current > 0 && (
             <p style={{ fontSize: "1rem" }}>
-              <ApnSym width="1rem" height="1rem" />{" "}
+              <ApnSym width="1rem" height="1rem" /> {current > 1 && current}
               = Akvaplan-niva ({t("people.akvaplanist(now)")})
             </p>
           )}
@@ -146,7 +146,7 @@ export default function DoiPublication(
 
                 {openalex.authorships.at(n)?.institutions.map((
                   { display_name, id, ror, country_code, type, ...r },
-                ) => <dd>{display_name}</dd>)}
+                ) => <dd lang="en" hidden>{display_name}</dd>)}
               </>
             ))}
           </dl>
