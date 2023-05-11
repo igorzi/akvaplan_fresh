@@ -4,13 +4,13 @@ import { UnknownPageProps } from "$fresh/server.ts";
 
 export default function NotFoundPage({ url }: UnknownPageProps) {
   const title = "Unknown URL";
-  //const wp = ["wp-admin", "wp-content"];
+
   // Disallow: /wp-admin/
   // Disallow: /wp-content/
-  // Disallow: /xmlrpc.php
-  // Disallow: /wp-login.php
-  // Disallow: /wp-cron.php
-  console.debug(404, url.pathname);
+
+  if (!url.pathname.endsWith(".php")) {
+    console.debug(404, url.pathname);
+  }
   return (
     <html>
       <Head>

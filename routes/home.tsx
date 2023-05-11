@@ -1,4 +1,3 @@
-//import { buildMobileNav } from "akvaplan_fresh/services/nav.ts";
 import { homeAlbums } from "akvaplan_fresh/services/mediebank.ts";
 import { getServicesLevel0 } from "akvaplan_fresh/services/svc.ts";
 import { getResearchLevel0 } from "akvaplan_fresh/services/research.ts";
@@ -13,7 +12,7 @@ import {
   MoreNews,
   NewsFilmStrip,
   Page,
-  WhyUs,
+  //WhyUs,
 } from "akvaplan_fresh/components/mod.ts";
 
 import { Handlers, RouteConfig } from "$fresh/server.ts";
@@ -104,6 +103,7 @@ export default function Home(
       <Head>
         <link rel="stylesheet" href={asset("/css/mini-news.css")} />
         <link rel="stylesheet" href={asset("/css/hscroll.css")} />
+        <link rel="stylesheet" href={asset("/css/hscroll-dynamic.css")} />
         <link rel="stylesheet" href={asset("/css/article.css")} />
         <script src={asset("/@nrk/core-scroll.min.js")} />
       </Head>
@@ -176,7 +176,6 @@ export default function Home(
       }
 
       {/* Research facilities (Fisk Loise) Sensor platforms */}
-      {/* <WhyUs /> */}
     </Page>
   );
 }
