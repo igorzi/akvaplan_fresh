@@ -13,6 +13,7 @@ interface PeopleProps {
   id?: string;
   person?: Akvaplanist;
   lang?: string;
+  icons: boolean;
 }
 const people = await akvaplanistMap();
 
@@ -21,6 +22,7 @@ export function PeopleCard(
     person,
     lang = langSignal.value,
     id,
+    icons = true,
   }: PeopleProps,
 ) {
   if (people.has(id)) {
@@ -99,21 +101,24 @@ export function PeopleCard(
         </a>
       )}
 
-      <div class="">
-        {tel && (
+      {icons && (
+        <div class="">
+          {tel && (
+            <a
+              href={`tel:${tel}`}
+              aria-label={`call ${tel}`}
+            >
+              <Icon name="phone_in_talk"></Icon>
+            </a>
+          )}
           <a
-            href={`tel:${tel}`}
+            href={`mailto:${email}`}
+            aria-label={`send mail to ${email}`}
           >
-            <Icon name="phone_in_talk"></Icon>
+            <Icon name="contact_mail"></Icon>
           </a>
-        )}
-        <a
-          href={`mailto:${email}`}
-          aria-label={email}
-        >
-          <Icon name="contact_mail"></Icon>
-        </a>
-      </div>
+        </div>
+      )}
     </Card>
   );
 }

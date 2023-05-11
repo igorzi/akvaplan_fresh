@@ -45,12 +45,14 @@ export const GroupedPeople = (
             {group === "unit" ? t(`unit.${grpkey}`) : grpkey}
           </a>
         </h2>
+
         <HScroll scrollerId="news-scroll">
           {grpmembers.map((person) => (
             <PeopleCard
               id={person.id}
               person={person}
               key={person.id}
+              icons={false}
             />
           ))}
         </HScroll>
