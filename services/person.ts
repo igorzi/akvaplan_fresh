@@ -1,4 +1,4 @@
-// @todo Move to service ?
+// @todo People alias: move to service ?
 // Used by person page to check if a publication is authored by this person
 const familyAliasMap = new Map([
   ["clh", "Halsband-Lenk"],
@@ -19,3 +19,7 @@ export const givenAliasMap = new Map(
 export const alias = new Map([
   ["ANDREY|SIKORSKI", "avs"],
 ]);
+
+// When person just has 1 initial, and the candidate more => accept?
+// {"person":{"initials":["V"],"family":"Savinov","given":"Vladimir"},"candidate":{"rejected":true,"family":"Savinov","given":"V.M."}}
+// {"person":{"initials":["V"],"family":"Savinov","given":"Vladimir"},"candidate":{"rejected":true,"family":"Savinov","given":"Vladimir M"}}

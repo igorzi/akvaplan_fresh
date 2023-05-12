@@ -95,7 +95,7 @@ export default function DoiPublication(
             dangerouslySetInnerHTML={{ __html: title }}
           />
           <p>
-            <em dangerouslySetInnerHTML={{ __html: container }} />{" "}
+            <em dangerouslySetInnerHTML={{ __html: container || "?" }} />{" "}
             (<time>{printed ?? published}</time>)
           </p>
           <p>{oa_url && <a download href={oa_url}>pdf</a>}</p>
@@ -146,7 +146,7 @@ export default function DoiPublication(
 
                 {openalex.authorships.at(n)?.institutions.map((
                   { display_name, id, ror, country_code, type, ...r },
-                ) => <dd lang="en" hidden>{display_name}</dd>)}
+                ) => <dd lang="en">{display_name}</dd>)}
               </>
             ))}
           </dl>

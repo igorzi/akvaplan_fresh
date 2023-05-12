@@ -51,7 +51,10 @@ export const personInAuthors = (person) => ({ family, given }) => {
   ];
   const initials = personInitials.map((ini) => ini.join(""));
 
-  const initialsAreMatching = initials.includes(authorInitials.join(""));
+  const initialsAreMatching = initials.slice(0, personInitials.length).includes(
+    authorInitials.join(""),
+  );
+
   if (!initialsAreMatching) {
     console.warn(
       JSON.stringify({
