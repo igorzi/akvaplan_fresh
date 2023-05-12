@@ -21,12 +21,6 @@ export const findAkvaplanistInCristin = async ({ given, family, id }) => {
     () => {},
   );
   if (r?.ok) {
-    // {
-    //   first_name: "Stig",
-    //   surname: "Falk-Petersen",
-    //   url: "https://api.cristin.no/v2/persons/57495",
-    //   cristin_person_id: "57495"
-    // }
     for (
       const { surname, first_name, cristin_person_id } of await r.json()
     ) {
@@ -40,14 +34,14 @@ export const findAkvaplanistInCristin = async ({ given, family, id }) => {
           }
           return Number(cristin_person_id);
         } else {
-          console.debug("Family match", {
-            family,
-            given,
-            cristin: { first_name, cristin_person_id },
-          });
+          // console.debug("Family match", {
+          //   family,
+          //   given,
+          //   cristin: { first_name, cristin_person_id },
+          // });
         }
       }
     }
-    console.warn("Not found in CRISTIN", { id, family, given });
+    //console.debug("Not found in CRISTIN", { id, family, given });
   }
 };
