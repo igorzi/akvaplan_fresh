@@ -71,4 +71,20 @@ export const doiImage = new Map([
     "10.1016/j.marpolbul.2022.114197",
     "https://ars.els-cdn.com/content/image/1-s2.0-S0025326X22008797-ga1_lrg.jpg",
   ],
+  [
+    "10.3389/fevo.2023.1107992",
+    "https://www.frontiersin.org/files/Articles/1107992/fevo-11-1107992-HTML/image_m/fevo-11-1107992-g003.jpg",
+  ],
+  [
+    "10.3390/fishes8040212",
+    "https://pub.mdpi-res.com/fishes/fishes-08-00212/article_deploy/html/images/fishes-08-00212-g001.png?1682519127",
+  ],
+  [
+    "10.1016/j.aquaculture.2023.739325",
+    "https://ars.els-cdn.com/content/image/1-s2.0-S0044848623000984-gr2.jpg",
+  ],
+  [
+    "10.3389/fmicb.2023.1130018",
+    "https://www.frontiersin.org/files/Articles/1130018/fmicb-14-1130018-HTML/image_m/fmicb-14-1130018-g002.jpg",
+  ],
 ]);

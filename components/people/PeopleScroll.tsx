@@ -20,13 +20,15 @@ const inline = {
   gridTemplateColumns: "repeat(auto-fit, minmax(440px, 1fr))",
   gridGap: "1rem",
 };
-export const OneGroup = (
+export const OnePersonGroup = (
   { members },
 ) => (
   <ul style={inline}>
     {members.map((person: Akvaplanist) => (
       <li style={inline}>
-        <PeopleCard person={person} id={person.id} key={person.id} />
+        <span>
+          <PeopleCard person={person} id={person.id} key={person.id} />
+        </span>
       </li>
     ))}
   </ul>

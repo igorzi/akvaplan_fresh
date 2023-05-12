@@ -2,6 +2,7 @@ import {
   buildoiNewsMap,
   doiImage,
   findAkvaplanist,
+  findPriorAkvaplanist,
   getOpenAlexWork,
   getSlimPublication,
   personURL,
@@ -49,18 +50,30 @@ export const handler: Handlers<SlimPublication> = {
       const image = await doiImage.get(doi);
       let i = 0;
       let current = 0;
+      let priors = 0;
       for await (const person of (slim.authors ?? [])) {
         const { given, family } = person;
         person.name = `${given} ${family}`;
         const { id } = await findAkvaplanist({ given, family }) ?? {};
         if (id) {
-          person.id = id;
           current++;
+          person.id = id;
+        } else {
+          const prior = await findPriorAkvaplanist({ given, family });
+
+          if (prior) {
+            priors++;
+            person.prior = true;
+            //console.debug({ prior, given, family });
+            if (prior.id) {
+              person.id = prior.id;
+            }
+          }
         }
         slim.authors[i++] = person;
       }
 
-      return ctx.render({ slim, news, openalex, lang, image, current });
+      return ctx.render({ slim, news, openalex, lang, image, current, priors });
     } else {
       return ctx.renderNotFound();
     }
@@ -68,9 +81,10 @@ export const handler: Handlers<SlimPublication> = {
 };
 
 export default function DoiPublication(
-  { params, data: { slim, news, openalex, lang, image, current } }: PageProps<
-    { slim: SlimPublication; news: unknown; image: string }
-  >,
+  { params, data: { slim, news, openalex, lang, image, current, priors } }:
+    PageProps<
+      { slim: SlimPublication; news: unknown; image: string }
+    >,
 ) {
   const {
     title,
@@ -124,21 +138,34 @@ export default function DoiPublication(
           </h2>
           {current > 0 && (
             <p style={{ fontSize: "1rem" }}>
-              <ApnSym width="1rem" height="1rem" /> {current > 1 && current}
-              = Akvaplan-niva ({t("people.akvaplanist(now)")})
+              <ApnSym width="1rem" height="1rem" /> {current > 0 && current}
+              {" "}
+              Akvaplan-niva ({t("people.akvaplanist(now)")})
+            </p>
+          )}
+          {priors > 0 && (
+            <p style={{ fontSize: "1rem" }}>
+              <ApnSym width="1rem" height="1rem" style="filter: grayscale(1)" />
+              {" "}
+              {priors > 0 && priors}{" "}
+              Akvaplan-niva ({t("people.akvaplanist(prior)")})
             </p>
           )}
           <dl style={{ fontSize: "1rem" }}>
-            {authors.map(({ name, given, family, id }, n) => (
+            {authors.map(({ name, given, family, id, prior }, n) => (
               <>
                 <dt>
-                  {id
+                  {id || prior
                     ? (
                       <span>
                         <a href={personURL({ id, given, family, lang })}>
                           {name}
                         </a>{" "}
-                        <ApnSym width="1rem" height="1rem" />
+                        <ApnSym
+                          width="1rem"
+                          height="1rem"
+                          style={prior ? { filter: "grayscale(1)" } : {}}
+                        />
                       </span>
                     )
                     : <span>{name}</span>}

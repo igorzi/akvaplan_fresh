@@ -40,6 +40,7 @@ export function PeopleCard(
     workplace,
     management,
     responsibility,
+    prior,
   } = person ?? {};
 
   return (
@@ -60,7 +61,11 @@ export function PeopleCard(
             </a>
           )}
       </div>
-      <ApnSym width="2rem" />
+      <ApnSym
+        width="2rem"
+        style={prior === true ? { filter: "grayscale(1)" } : {}}
+      />{" "}
+      {person.prior === true && <span>{t("people.akvaplanist(prior)")}</span>}
       <span class="people-position">
         {position?.[lang ?? "no"] ?? ""}
       </span>
@@ -111,12 +116,14 @@ export function PeopleCard(
               <Icon name="phone_in_talk"></Icon>
             </a>
           )}
-          <a
-            href={`mailto:${email}`}
-            aria-label={`send mail to ${email}`}
-          >
-            <Icon name="contact_mail"></Icon>
-          </a>
+          {email && (
+            <a
+              href={`mailto:${email}`}
+              aria-label={`send mail to ${email}`}
+            >
+              <Icon name="contact_mail"></Icon>
+            </a>
+          )}
         </div>
       )}
     </Card>

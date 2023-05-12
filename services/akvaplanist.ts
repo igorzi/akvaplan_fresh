@@ -1,5 +1,6 @@
 import { alias, offices } from "akvaplan_fresh/services/mod.ts";
 import { normalize as n, tr } from "akvaplan_fresh/text/mod.ts";
+import { priorAkvaplanistID, priorAkvaplanists } from "./prior_akvaplanists.ts";
 import { Akvaplanist } from "akvaplan_fresh/@interfaces/mod.ts";
 
 export const base = "https://akvaplanists.deno.dev";
@@ -63,6 +64,19 @@ export const findAkvaplanist = async (
       return familyAndInitial.length === 1 ? familyAndInitial.at(0) : undefined;
     }
   }
+};
+
+export const findPriorAkvaplanist = (
+  { id, given, family }: Akvaplanist,
+): Promise<Akvaplanist | undefined> => {
+  if (id) {
+    return priorAkvaplanistID.get(id);
+  }
+  const prior = priorAkvaplanists.find((p) => p.family === family);
+  if (prior?.id) {
+    return prior;
+  }
+  return prior;
 };
 
 export const getAugmentedAkvaplanists = async (): Akvaplanist[] =>

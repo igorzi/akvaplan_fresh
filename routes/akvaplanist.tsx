@@ -9,6 +9,7 @@ import {
   getAugmentedAkvaplanists,
   newsOnPerson,
   offices,
+  priorAkvaplanistID,
   pubsFromPersonGroupedByYear,
 } from "akvaplan_fresh/services/mod.ts";
 
@@ -20,7 +21,7 @@ import {
   HScroll,
   NewsFilmStrip,
   OfficeCard,
-  OneGroup,
+  OnePersonGroup,
   Page,
   PeopleSearchForm,
 } from "akvaplan_fresh/components/mod.ts";
@@ -39,6 +40,7 @@ import {
 } from "$fresh/server.ts";
 
 import { Head } from "$fresh/runtime.ts";
+import { priorAkvaplanists } from "../services/prior_akvaplanists.ts";
 
 interface AkvaplanistsRouteProps {
   people: Akvaplanist[];
@@ -135,9 +137,27 @@ export const handler: Handlers = {
 
     const base = `/${lang}/${page}/${group}`;
 
-    const person = ("id" === group && results.length === 1)
-      ? results.at(0)
-      : {};
+    let person = ("id" === group && results.length === 1) ? results.at(0) : {};
+
+    if (results?.length === 0 && filter) {
+      if (["id", "name"].includes(group)) {
+        if (priorAkvaplanistID.has(filter)) {
+          const prior = priorAkvaplanistID.get(filter);
+          person = { prior: true, family: prior.family, given: prior.given };
+          results[0] = person;
+        } else {
+          // @todo The route params :fn :gn must be fixed, and single person routes must
+          const prior = priorAkvaplanists.find(({ given, family }) =>
+            family === filter &&
+            given === params.fn
+          );
+          if (prior) {
+            person = { prior: true, family: prior.family, given: prior.given };
+            results[0] = prior;
+          }
+        }
+      }
+    }
 
     if (person && !person.cristin) {
       person.cristin = await findAkvaplanistInCristin(person);
@@ -275,7 +295,7 @@ export default function Akvaplanists(
         </section>
       )}
 
-      {!["id", "workplace"].includes(group) &&
+      {!["id", "name", "workplace"].includes(group) &&
         (
           <section class="page-header">
             {/* <NewsFilmStrip news={news} lang={lang.value} /> */}
@@ -291,7 +311,7 @@ export default function Akvaplanists(
           </section>
         )}
 
-      {filter?.length > 0 ? <OneGroup members={results} /> : (
+      {filter?.length > 0 ? <OnePersonGroup members={results} /> : (
         <>
           <PeopleSearchForm q={q} sortdir={searchParams.get("sortdir")} />
           <GroupedPeople group={group} grouped={grouped} />
