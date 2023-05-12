@@ -186,7 +186,7 @@ export default (
             <h1 style={_header}>{t("about.Identification")}</h1>
             <dl>
               <dt>
-                Organisasjonsnummer
+                {t("about.Organisasjonsnummer")}
               </dt>
               <dd>
                 <a
@@ -197,7 +197,10 @@ export default (
                 </a>
               </dd>
               <dt>
-                <abbr title={"Research Organization Registry"}>ROR</abbr> ID:
+                <abbr title={"Research Organization Registry"} lang="en">
+                  ROR
+                </abbr>{" "}
+                ID:
               </dt>
               <dd>
                 <a
@@ -332,18 +335,18 @@ export default (
                 </dd>
 
                 <dt>
-                  Telefon
+                  {t("ui.Telephone")}
                 </dt>
                 <dd>
                   <a
                     href={`tel:${akvaplan.tel}`}
                   >
-                    <Icon name="phone_in_talk" /> +47 77 75 03 00
+                    <Icon name="phone_in_talk" /> {akvaplan.tel}
                   </a>
                 </dd>
 
                 <dt>
-                  E-post
+                  {t("ui.E-mail")}
                 </dt>
                 <dd>
                   <a

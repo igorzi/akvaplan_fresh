@@ -17,7 +17,7 @@ const En = new Map([
   ["pubs", "/en/publications"],
   ["dcat", "/en/dcat"],
   ["documents", "/en/documents"],
-  ["invoicing", "/no/faktura"],
+  ["invoicing", "/en/invoice"],
   ["people", "/en/people"],
 ]);
 const No = new Map([

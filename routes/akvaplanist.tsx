@@ -2,6 +2,9 @@
 import {
   buildGroupFX,
   buildPeopleGrouper,
+  cristinAppPersonURL,
+  cristinAppWorksURL,
+  findAkvaplanistInCristin,
   //groupByChar0,
   getAugmentedAkvaplanists,
   newsOnPerson,
@@ -136,8 +139,9 @@ export const handler: Handlers = {
       ? results.at(0)
       : {};
 
-    //@todo Person Country is TELEPHONE
-    //FIXME Person API.
+    if (person && !person.cristin) {
+      person.cristin = await findAkvaplanistInCristin(person);
+    }
 
     //@todo separate route for 1 person!?
     const news = (person && person.family)
@@ -311,7 +315,26 @@ export default function Akvaplanists(
 
       {pubsByYear.size > 0 && (
         <section>
-          <h1>{t("pubs.Research_pubs")} ({numPubs})</h1>
+          <h1>{t("pubs.Pubs")} ({numPubs})</h1>
+          {person?.cristin && (
+            <div>
+              {t("pubs.Also_view")}{" "}
+              <a href={cristinAppWorksURL(person.cristin)} target="_blank">
+                {t("pubs.works")}
+              </a>{" "}
+              {t("pubs.and")}{" "}
+              <a href={cristinAppPersonURL(person.cristin)} target="_blank">
+                {t("pubs.person")}
+              </a>{" "}
+              {t("pubs.in")}{" "}
+              <abbr
+                title="Current Research Information System in Norway"
+                lang="en"
+              >
+                CRISTIN
+              </abbr>
+            </div>
+          )}
           <div style={{ fontSize: "1rem" }}>
             {[...pubsByYear].map(([grpkey, grppubs], i) =>
               i < 0
