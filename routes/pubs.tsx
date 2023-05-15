@@ -63,9 +63,7 @@ export const handler: Handlers<DoiSearchResultsProps> = {
 export default function ApnPubs({ data }: PageProps<DoiSearchResultsProps>) {
   const { all, results, title, q, base, lang } = data;
   return (
-    <Page title="Pubs" base={base}>
-      <link rel="stylesheet" href="/css/hscroll.css" />
-      <script src="/@nrk/core-scroll.min.js" />
+    <Page title={t("nav.Pubs")} base={base}>
       {/* <Head></Head> */}
       <h1>{title}</h1>
       <DoiSearch q={q} results={results} all={all} lang={lang} />
