@@ -1,7 +1,10 @@
 //https://api.cristin.no/v2/doc
 export const apiv2 = "https://api.cristin.no/v2";
 export const cristinAkvaplanID = 6064;
-export const akvaplanCristinPersonMap = new Map([["per", 60802]]);
+export const akvaplanCristinPersonMap = new Map([
+  ["per", 60802],
+  ["sam", 803586],
+]);
 export const cristinPeopleInsitutionURL = (ident: string | number) =>
   `${apiv2}/persons?institution=${ident}&per_page=1000`;
 export const cristinAppWorksURL = (
