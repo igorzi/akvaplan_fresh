@@ -12,27 +12,29 @@ import * as $5 from "./routes/akvaplanist.tsx";
 import * as $6 from "./routes/article/[slug].tsx";
 import * as $7 from "./routes/careers.tsx";
 import * as $8 from "./routes/dcat.tsx";
-import * as $9 from "./routes/doi.tsx";
-import * as $10 from "./routes/fakturering.tsx";
-import * as $11 from "./routes/home.tsx";
-import * as $12 from "./routes/index.tsx";
-import * as $13 from "./routes/legacy.tsx";
-import * as $14 from "./routes/legacy_pages_redirect.tsx";
-import * as $15 from "./routes/ms-louise.tsx";
-import * as $16 from "./routes/mynewsdesk-articles/[slug].tsx";
-import * as $17 from "./routes/nav.tsx";
-import * as $18 from "./routes/news.tsx";
-import * as $19 from "./routes/null.tsx";
-import * as $20 from "./routes/pref.tsx";
-import * as $21 from "./routes/pubs.tsx";
-import * as $22 from "./routes/research.tsx";
-import * as $23 from "./routes/research_topics.tsx";
-import * as $24 from "./routes/search.tsx";
-import * as $25 from "./routes/service_topics.tsx";
-import * as $26 from "./routes/services.tsx";
-import * as $27 from "./routes/sitemap.txt.ts";
-import * as $28 from "./routes/topics.tsx";
-import * as $29 from "./routes/usr.tsx";
+import * as $9 from "./routes/documents.tsx";
+import * as $10 from "./routes/doi.tsx";
+import * as $11 from "./routes/fakturering.tsx";
+import * as $12 from "./routes/home.tsx";
+import * as $13 from "./routes/index.tsx";
+import * as $14 from "./routes/legacy.tsx";
+import * as $15 from "./routes/legacy_pages_redirect.tsx";
+import * as $16 from "./routes/ms-louise.tsx";
+import * as $17 from "./routes/mynewsdesk-articles/[slug].tsx";
+import * as $18 from "./routes/nav.tsx";
+import * as $19 from "./routes/news.tsx";
+import * as $20 from "./routes/null.tsx";
+import * as $21 from "./routes/pref.tsx";
+import * as $22 from "./routes/projects.tsx";
+import * as $23 from "./routes/pubs.tsx";
+import * as $24 from "./routes/research.tsx";
+import * as $25 from "./routes/research_topics.tsx";
+import * as $26 from "./routes/search.tsx";
+import * as $27 from "./routes/service_topics.tsx";
+import * as $28 from "./routes/services.tsx";
+import * as $29 from "./routes/sitemap.txt.ts";
+import * as $30 from "./routes/topics.tsx";
+import * as $31 from "./routes/usr.tsx";
 import * as $$0 from "./islands/HScrollWithDynamicImage.tsx";
 import * as $$1 from "./islands/button_open_dialog.tsx";
 import * as $$2 from "./islands/doi_search.tsx";
@@ -52,27 +54,29 @@ const manifest = {
     "./routes/article/[slug].tsx": $6,
     "./routes/careers.tsx": $7,
     "./routes/dcat.tsx": $8,
-    "./routes/doi.tsx": $9,
-    "./routes/fakturering.tsx": $10,
-    "./routes/home.tsx": $11,
-    "./routes/index.tsx": $12,
-    "./routes/legacy.tsx": $13,
-    "./routes/legacy_pages_redirect.tsx": $14,
-    "./routes/ms-louise.tsx": $15,
-    "./routes/mynewsdesk-articles/[slug].tsx": $16,
-    "./routes/nav.tsx": $17,
-    "./routes/news.tsx": $18,
-    "./routes/null.tsx": $19,
-    "./routes/pref.tsx": $20,
-    "./routes/pubs.tsx": $21,
-    "./routes/research.tsx": $22,
-    "./routes/research_topics.tsx": $23,
-    "./routes/search.tsx": $24,
-    "./routes/service_topics.tsx": $25,
-    "./routes/services.tsx": $26,
-    "./routes/sitemap.txt.ts": $27,
-    "./routes/topics.tsx": $28,
-    "./routes/usr.tsx": $29,
+    "./routes/documents.tsx": $9,
+    "./routes/doi.tsx": $10,
+    "./routes/fakturering.tsx": $11,
+    "./routes/home.tsx": $12,
+    "./routes/index.tsx": $13,
+    "./routes/legacy.tsx": $14,
+    "./routes/legacy_pages_redirect.tsx": $15,
+    "./routes/ms-louise.tsx": $16,
+    "./routes/mynewsdesk-articles/[slug].tsx": $17,
+    "./routes/nav.tsx": $18,
+    "./routes/news.tsx": $19,
+    "./routes/null.tsx": $20,
+    "./routes/pref.tsx": $21,
+    "./routes/projects.tsx": $22,
+    "./routes/pubs.tsx": $23,
+    "./routes/research.tsx": $24,
+    "./routes/research_topics.tsx": $25,
+    "./routes/search.tsx": $26,
+    "./routes/service_topics.tsx": $27,
+    "./routes/services.tsx": $28,
+    "./routes/sitemap.txt.ts": $29,
+    "./routes/topics.tsx": $30,
+    "./routes/usr.tsx": $31,
   },
   islands: {
     "./islands/HScrollWithDynamicImage.tsx": $$0,
