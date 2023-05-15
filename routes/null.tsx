@@ -1,35 +1,16 @@
 import { Page } from "akvaplan_fresh/components/page.tsx";
-import { lang, t } from "akvaplan_fresh/text/mod.ts";
+import { t } from "akvaplan_fresh/text/mod.ts";
+export {
+  handler,
+  type InternationalProps,
+} from "akvaplan_fresh/utils/page/international_page.ts";
 
-import {
-  type HandlerContext,
-  type Handlers,
-  type PageProps,
-  type RouteConfig,
-} from "$fresh/server.ts";
-
-interface NullProps {
-  lang: string;
-  base: string;
-  title: string;
-}
-
+import { PageProps, RouteConfig } from "$fresh/server.ts";
 export const config: RouteConfig = {
   routeOverride: "/:lang(en|no)/:page(null|0)",
 };
-
-export const handler: Handlers = {
-  GET(req: Request, ctx: HandlerContext) {
-    const { params } = ctx;
-    lang.value = params.lang;
-    const title = t(params.page);
-    const base = `/${params.lang}/${params.page}/`;
-    return ctx.render({ lang, title, base });
-  },
-};
-
-export default function Null(
-  { data: { title, lang, base } }: PageProps<NullProps>,
+export default function Documents(
+  { data: { title, lang, base } }: PageProps<InternationalProps>,
 ) {
   return (
     <Page title={title} base={base}>
