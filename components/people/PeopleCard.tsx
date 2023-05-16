@@ -110,13 +110,14 @@ export function PeopleCard(
       )}
 
       {icons && (
-        <div class="">
+        <div class="people-workplace">
           {tel && (
             <a
               href={`tel:${tel}`}
               aria-label={`call ${tel}`}
             >
               <Icon name="phone_in_talk"></Icon>
+              {tel}
             </a>
           )}
           {email && (
@@ -125,6 +126,7 @@ export function PeopleCard(
               aria-label={`send mail to ${email}`}
             >
               <Icon name="contact_mail"></Icon>
+              {email}
             </a>
           )}
         </div>
