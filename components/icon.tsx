@@ -11,6 +11,7 @@ const icons = new Set([
   "exit_to_app",
   "language",
   "phone_in_talk",
+  "west",
   "search",
 ]);
 

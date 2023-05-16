@@ -87,4 +87,8 @@ export const doiImage = new Map([
     "10.3389/fmicb.2023.1130018",
     "https://www.frontiersin.org/files/Articles/1130018/fmicb-14-1130018-HTML/image_m/fmicb-14-1130018-g002.jpg",
   ],
+  [
+    "10.1002/ece3.9569",
+    "https://onlinelibrary.wiley.com/cms/asset/b6391f3c-1a5d-4e55-abd2-263efd7d4d33/ece39569-fig-0005-m.jpg",
+  ],
 ]);

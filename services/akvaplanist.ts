@@ -69,14 +69,18 @@ export const findAkvaplanist = async (
 export const findPriorAkvaplanist = (
   { id, given, family }: Akvaplanist,
 ): Promise<Akvaplanist | undefined> => {
-  if (id) {
+  if (id && priorAkvaplanistID.has(id)) {
     return priorAkvaplanistID.get(id);
   }
-  const prior = priorAkvaplanists.find((p) => p.family === family);
-  if (prior?.id) {
-    return prior;
+  const exact = priorAkvaplanists.find(
+    (p) =>
+      n(p.family) === n(family) &&
+      n(p.given) === n(given),
+  );
+  if (exact) {
+    return exact;
   }
-  return prior;
+  //return prior;
 };
 
 export const getAugmentedAkvaplanists = async (): Akvaplanist[] =>

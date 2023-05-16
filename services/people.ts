@@ -34,7 +34,12 @@ export const extractInitials = (given: string) =>
 
 // For a  `person`, check if at least one of authors (named `family` / `given`) matches,
 // ie. are identical or share family name + initials
-export const personInAuthors = (person) => ({ family, given }) => {
+export const personInAuthors = (person) => ({ family, given, name }) => {
+  //bail on name, it's very uncommon (only 5 pubs )
+  if (name && !family) {
+    return false;
+  }
+
   const fam = family === person.family ||
     n(family) === n(person.family) ||
     n(familyAlias(person.id)) === n(family);

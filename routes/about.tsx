@@ -53,7 +53,7 @@ export const handler: Handlers = {
       ...apn,
       links: {
         board: boardURL(lang.value),
-        leaders: routes(lang.value).get("people") + "/unit/ledels",
+        leaders: routes(lang.value).get("people") + "/management",
         sectionleaders: routes(lang.value).get("people") + "/?q=seksjonsleder",
       },
       admDir,
@@ -115,7 +115,11 @@ export default (
             <h1 style={_header}>
               {t("people.Management")}
             </h1>
-            <PeopleCard person={akvaplan.admDir} lang={lang} />
+            <PeopleCard
+              id={akvaplan.admDir.id}
+              person={akvaplan.admDir}
+              lang={lang}
+            />
 
             <menu>
               <li>

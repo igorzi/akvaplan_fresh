@@ -8,7 +8,7 @@ const fetchJSON = async (url) => {
   if (r?.ok) {
     return r.json();
   } else {
-    console.warn(`GET ${url} failed with status: ${r.status}`);
+    console.warn(`GET ${url} failed (${r?.status})`);
   }
 };
 

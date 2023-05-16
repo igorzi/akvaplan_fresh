@@ -79,4 +79,7 @@ export const serviceGroupURL = ({ topic, lang }) =>
     lang === "en" || lang?.value == "en" ? "topic" : "tema"
   }/${topic}`;
 
+export const pubsURL = ({ lang } = {}) =>
+  `${routes(lang || langSignal.value).get("pubs")}`;
+
 export const pubURL = ({ doi, lang }) => `${routes(lang).get("pubs")}/${doi}`;

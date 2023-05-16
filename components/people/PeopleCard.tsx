@@ -1,3 +1,6 @@
+// FIXME PeopleCard: Priors with ID should use gray symbol and no email
+// https://akvaplan.no/no/nyhet/2021-04-26/tynn-men-fet-fisken-tverrhalet-langebarn-utgjor-en-energibombe-i-de-arktiske-hav
+// https://akvaplan.no/no/folk/name/Biuw/Martin
 import { akvaplanistMap } from "akvaplan_fresh/services/akvaplanist.ts";
 import { peopleURL, personURL } from "akvaplan_fresh/services/nav.ts";
 
@@ -107,13 +110,14 @@ export function PeopleCard(
       )}
 
       {icons && (
-        <div class="">
+        <div class="people-workplace">
           {tel && (
             <a
               href={`tel:${tel}`}
               aria-label={`call ${tel}`}
             >
               <Icon name="phone_in_talk"></Icon>
+              {tel}
             </a>
           )}
           {email && (
@@ -122,6 +126,7 @@ export function PeopleCard(
               aria-label={`send mail to ${email}`}
             >
               <Icon name="contact_mail"></Icon>
+              {email}
             </a>
           )}
         </div>

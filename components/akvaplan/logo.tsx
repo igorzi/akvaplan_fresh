@@ -10,7 +10,7 @@ export const ApnLogo = ({ width = "100%", height = "48px" } = {}) => (
     height={height}
     viewBox="0 0 127.11 30.276"
     aria-label="Akvaplan-niva"
-    alt=""
+    alt="logo"
     role="img"
     class="Akvaplan-niva"
   >

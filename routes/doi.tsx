@@ -1,16 +1,23 @@
+export {
+  handler as _handler,
+  type InternationalProps,
+  style,
+} from "akvaplan_fresh/utils/page/international_page.ts";
+
 import {
-  buildoiNewsMap,
+  //buildoiNewsMap,
   doiImage,
   findAkvaplanist,
   findPriorAkvaplanist,
   getOpenAlexWork,
   getSlimPublication,
   personURL,
+  pubsURL,
 } from "akvaplan_fresh/services/mod.ts";
 
-import { ApnSym, Card, Page } from "akvaplan_fresh/components/mod.ts";
+import { ApnSym, Card, Icon, Page } from "akvaplan_fresh/components/mod.ts";
 
-import { lang, lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
+import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 
 import { SlimPublication } from "akvaplan_fresh/@interfaces/slim_publication.ts";
 
@@ -20,13 +27,13 @@ import {
   PageProps,
   RouteConfig,
 } from "$fresh/server.ts";
-import { Akvaplanist } from "../@interfaces/akvaplanist.ts";
 
-import { Head } from "$fresh/runtime.ts";
-import { router } from "https://deno.land/x/rutt@0.0.14/mod.ts";
+//import { Akvaplanist } from "../@interfaces/akvaplanist.ts";
+
+//import { Head } from "$fresh/runtime.ts";
 
 export const config: RouteConfig = {
-  routeOverride: "{/:lang}?/doi/:prefix/:suffix0/:extra*",
+  routeOverride: "{/:lang(en|no)}?/doi/:prefix/:suffix0/:extra*",
 };
 
 const doiFromParams = (params: Record<string, string>) => {
@@ -45,15 +52,15 @@ export const handler: Handlers<SlimPublication> = {
     const slim = await getSlimPublication(doi);
 
     if (slim) {
-      const news = await buildoiNewsMap() ?? {};
+      //const news = await buildoiNewsMap() ?? {};
       const openalex = await getOpenAlexWork({ doi }) ?? {};
       const image = await doiImage.get(doi);
       let i = 0;
       let current = 0;
       let priors = 0;
       for await (const person of (slim.authors ?? [])) {
-        const { given, family } = person;
-        person.name = `${given} ${family}`;
+        const { given, family, name } = person;
+        person.name = name ?? `${given} ${family}`;
         const { id } = await findAkvaplanist({ given, family }) ?? {};
         if (id) {
           current++;
@@ -73,7 +80,7 @@ export const handler: Handlers<SlimPublication> = {
         slim.authors[i++] = person;
       }
 
-      return ctx.render({ slim, news, openalex, lang, image, current, priors });
+      return ctx.render({ slim, openalex, lang, image, current, priors });
     } else {
       return ctx.renderNotFound();
     }
@@ -81,10 +88,9 @@ export const handler: Handlers<SlimPublication> = {
 };
 
 export default function DoiPublication(
-  { params, data: { slim, news, openalex, lang, image, current, priors } }:
-    PageProps<
-      { slim: SlimPublication; news: unknown; image: string }
-    >,
+  { params, data: { slim, openalex, lang, image, current, priors } }: PageProps<
+    { slim: SlimPublication; image: string }
+  >,
 ) {
   const {
     title,
@@ -95,14 +101,25 @@ export default function DoiPublication(
     container,
     authors,
     doi,
+    cites,
     ...rest
   } = slim;
-  const { is_oa, oa_status, oa_url } = openalex.open_access;
+  const {
+    open_access: {
+      is_retracted,
+      is_paratext,
+      is_oa,
+      oa_status,
+      oa_url,
+      any_repository_has_fulltext,
+    },
+  } = openalex || {};
+  const oa = license && /cc/i.test(license) ? true : oa_status;
+  const pdf = slim?.pdf || oa_url;
   const href = `https://doi.org/${doi}`;
 
   return (
     <Page title={title}>
-      <Head></Head>
       <article>
         <Card>
           <h1
@@ -112,17 +129,6 @@ export default function DoiPublication(
             <em dangerouslySetInnerHTML={{ __html: container || "?" }} />{" "}
             (<time>{printed ?? published}</time>)
           </p>
-          <p>{oa_url && <a download href={oa_url}>pdf</a>}</p>
-          <p>
-            {image && <img src={image} alt={t("")} width="800" height="450" />}
-          </p>
-        </Card>
-
-        <Card>
-          <p>
-            {t(`news.${type}`)}
-          </p>
-          <p>{license?.toUpperCase()}</p>
           <p>
             <a
               target="_blank"
@@ -131,7 +137,15 @@ export default function DoiPublication(
               https://doi.org/{doi}
             </a>
           </p>
+          {oa === true ? t("pubs.oa") : t("pubs.restricted")}
+          {oa_status}
+          <p>
+            {license && image && (
+              <img src={image} alt={t("")} width="400" height="225" />
+            )}
+          </p>
         </Card>
+        <div style={{ marginTop: "2rem" }} />
         <Card>
           <h2 style={{ color: "var(--accent)" }}>
             {authors.length > 1 ? t("pubs.Authors") : t("pubs.Author")}
@@ -145,8 +159,11 @@ export default function DoiPublication(
           )}
           {priors > 0 && (
             <p style={{ fontSize: "1rem" }}>
-              <ApnSym width="1rem" height="1rem" style="filter: grayscale(1)" />
-              {" "}
+              <ApnSym
+                width="1rem"
+                height="1rem"
+                style="filter: grayscale(1)"
+              />{" "}
               {priors > 0 && priors}{" "}
               Akvaplan-niva ({t("people.akvaplanist(prior)")})
             </p>
@@ -178,21 +195,45 @@ export default function DoiPublication(
             ))}
           </dl>
         </Card>
-      </article>
+        <div style={{ marginTop: "2rem" }} />
+        <Card>
+          <h2 style={{ color: "var(--accent)" }}>
+            Metadata
+          </h2>
+          <dl style={{ fontSize: "1rem" }}>
+            <dt>type</dt>
+            <dd>{t(`type.${type}`)}</dd>
 
-      {
-        /* {openalex?.id && (
-        <p>
-          {t("pubs.View_in")}{" "}
-          <a
-            target="_blank"
-            href={openalex.id}
-          >
-            OpenAlex
-          </a>
-        </p>
-      )} */
-      }
+            <dt>{t("pubs.license")}</dt>
+            <dd>
+              {license ? license.toUpperCase() : t("license.None_or_unknown")}
+            </dd>
+
+            <dt>OpenAlex</dt>
+            <dd>
+              <a
+                target="_blank"
+                href={openalex.id}
+              >
+                {openalex.id}
+              </a>
+            </dd>
+
+            {pdf && (
+              <>
+                <dt>pdf/{t("pubs.fulltext")}</dt>
+                <dd>
+                  <a download href={pdf}>{pdf}</a>
+                </dd>
+              </>
+            )}
+          </dl>
+        </Card>
+        <nav>
+          {t("nav.Back_to")} <Icon name="west" hidden />
+          <a href={pubsURL()}>{t("nav.Pubs")}</a>
+        </nav>
+      </article>
     </Page>
   );
 }

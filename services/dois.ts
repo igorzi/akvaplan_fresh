@@ -63,3 +63,27 @@ export const getSlimPublication = async (
     return slim;
   }
 };
+
+// for await (const person of (slim.authors ?? [])) {
+//   const { given, family } = person;
+//   person.name = `${given} ${family}`;
+//   const { id } = await findAkvaplanist({ given, family }) ?? {};
+//   if (id) {
+//     current++;
+//     person.id = id;
+//   } else {
+//     const prior = await findPriorAkvaplanist({ given, family });
+
+//     if (prior) {
+//       priors++;
+//       person.prior = true;
+//       //console.debug({ prior, given, family });
+//       if (prior.id) {
+//         person.id = prior.id;
+//       }
+//     }
+//   }
+// return { authors, count: { priors, current} }
+
+//@todo Fix broken DOI metadata
+// crap utf-8 10.3389/fmars.2015.00031

@@ -7,9 +7,9 @@ export {
 
 import { PageProps, RouteConfig } from "$fresh/server.ts";
 export const config: RouteConfig = {
-  routeOverride: "/:lang(en|no)/:page(null|0)",
+  routeOverride: "/:lang(en|no)/:page(projects|prosjekt)",
 };
-export default function Documents(
+export default function Projects(
   { data: { title, lang, base } }: PageProps<InternationalProps>,
 ) {
   return (
