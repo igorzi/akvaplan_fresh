@@ -13,6 +13,7 @@ const icons = new Set([
   "phone_in_talk",
   "west",
   "search",
+  "sms_failed",
 ]);
 
 const iconpath = (name: string) => `static/icon/${name}.svg`;
@@ -26,7 +27,8 @@ for (const name of icons) {
   try {
     const path = iconpath(name);
     await Deno.stat(path);
-    const svg = await Deno.readTextFile(path);
+    const _svg = await Deno.readTextFile(path);
+    const svg = _svg; //.replace("").replace();
     svgs.set(name, svg);
   } catch (e) {
     console.error(e);

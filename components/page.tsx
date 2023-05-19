@@ -30,6 +30,7 @@ export function Page(
     title,
     base = baseForLang,
     href,
+    Logo = CleanHeader,
     Left = null,
     Right = null,
     ...props
@@ -37,7 +38,7 @@ export function Page(
 ) {
   const head = (
     <Head>
-      {title ? <title>{t(title)} – Akvaplan-niva</title> : (
+      {title ? <title>{title} – Akvaplan-niva</title> : (
         <title>
           Akvaplan-niva – {lang.value === "en" ? slogun : slagord}
         </title>
@@ -74,7 +75,7 @@ export function Page(
       {head}
 
       <body {...propsExceptChildren}>
-        <CleanHeader href={href} lang={lang.value} />
+        <Logo href={href} lang={lang.value} />
         <main style={{ minHeight: "100vh", padding: "0 var(--size-3)" }}>
           {children}
         </main>

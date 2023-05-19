@@ -107,8 +107,13 @@ export const setLang = (
   }
 };
 
-export const t = (key: string) =>
-  signal<string>(dict?.value?.get(key?.value ?? key) ?? key);
+export const t = (key: string) => {
+  const k = key?.value ?? key;
+  if (k && !dict?.value?.has(k)) {
+    console.warn(`${lang} translation missing "${k}": "${k}",`);
+  }
+  return signal<string>(dict?.value?.get(k) ?? k);
+};
 
 export const buildIndexLangRedirect = () =>
   `(() => {

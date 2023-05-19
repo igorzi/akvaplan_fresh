@@ -1,3 +1,4 @@
+import { start } from "https://deno.land/x/fresh@1.1.4/server.ts";
 import { href, multiSearchMynewsdesk } from "./mynewsdesk.ts";
 
 import {
@@ -34,4 +35,38 @@ export const newsFromMynewsdesk = ({ lang }: NewsMapper) =>
   thumb: thumbURL(extractID(image ?? "")),
   type: type_of_media,
   rels,
+});
+
+const year = ({ datetime }) => new Date(datetime).getFullYear();
+const projectYears = (start_at, end_at) =>
+  `${year(start_at)} – ${year(end_at)}`;
+const projectURL = (title) => title.toLowerCase().replaceAll(/\s/g, "-");
+export const projectFromMynewsdesk = ({ lang }: NewsMapper) =>
+(
+  {
+    language,
+    id,
+    image_caption,
+    header,
+    start_at,
+    end_at,
+    published_at,
+    image,
+    type_of_media,
+    rels,
+    ...item
+  }: MynewsdeskItem,
+): News => ({
+  id,
+  title: header,
+  published: published_at.datetime,
+  duration: projectYears(start_at, end_at),
+  href: projectURL(header),
+  hreflang: language,
+  img: image,
+  caption: image_caption ?? header,
+  thumb: thumbURL(extractID(image ?? "")),
+  type: type_of_media,
+  rels,
+  mynewsdesk: item,
 });

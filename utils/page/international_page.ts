@@ -15,7 +15,7 @@ export interface InternationalProps {
   title: string;
 }
 
-const extractRenderProps = (req: Request, ctx: HandlerContext) => {
+export const extractRenderProps = (req: Request, ctx: HandlerContext) => {
   const { params } = ctx;
   const { pathname } = new URL(req.url);
   lang.value = params.lang;

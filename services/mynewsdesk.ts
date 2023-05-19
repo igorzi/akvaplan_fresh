@@ -45,10 +45,12 @@ export const fetchItemBySlug = async (
   type_of_media = "news",
 ) => {
   const url = searchURL(slug, type_of_media);
+  console.log(url.href);
 
   const r = await fetch(url.href);
   if (r.ok) {
     const { search_result } = await r.json();
+
     const { id } = search_result?.items?.find(({ url }) =>
       url.includes(slug)
     ) ??

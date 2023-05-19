@@ -6,7 +6,7 @@ import { peopleURL, personURL } from "akvaplan_fresh/services/nav.ts";
 
 import { ApnSym, Card, Icon } from "akvaplan_fresh/components/mod.ts";
 
-import { lang as langSignal, languages, t } from "akvaplan_fresh/text/mod.ts";
+import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 
 import { type Akvaplanist } from "akvaplan_fresh/@interfaces/mod.ts";
 
@@ -108,24 +108,38 @@ export function PeopleCard(
           {t("people.Management")}
         </a>
       )}
-
+      <p style={{ marginTop: "1rem" }}></p>
       {icons && (
         <div class="people-workplace">
           {tel && (
-            <a
-              href={`tel:${tel}`}
-              aria-label={`call ${tel}`}
-            >
-              <Icon name="phone_in_talk"></Icon>
-              {tel}
-            </a>
+            <span>
+              <a
+                href={`tel:${tel}`}
+                aria-label={`call ${tel}`}
+              >
+                {/* <Icon name="phone_in_talk"></Icon> */}
+              </a>
+
+              {[...tel].map((c, i) => i % 2 ? c : `${c} `)}
+            </span>
           )}
+        </div>
+      )}
+      {icons && (
+        <div class="people-workplace">
           {email && (
+            // <a
+            //   href={`mailto:${email}`}
+            //   aria-label={`send mail to ${email}`}
+            // >
+            // <Icon name="contact_mail" />
+
+            //   {email}
+            // </a>
             <a
               href={`mailto:${email}`}
               aria-label={`send mail to ${email}`}
             >
-              <Icon name="contact_mail"></Icon>
               {email}
             </a>
           )}
