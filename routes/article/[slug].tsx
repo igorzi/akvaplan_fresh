@@ -21,19 +21,30 @@ import { PeopleCard as PersonCard } from "../../components/mod.ts";
 
 export const config: RouteConfig = {
   routeOverride:
-    "{/:lang}?/:type(news|nyhet|pressrelease|pressemelding|press){/:isodate}?/:slug",
+    "{/:lang(no|en)}?/:type(news|nyhet|pressrelease|pressemelding|press|projects|project|prosjekter|prosjekt){/:isodate}?/:slug",
 };
 
 //console.log("@todo News article: auto-fetch related contacts");
+
+const typeOfMedia = (type: string) => {
+  if (["project", "prosjekt"].includes(type)) {
+    return "event";
+  }
+  return type.startsWith("press") ? "pressrelease" : "news";
+};
 
 export const handler: Handlers = {
   async GET(req, ctx) {
     const { slug, lang, type } = ctx.params;
     langSignal.value = lang;
-    const type_of_media = type.startsWith("press") ? "pressrelease" : "news";
+    const type_of_media = typeOfMedia(type);
+
     const item = await fetchItemBySlug(slug, type_of_media);
     if (!item) {
       return ctx.renderNotFound();
+    }
+    if (["project", "prosjekt"].includes(type) && "no" === lang) {
+      item.header = t(`project.${slug}.title`);
     }
     const relcontact = item.related_items.find(({ type_of_media }) =>
       type_of_media === "contact_person"
@@ -93,7 +104,7 @@ export default function NewsArticle(
 
   const published = isodate(published_at.datetime);
 
-  const __html = body;
+  const __html = body ?? summary;
 
   const _caption = {
     fontSize: "0.75rem",

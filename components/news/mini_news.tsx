@@ -43,10 +43,10 @@ export const MiniNewsCard = (
         />
 
         <time>{isodate(published)}</time>{" "}
-        <span>{t(`news.${type}`).value.toUpperCase()}</span>
+        <span style={{ color: "var(--text2)" }}>{t(`type.${type}`)}</span>
         {hreflang !== lang
           ? (
-            <span style={{ color: "var(--text2)" }}>
+            <span>
               &nbsp;({t(`lang.${hreflang}`)})
             </span>
           )

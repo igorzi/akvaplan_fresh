@@ -327,7 +327,7 @@ export default (
                     href="https://goo.gl/maps/P73K9hcVKeKd7jkz5"
                     target="_blank"
                   >
-                    {t("Google Maps")}
+                    {t("ui.Google_maps")}
                   </a>)
                 </dd>
 

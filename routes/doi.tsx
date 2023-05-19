@@ -15,6 +15,8 @@ import {
   pubsURL,
 } from "akvaplan_fresh/services/mod.ts";
 
+import { isodate } from "akvaplan_fresh/utils/mod.ts";
+
 import { ApnSym, Card, Icon, Page } from "akvaplan_fresh/components/mod.ts";
 
 import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
@@ -48,17 +50,18 @@ export const handler: Handlers<SlimPublication> = {
     const lang = params.lang;
 
     langSignal.value = lang;
-    const doi = doiFromParams(params);
-    const slim = await getSlimPublication(doi);
 
-    if (slim) {
+    const doi = doiFromParams(params);
+
+    if (doi) {
+      const slim = await getSlimPublication(doi);
       //const news = await buildoiNewsMap() ?? {};
       const openalex = await getOpenAlexWork({ doi }) ?? {};
       const image = await doiImage.get(doi);
       let i = 0;
       let current = 0;
       let priors = 0;
-      for await (const person of (slim.authors ?? [])) {
+      for await (const person of (slim?.authors ?? [])) {
         const { given, family, name } = person;
         person.name = name ?? `${given} ${family}`;
         const { id } = await findAkvaplanist({ given, family }) ?? {};
@@ -92,7 +95,7 @@ export default function DoiPublication(
     { slim: SlimPublication; image: string }
   >,
 ) {
-  const {
+  let {
     title,
     type,
     license,
@@ -103,7 +106,7 @@ export default function DoiPublication(
     doi,
     cites,
     ...rest
-  } = slim;
+  } = slim ?? {};
   const {
     open_access: {
       is_retracted,
@@ -117,12 +120,26 @@ export default function DoiPublication(
   const oa = license && /cc/i.test(license) ? true : oa_status;
   const pdf = slim?.pdf || oa_url;
   const href = `https://doi.org/${doi}`;
+  title = title ?? openalex?.title;
+  type = type ?? openalex?.type;
+  doi = doi ?? openalex?.doi?.split("doi.org/").at(1);
+  cites = openalex?.cited_by_count ?? cites; // openalex is continously updated
+  const hreflang = slim?.lang ?? openalex?.language ?? "en";
 
   return (
     <Page title={title}>
+      {!slim && (
+        <p style="display:grid; grid-gap: 0.25rem; grid-template-columns: 48px auto; align-items: center;">
+          <Icon name="sms_failed" />
+          <span>
+            This work is not part of Akvaplan-niva's corpus
+          </span>
+        </p>
+      )}
       <article>
         <Card>
           <h1
+            lang={hreflang}
             dangerouslySetInnerHTML={{ __html: title }}
           />
           <p>
@@ -137,8 +154,8 @@ export default function DoiPublication(
               https://doi.org/{doi}
             </a>
           </p>
-          {oa === true ? t("pubs.oa") : t("pubs.restricted")}
-          {oa_status}
+          {oa === true ? t("pubs.oa") : null}
+
           <p>
             {license && image && (
               <img src={image} alt={t("")} width="400" height="225" />
@@ -148,7 +165,7 @@ export default function DoiPublication(
         <div style={{ marginTop: "2rem" }} />
         <Card>
           <h2 style={{ color: "var(--accent)" }}>
-            {authors.length > 1 ? t("pubs.Authors") : t("pubs.Author")}
+            {authors?.length > 1 ? t("pubs.Authors") : t("pubs.Author")}
           </h2>
           {current > 0 && (
             <p style={{ fontSize: "1rem" }}>
@@ -169,7 +186,7 @@ export default function DoiPublication(
             </p>
           )}
           <dl style={{ fontSize: "1rem" }}>
-            {authors.map(({ name, given, family, id, prior }, n) => (
+            {authors?.map(({ name, given, family, id, prior }, n) => (
               <>
                 <dt>
                   {id || prior
@@ -200,33 +217,48 @@ export default function DoiPublication(
           <h2 style={{ color: "var(--accent)" }}>
             Metadata
           </h2>
-          <dl style={{ fontSize: "1rem" }}>
+          <dl class="ellipsis" style={{ fontSize: "1rem" }}>
             <dt>type</dt>
             <dd>{t(`type.${type}`)}</dd>
 
             <dt>{t("pubs.license")}</dt>
             <dd>
-              {license ? license.toUpperCase() : t("license.None_or_unknown")}
+              {license ? license.toUpperCase() : t("ui.unknown")}
             </dd>
 
-            <dt>OpenAlex</dt>
+            <dt>{t("pubs.cites")}</dt>
             <dd>
+              {cites}
+            </dd>
+
+            <dt>{t("pubs.linked_data")}</dt>
+            <dd>
+              Crossref:{" "}
+              <a href={`https://api.crossref.org/works/${doi}`}>{doi}</a>
+            </dd>
+            <dd>
+              OpenAlex:{" "}
               <a
                 target="_blank"
-                href={openalex.id}
+                hrefLang="en"
+                href={openalex.id.replace("https://", "https://api.")}
               >
-                {openalex.id}
+                {openalex.id.split(".org/").at(1)}
               </a>
             </dd>
 
             {pdf && (
               <>
-                <dt>pdf/{t("pubs.fulltext")}</dt>
+                <dt>{t("pubs.fulltext")}</dt>
                 <dd>
-                  <a download href={pdf}>{pdf}</a>
+                  <a download href={pdf} hreflang={hreflang}>{pdf}</a>
                 </dd>
               </>
             )}
+            <dt>{t("ui.updated")}</dt>
+            <dd>
+              {isodate(openalex.updated_date)}
+            </dd>
           </dl>
         </Card>
         <nav>

@@ -6,6 +6,7 @@ export const ArticleSquare = (
     title,
     name,
     published,
+    duration,
     img,
     desc,
     href,
@@ -42,7 +43,8 @@ export const ArticleSquare = (
       />
     </a>
     <p>
-      {isodate(published)} {hreflang !== undefined && lang.value !== hreflang
+      {duration ? duration : isodate(published)}{" "}
+      {hreflang !== undefined && lang.value !== hreflang
         ? <span>({t(`lang.${hreflang}`)})</span>
         : null}
     </p>
@@ -89,7 +91,8 @@ export const ArticleSq2 = (
       />
     </a>
     <p>
-      {isodate(published)} {hreflang !== undefined && lang.value !== hreflang
+      {duration ? duration : isodate(published)}{" "}
+      {hreflang !== undefined && lang.value !== hreflang
         ? <span>({t(`lang.${hreflang}`)})</span>
         : null}
     </p>
