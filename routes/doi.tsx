@@ -52,9 +52,9 @@ export const handler: Handlers<SlimPublication> = {
     langSignal.value = lang;
 
     const doi = doiFromParams(params);
+    const slim = await getSlimPublication(doi);
 
-    if (doi) {
-      const slim = await getSlimPublication(doi);
+    if (slim || doi) {
       //const news = await buildoiNewsMap() ?? {};
       const openalex = await getOpenAlexWork({ doi }) ?? {};
       const image = await doiImage.get(doi);
@@ -63,7 +63,7 @@ export const handler: Handlers<SlimPublication> = {
       let priors = 0;
       for await (const person of (slim?.authors ?? [])) {
         const { given, family, name } = person;
-        person.name = name ?? `${given} ${family}`;
+        person.name = name ?? `${given ?? ""} ${family}`;
         const { id } = await findAkvaplanist({ given, family }) ?? {};
         if (id) {
           current++;

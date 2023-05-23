@@ -1,5 +1,7 @@
 import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 import { SignalLike, StringSignal } from "akvaplan_fresh/@interfaces/signal.ts";
+
+import { slug } from "https://deno.land/x/slug/mod.ts";
 import { computed } from "@preact/signals-core";
 export const siteNav: SignalLike<Array> = computed(() =>
   buildNav(langSignal.value)
@@ -14,6 +16,8 @@ const En = new Map([
   ["services", "/en/services"],
   ["research", "/en/research"],
   ["settings", "/en/settings"],
+  ["project", "/en/project"],
+  ["projects", "/en/projects"],
   ["pubs", "/en/publications"],
   ["dcat", "/en/dcat"],
   ["documents", "/en/documents"],
@@ -24,16 +28,22 @@ const No = new Map([
   ["about", "/no/om"],
   ["dcat", "/no/dcat"],
   ["news", "/no/nyheter"],
+
+  ["pubs", "/no/publikasjoner"],
+  ["project", "/no/prosjekt"],
+  ["projects", "/no/prosjekter"],
+
+  ["people", "/no/folk"],
+
   ["research", "/no/forskning"],
   ["service", "/no/tjenester"],
   ["services", "/no/tjenester"],
   ["settings", "/no/innstillinger"],
   ["search", "/no/_"],
-  ["pubs", "/no/publikasjoner"],
+
   ["invoicing", "/no/faktura"],
   ["documents", "/no/dokumenter"],
   ["akvaplanists", "/no/folk"],
-  ["people", "/no/folk"],
 ]);
 
 export const routes = (lang: string | StringSignal) =>
@@ -83,3 +93,8 @@ export const pubsURL = ({ lang } = {}) =>
   `${routes(lang || langSignal.value).get("pubs")}`;
 
 export const pubURL = ({ doi, lang }) => `${routes(lang).get("pubs")}/${doi}`;
+
+// const projectURL = (title) =>
+//   title.toLowerCase().replaceAll(/\s/g, "-").split("-").at(0);
+export const projectURL = ({ lang, title }) =>
+  `${routes(lang).get("project")}/${slug(title)}`;

@@ -59,7 +59,8 @@ export const findAkvaplanist = async (
       return exact;
     } else {
       const familyAndInitial = [...all.values()].filter((p) =>
-        p.family === family && [...p.given].at(0) === [...given].at(0)
+        p.family === family &&
+        [...p?.given].at(0) === [...given ?? ""].at(0)
       );
       return familyAndInitial.length === 1 ? familyAndInitial.at(0) : undefined;
     }

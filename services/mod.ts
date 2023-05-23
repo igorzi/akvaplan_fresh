@@ -13,6 +13,7 @@ export * from "./offices.ts";
 export * from "./openalex.ts";
 export * from "./people.ts";
 export * from "./person.ts";
+export * from "./projects.tsx";
 export * from "./prior_akvaplanists.ts";
 export * from "./research.ts";
 export * from "./response30x.ts";
