@@ -57,7 +57,7 @@ export const getSlimPublication = async (
 ): Promise<SlimPublication | undefined> => {
   const base = Deno?.env?.get("dois_base") ?? DOIS_BASE;
   const url = new URL(`/doi/${doi}`, base);
-  const response = await fetch(url).catch(() => {});
+  const response = await fetch(url.href).catch(() => {});
   if (response?.ok) {
     const slim: SlimPublication = await response.json();
     return slim;

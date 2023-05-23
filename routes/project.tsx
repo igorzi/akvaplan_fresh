@@ -2,44 +2,44 @@ import {
   defaultImage,
   fetchItem,
   fetchItemBySlug,
-} from "akvaplan_fresh/services/mynewsdesk.ts";
-import { isodate } from "akvaplan_fresh/time/mod.ts";
+  multiSearchMynewsdesk,
+  newsFromMynewsdesk,
+  projectMap,
+  projectYears,
+} from "akvaplan_fresh/services/mod.ts";
+
+import { isodate, normalize } from "akvaplan_fresh/utils/mod.ts";
 import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 import { akvaplanistMap } from "akvaplan_fresh/services/akvaplanist.ts";
 
-import Article from "akvaplan_fresh/components/article/Article.tsx";
-import ArticleContact from "akvaplan_fresh/components/article/ArticleContact.tsx";
-import ArticleHeader from "akvaplan_fresh/components/article/ArticleHeader.tsx";
-
-//import { YouTube } from "akvaplan_fresh/components/video/youtube.tsx";
-
 import { MynewsdeskItem } from "akvaplan_fresh/@interfaces/mynewsdesk.ts";
 
-import { Card, Page } from "akvaplan_fresh/components/mod.ts";
+import {
+  Article,
+  ArticleContact,
+  ArticleHeader,
+  ArticleSquare,
+  Card,
+  HScroll,
+  Page,
+} from "akvaplan_fresh/components/mod.ts";
+
+import { PeopleCard as PersonCard } from "akvaplan_fresh/components/mod.ts";
+import { routes } from "../services/nav.ts";
+
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { PeopleCard as PersonCard } from "../../components/mod.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 
 export const config: RouteConfig = {
-  routeOverride:
-    "{/:lang(no|en)}?/:type(news|nyhet|pressrelease|pressemelding|press){/:isodate}?/:slug",
-};
-
-//console.log("@todo News article: auto-fetch related contacts");
-
-const typeOfMedia = (type: string) => {
-  if (["project", "prosjekt"].includes(type)) {
-    return "event";
-  }
-  return type.startsWith("press") ? "pressrelease" : "news";
+  routeOverride: "/:lang(no|en)/:type(project|prosjekt)/:slug",
 };
 
 export const handler: Handlers = {
   async GET(req, ctx) {
     const { slug, lang, type } = ctx.params;
     langSignal.value = lang;
-    const type_of_media = typeOfMedia(type);
 
-    const item = await fetchItemBySlug(slug, type_of_media);
+    const item = await fetchItemBySlug(slug, "event");
     if (!item) {
       return ctx.renderNotFound();
     }
@@ -49,14 +49,31 @@ export const handler: Handlers = {
     const relcontact = item.related_items.find(({ type_of_media }) =>
       type_of_media === "contact_person"
     );
+
+    let { searchwords, logo } = projectMap.get(slug) ?? {};
+    searchwords = [...new Set([...searchwords ?? [], slug].map(normalize))];
+    const regex = searchwords.join("|");
+    console.warn({ regex });
+    const needle = new RegExp(normalize(regex), "ui");
+
+    const _news = await multiSearchMynewsdesk(
+      searchwords,
+      ["news", "pressrelease"],
+      { limit: 64 },
+    ) ?? [];
+    const _matching = _news.filter((news) =>
+      needle.test(normalize(JSON.stringify(news)))
+    );
+    const news = _matching?.map(newsFromMynewsdesk({ lang }));
+
     if (relcontact) {
       const { item_id } = relcontact;
       const contact_person = await fetchItem(item_id, "contact_person");
       const { email } = contact_person;
       const contact = email?.split("@")?.at(0);
-      return ctx.render({ item, lang, contact, contact_person });
+      return ctx.render({ item, lang, logo, news, contact, contact_person });
     } else {
-      return ctx.render({ item, lang, contact: null });
+      return ctx.render({ item, lang, logo, news, contact: null });
     }
   },
 };
@@ -72,8 +89,10 @@ interface ArticleProps {
 
 //console.log("@todo News article needs bullet points for <li> elements");
 
-export default function NewsArticle(
-  { data: { item, lang, contact, contact_person } }: PageProps<ArticleProps>,
+export default function ProjectHome(
+  { data: { item, lang, news, contact, contact_person, logo } }: PageProps<
+    ArticleProps
+  >,
 ) {
   const {
     header,
@@ -96,11 +115,13 @@ export default function NewsArticle(
     url,
     language,
     body,
+    start_at,
+    end_at,
     ...mynewsdeskItem
   } = item;
 
   //https://cloudinary.com/documentation/transformation_reference#ar_aspect_ratio
-  const img = image?.replace(",w_1782", ",w_1600,ar_16:9") ?? defaultImage;
+  const img = image; //?.replace(",w_1782", ",w_1600,ar_16:9") ?? defaultImage;
 
   const published = isodate(published_at.datetime);
 
@@ -110,19 +131,44 @@ export default function NewsArticle(
     fontSize: "0.75rem",
   };
 
+  const title = (
+    <span>
+      <a href={routes(lang).get("projects")}>{t(`nav.Projects`)}</a>: {header}
+      {" "}
+      ({projectYears(start_at, end_at)})
+    </span>
+  );
+
   return (
     <Page title={header}>
+      <Head>
+        <link rel="stylesheet" href={asset("/css/hscroll.css")} />
+        <link rel="stylesheet" href={asset("/css/article.css")} />
+        <script src={asset("/@nrk/core-scroll.min.js")} />
+      </Head>{" "}
+      <h1>
+        {title}
+      </h1>
+      <p>
+        <img
+          alt="project logo"
+          width="350"
+          height="auto"
+          src={logo}
+        />
+      </p>
+
+      <HScroll maxVisibleChildren={5.5}>
+        {news.map(ArticleSquare)}
+      </HScroll>
       <Article language={language}>
-        <section style={_caption}>
+        {
+          /* <section style={_caption}>
           <em style={{ color: "var(--text2)" }}>
             {lang !== language ? OnlyIn({ lang, language }) : null}
           </em>
-        </section>
-        <ArticleHeader
-          header={header}
-          image={img}
-          imageCaption={image_caption}
-        />
+        </section> */
+        }
 
         <figure style={_caption}>
           <figcaption>{image_caption}</figcaption>
@@ -150,10 +196,6 @@ export default function NewsArticle(
             <PersonCard id={contact} person={contact_person} />
           </section>
         )}
-
-        <p style={_caption}>
-          {t(`type.${type_of_media}`)} {t("ui.published")} {published}
-        </p>
       </Article>
     </Page>
   );

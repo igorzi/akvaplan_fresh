@@ -1,6 +1,5 @@
-import { start } from "https://deno.land/x/fresh@1.1.4/server.ts";
-import { href, multiSearchMynewsdesk } from "./mynewsdesk.ts";
-
+import { href } from "./mynewsdesk.ts";
+import { projectURL } from "./nav.ts";
 import {
   MynewsdeskItem,
   News,
@@ -38,14 +37,16 @@ export const newsFromMynewsdesk = ({ lang }: NewsMapper) =>
 });
 
 const year = ({ datetime }) => new Date(datetime).getFullYear();
-const projectYears = (start_at, end_at) =>
+export const projectYears = (start_at, end_at) =>
   `${year(start_at)} – ${year(end_at)}`;
-const projectURL = (title) => title.toLowerCase().replaceAll(/\s/g, "-");
+
+// lookup acronym from url?
 export const projectFromMynewsdesk = ({ lang }: NewsMapper) =>
 (
   {
     language,
     id,
+    url,
     image_caption,
     header,
     start_at,
@@ -61,7 +62,7 @@ export const projectFromMynewsdesk = ({ lang }: NewsMapper) =>
   title: header,
   published: published_at.datetime,
   duration: projectYears(start_at, end_at),
-  href: projectURL(header),
+  href: projectURL({ lang, title: header }),
   hreflang: language,
   img: image,
   caption: image_caption ?? header,

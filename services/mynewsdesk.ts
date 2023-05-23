@@ -3,6 +3,9 @@ import { detectDOIs } from "akvaplan_fresh/text/doi.ts";
 import { MynewsdeskItem } from "akvaplan_fresh/@interfaces/mynewsdesk.ts";
 import { slug as _slug } from "https://deno.land/x/slug/mod.ts";
 
+const sortPublishedLatest = (a, b) =>
+  b.published_at.datetime.localeCompare(a.published_at.datetime);
+
 // https://www.mynewsdesk.com/docs/webservice_pressroom#services_view
 const base = "https://www.mynewsdesk.com";
 
@@ -140,10 +143,12 @@ export const multiSearchMynewsdesk = async (
 ) => {
   const result = new Map<string, unknown>();
   const limit = opts?.limit ?? 64;
+  const sort = opts.search ?? sortPublishedLatest;
 
   for await (const q of new Set([...queries])) {
     for await (const type_of_media of new Set([...types])) {
-      const { items } = await searchMynewsdesk({ q, type_of_media, limit });
+      const { items } = await searchMynewsdesk({ q, type_of_media, limit }) ??
+        {};
       if (items) {
         for (const n of items) {
           result.set(n.id, n);
@@ -151,5 +156,5 @@ export const multiSearchMynewsdesk = async (
       }
     }
   }
-  return [...result.values()];
+  return [...result.values()].sort(sort);
 };

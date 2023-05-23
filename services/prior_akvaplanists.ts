@@ -3,7 +3,7 @@
 // https://api.openalex.org/authors?filter=last_known_institution.id:I4210138062&per_page=200
 
 // Used...
-// In people page, but if no ID not all spellings might be returned, eg http://localhost:7777/no/folk/name/%C3%85str%C3%B6m/Emmelie%20K.L.
+// In people page, but if no ID not all spellings might be returned, eg. /no/folk/name/%C3%85str%C3%B6m/Emmelie%20K.L.
 export const priorAkvaplanists = [
   { given: "Starrlight", family: "Augustine" },
   { family: "Bloch-Hansen", given: "Karin" },
@@ -27,7 +27,10 @@ export const priorAkvaplanists = [
     workplace: "Tromsø",
     country: "NO",
     id: "jlc",
-  },
+  }, // Also known as "JoLynn Butts"; source: https://orcid.org/0000-0002-6598-0818
+
+  { "family": "Butts", "given": "Jo Lynn", "count": 1 },
+  { "family": "Butts", "given": "Jolynn", "count": 1 },
   {
     given: "Michael L.",
     family: "Carroll",
@@ -83,10 +86,10 @@ export const priorAkvaplanists = [
     family: "Holte",
     given: "Børge",
   },
-  {
-    family: "Øiestad",
-    given: "Victor",
-  },
+  { family: "Øiestad", given: "Victor" },
+  { family: "Oiestad", given: "V." },
+  { family: "Øiestad", given: "V." },
+
   {
     family: "Hjelset",
     given: "Ann Merete",
@@ -160,6 +163,8 @@ export const priorAkvaplanists = [
   { given: "Lindsay", family: "Wilson" }, // 2011: Fra Lindsay med NP/UIT addresse
   { given: "Gro H.", family: "Olsen" }, // 2010
   { given: "Michael", family: "Greenacre" }, // 2017
+  { given: "M.", family: "Greenacre" }, // 2017
+
   { given: "Fredrik", family: "Broms" }, // 2016
   { given: "Timothy J. ", family: "Smith" }, // 2011
   { given: "Adriana E.", family: "Sardi" }, // 2015
@@ -168,7 +173,10 @@ export const priorAkvaplanists = [
 
   { given: "Knut", family: "Forberg" },
   { given: "Børge", family: "Holte" },
+
   { given: "Lis Lindal", family: "Jørgensen" }, //(1996: Redescription of Trochochaeta carica (Birula, 1897) (Polychaeta, Trochochaetidae) with notes on reproductive biology and larvae)
+  { given: "Lis L.", family: "Jørgensen" },
+
   { given: "Arnþór", family: "Gústavsson" },
   { given: "Nathalie", family: "Morata" },
 
@@ -218,12 +226,17 @@ export const priorAkvaplanists = [
   { given: "Magnus", family: "Aune" },
   { given: "Kristin", family: "Sæther" },
   { given: "Mette", family: "Remen" },
-  // bad { given: "Olexander", family: "Kozlovets" },10.20535/ibb.2020.4.4.211227
-  //  Hansen har sagt opp sin stilling. Siste arbeidsdag er 28.02.2023
-];
+  { given: "Sanna", family: "Matsson" }, // Böris Sanna Christina A Matsson ?
+  { given: "Thomas H.", family: "Pearson" },
+  { given: "T. H.", family: "Pearson" },
+  { given: "T.H.", family: "Pearson" },
+  { given: null, family: "Scanlon" }, //just 1: /no/doi/10.1046/j.1439-0426.2001.00315.x
 
-// P. Geraudie doi.org/10.1016/j.cbpa.2012.05.099
-// T.H. Pearson https://doi.org/10.1016/j.marpolbul.2007.08.018
+  { "family": "White", "count": 1 },
+  { "family": "White", "given": "P.", "count": 1 },
+  { "family": "White", "given": "Patrick", "count": 1 },
+  // bad { given: "Olexander", family: "Kozlovets" },10.20535/ibb.2020.4.4.211227
+];
 
 export const priorAkvaplanistID = new Map(
   priorAkvaplanists.filter(({ id }) => id).map((p) => [p.id, p]),

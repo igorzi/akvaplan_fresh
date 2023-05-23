@@ -25,16 +25,17 @@ import * as $18 from "./routes/nav.tsx";
 import * as $19 from "./routes/news.tsx";
 import * as $20 from "./routes/null.tsx";
 import * as $21 from "./routes/pref.tsx";
-import * as $22 from "./routes/projects.tsx";
-import * as $23 from "./routes/pubs.tsx";
-import * as $24 from "./routes/research.tsx";
-import * as $25 from "./routes/research_topics.tsx";
-import * as $26 from "./routes/search.tsx";
-import * as $27 from "./routes/service_topics.tsx";
-import * as $28 from "./routes/services.tsx";
-import * as $29 from "./routes/sitemap.txt.ts";
-import * as $30 from "./routes/topics.tsx";
-import * as $31 from "./routes/usr.tsx";
+import * as $22 from "./routes/project.tsx";
+import * as $23 from "./routes/projects.tsx";
+import * as $24 from "./routes/pubs.tsx";
+import * as $25 from "./routes/research.tsx";
+import * as $26 from "./routes/research_topics.tsx";
+import * as $27 from "./routes/search.tsx";
+import * as $28 from "./routes/service_topics.tsx";
+import * as $29 from "./routes/services.tsx";
+import * as $30 from "./routes/sitemap.txt.ts";
+import * as $31 from "./routes/topics.tsx";
+import * as $32 from "./routes/usr.tsx";
 import * as $$0 from "./islands/HScrollWithDynamicImage.tsx";
 import * as $$1 from "./islands/button_open_dialog.tsx";
 import * as $$2 from "./islands/doi_search.tsx";
@@ -67,16 +68,17 @@ const manifest = {
     "./routes/news.tsx": $19,
     "./routes/null.tsx": $20,
     "./routes/pref.tsx": $21,
-    "./routes/projects.tsx": $22,
-    "./routes/pubs.tsx": $23,
-    "./routes/research.tsx": $24,
-    "./routes/research_topics.tsx": $25,
-    "./routes/search.tsx": $26,
-    "./routes/service_topics.tsx": $27,
-    "./routes/services.tsx": $28,
-    "./routes/sitemap.txt.ts": $29,
-    "./routes/topics.tsx": $30,
-    "./routes/usr.tsx": $31,
+    "./routes/project.tsx": $22,
+    "./routes/projects.tsx": $23,
+    "./routes/pubs.tsx": $24,
+    "./routes/research.tsx": $25,
+    "./routes/research_topics.tsx": $26,
+    "./routes/search.tsx": $27,
+    "./routes/service_topics.tsx": $28,
+    "./routes/services.tsx": $29,
+    "./routes/sitemap.txt.ts": $30,
+    "./routes/topics.tsx": $31,
+    "./routes/usr.tsx": $32,
   },
   islands: {
     "./islands/HScrollWithDynamicImage.tsx": $$0,
