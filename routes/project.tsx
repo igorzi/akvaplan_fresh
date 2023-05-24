@@ -43,9 +43,9 @@ export const handler: Handlers = {
     if (!item) {
       return ctx.renderNotFound();
     }
-    if (["project", "prosjekt"].includes(type) && "no" === lang) {
-      item.header = t(`project.${slug}.title`);
-    }
+    // if (["project", "prosjekt"].includes(type) && "no" === lang) {
+    //   item.header = t(`project.${slug}.title`);
+    // }
     const relcontact = item.related_items.find(({ type_of_media }) =>
       type_of_media === "contact_person"
     );
