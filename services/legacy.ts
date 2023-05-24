@@ -24,15 +24,17 @@ export const legacyRoutes = new Map<string, string>([
   ["/en/advisory-services", "/en/services"],
   ["/about-us", "/en/about-us"],
   ["/en/accreditation", "/en/accreditation"],
-  ["/en/advisory-services", "/en/advisory-services"],
-  ["/en/analytical-services", "/en/analytical-services"],
+  ["/en/advisory-services", "/en/services"],
+  ["/en/analytical-services", "/en/services"],
   ["/en/employees", "/en/people"],
-  ["/en/feed", "/en/feed"],
+  //["/en/feed", "/en/feed"],
   //["/en/home","/en/home"]
   //["/en/invoicing","/en/invoicing"]
   ["/en/news-archive", "/en/news"],
   //["/en/plastic-publications","/en/plastic-publications"]
   ["/en/projects-networks", "/en"],
+  ["/en/projects-networks/polar-front-ecology", "/en/project/polarfront"],
+  ["/en/projects-networks/criptic", "/en/project/criptic"],
   //["/en/quality-policy-and-ethical-guidelines","/en/quality-policy-and-ethical-guidelines"]
   ["/en/research-development", "/en/research"],
   ["/en/technical-inspections", "/en/services"],

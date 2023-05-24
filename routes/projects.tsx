@@ -26,12 +26,41 @@ export const config: RouteConfig = {
   routeOverride: "/:lang(en|no)/:page(projects|project|prosjekter|prosjekt)",
 };
 
+const GroupedProjects = (
+  { grouped, group },
+) => (
+  <div>
+    {[...grouped].filter(([grpkey]) => undefined !== grpkey).map((
+      [grpkey, grpmembers],
+    ) => (
+      <div>
+        <h2>
+          <a href={`${group}/${grpkey.toLowerCase()}`}>
+            {group === "unit" ? t(`unit.${grpkey}`) : grpkey}
+          </a>
+        </h2>
+
+        <HScroll scrollerId="news-scroll">
+          {grpmembers.map((person) => (
+            <PeopleCard
+              id={person.id}
+              person={person}
+              key={person.id}
+              icons={false}
+            />
+          ))}
+        </HScroll>
+      </div>
+    ))}
+  </div>
+);
+
 export const handler: Handlers = {
   async GET(req: Request, ctx: HandlerContext) {
     const props = extractRenderProps(req, ctx);
     const { lang } = props;
     const { items } = await searchMynewsdesk({
-      q: "project",
+      q: "",
       type_of_media: "event",
     }) ?? {};
 

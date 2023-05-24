@@ -48,7 +48,7 @@ export const fetchItemBySlug = async (
   type_of_media = "news",
 ) => {
   const url = searchURL(slug, type_of_media);
-  console.log(url.href);
+  //console.debug(url.href);
 
   const r = await fetch(url.href);
   if (r.ok) {
