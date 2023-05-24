@@ -27,9 +27,6 @@ export const config: RouteConfig = {
 //console.log("@todo News article: auto-fetch related contacts");
 
 const typeOfMedia = (type: string) => {
-  if (["project", "prosjekt"].includes(type)) {
-    return "event";
-  }
   return type.startsWith("press") ? "pressrelease" : "news";
 };
 
@@ -43,9 +40,13 @@ export const handler: Handlers = {
     if (!item) {
       return ctx.renderNotFound();
     }
-    if (["project", "prosjekt"].includes(type) && "no" === lang) {
-      item.header = t(`project.${slug}.title`);
-    }
+
+    const href = item.links?.find(({ text }) => "alternate" === text)?.url;
+    const hreflang = href ? new URL(href)?.pathname.substring(1, 3) : null;
+    const alternate = href ? { href, hreflang } : null;
+
+    item.links = item.links?.filter(({ text }) => "alternate" !== text);
+
     const relcontact = item.related_items.find(({ type_of_media }) =>
       type_of_media === "contact_person"
     );
@@ -54,11 +55,21 @@ export const handler: Handlers = {
       const contact_person = await fetchItem(item_id, "contact_person");
       const { email } = contact_person;
       const contact = email?.split("@")?.at(0);
-      return ctx.render({ item, lang, contact, contact_person });
+      return ctx.render({ item, lang, contact, contact_person, alternate });
     } else {
-      return ctx.render({ item, lang, contact: null });
+      return ctx.render({ item, lang, alternate, contact: null });
     }
   },
+};
+
+const AlsoInNative = ({ href, hreflang, lang }) => {
+  return (
+    <span lang={lang}>
+      {t(`lang.Also_in_native.${String(hreflang)}`)}
+      {": "}
+      <a hreflang={hreflang} href={href}>{href}</a>
+    </span>
+  );
 };
 
 const OnlyIn = ({ language, lang }) => {
@@ -73,7 +84,9 @@ interface ArticleProps {
 //console.log("@todo News article needs bullet points for <li> elements");
 
 export default function NewsArticle(
-  { data: { item, lang, contact, contact_person } }: PageProps<ArticleProps>,
+  { data: { item, lang, contact, contact_person, alternate } }: PageProps<
+    ArticleProps
+  >,
 ) {
   const {
     header,
@@ -115,7 +128,16 @@ export default function NewsArticle(
       <Article language={language}>
         <section style={_caption}>
           <em style={{ color: "var(--text2)" }}>
-            {lang !== language ? OnlyIn({ lang, language }) : null}
+            {alternate && lang !== language
+              ? (
+                <AlsoInNative
+                  href={alternate.href}
+                  hreflang={alternate.hreflang}
+                  lang={alternate.hreflang}
+                />
+              )
+              : null}
+            {!alternate && OnlyIn({ lang, language })}
           </em>
         </section>
         <ArticleHeader
@@ -150,7 +172,15 @@ export default function NewsArticle(
             <PersonCard id={contact} person={contact_person} />
           </section>
         )}
-
+        {alternate && (
+          <p style={_caption}>
+            <AlsoInNative
+              href={alternate.href}
+              hreflang={alternate.hreflang}
+              lang={alternate.hreflang}
+            />
+          </p>
+        )}
         <p style={_caption}>
           {t(`type.${type_of_media}`)} {t("ui.published")} {published}
         </p>
