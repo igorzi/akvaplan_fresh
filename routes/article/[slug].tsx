@@ -137,7 +137,7 @@ export default function NewsArticle(
                 />
               )
               : null}
-            {!alternate && OnlyIn({ lang, language })}
+            {!alternate && lang !== language && OnlyIn({ lang, language })}
           </em>
         </section>
         <ArticleHeader
