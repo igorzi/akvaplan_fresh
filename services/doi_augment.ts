@@ -35,10 +35,10 @@ export const doiImage = new Map([
     "10.1186/s40317-023-00323-4",
     "https://resources.mynewsdesk.com/image/upload/c_fill,dpr_auto,f_auto,g_auto,q_auto:good,w_1600,ar_16:9/qbtpircvf0wxljh0ks61",
   ],
-  [
-    "10.1111/jfb.15389",
-    "https://onlinelibrary.wiley.com/cms/asset/14f3bd39-a772-4c72-844c-0abca0bbb6d5/jfb15389-fig-0001-m.jpg",
-  ],
+  // [
+  //   "10.1111/jfb.15389",
+  //   "",
+  // ],
   [
     "10.1016/j.envint.2023.107915",
     "https://ars.els-cdn.com/content/image/1-s2.0-S0160412023001885-ga1.jpg",

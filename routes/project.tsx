@@ -53,7 +53,7 @@ export const handler: Handlers = {
     let { searchwords, logo } = projectMap.get(slug) ?? {};
     searchwords = [...new Set([...searchwords ?? [], slug].map(normalize))];
     const regex = searchwords.join("|");
-    console.warn({ regex });
+    //console.debug({ regex });
     const needle = new RegExp(normalize(regex), "ui");
 
     const _news = await multiSearchMynewsdesk(
@@ -86,8 +86,6 @@ interface ArticleProps {
   item: MynewsdeskItem;
   lang: string;
 }
-
-//console.log("@todo News article needs bullet points for <li> elements");
 
 export default function ProjectHome(
   { data: { item, lang, news, contact, contact_person, logo } }: PageProps<

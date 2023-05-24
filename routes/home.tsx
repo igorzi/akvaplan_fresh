@@ -124,10 +124,13 @@ export default function Home(
         <AlbumHeader
           text={t("home.album.articles_not_in_site_lang")}
           href={routes(lang).get("news")}
+          _lang="en|no"
         />
-        <span style={{ fontSize: "1rem" }}>
+        {
+          /* <span style={{ fontSize: "1rem" }}>
           {t(`news.Only_in_alt_lang`)} {t(`lang.alt.${lang}`)}
-        </span>
+        </span> */
+        }
         <HScroll maxVisibleChildren={maxVisNews}>
           {articlesNotInSiteLang.map(ArticleSquare)}
         </HScroll>
