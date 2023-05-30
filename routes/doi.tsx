@@ -226,10 +226,27 @@ export default function DoiPublication(
               {license ? license.toUpperCase() : t("ui.unknown")}
             </dd>
 
+            <dt>language</dt>
+            <dd>{t(`lang.${openalex?.language}`)}</dd>
+
+            {pdf && (
+              <>
+                <dt>{t("pubs.fulltext")}</dt>
+                <dd>
+                  <a download href={pdf} hreflang={hreflang}>{pdf}</a>
+                </dd>
+              </>
+            )}
+
             <dt>{t("pubs.cites")}</dt>
             <dd>
               {cites}
             </dd>
+
+            <dt>{t("pubs.funding")}</dt>
+            {openalex?.grants?.map(({ funder_display_name, award_id }) => (
+              <dd>{funder_display_name}: {award_id}</dd>
+            ))}
 
             <dt>{t("pubs.linked_data")}</dt>
             <dd>
@@ -246,15 +263,6 @@ export default function DoiPublication(
                 {openalex.id.split(".org/").at(1)}
               </a>
             </dd>
-
-            {pdf && (
-              <>
-                <dt>{t("pubs.fulltext")}</dt>
-                <dd>
-                  <a download href={pdf} hreflang={hreflang}>{pdf}</a>
-                </dd>
-              </>
-            )}
             <dt>{t("ui.updated")}</dt>
             <dd>
               {isodate(openalex.updated_date)}
