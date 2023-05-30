@@ -36,4 +36,4 @@ export const albums = new Map<string, unknown>([
 
 export const thumbnail = (id: number) => new URL(`/thumbnail_big/${id}`, base);
 
-export const preview = (id: number) => new URL(`/preview_big/${id}`, base);
+export const preview = (id: number) => new URL(`/preview/${id}`, base);
