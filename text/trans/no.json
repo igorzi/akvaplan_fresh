@@ -106,6 +106,7 @@
   "pubs.works": "arbeider",
   "pubs.and": "og",
   "pubs.cites": "sitert (antall ganger)",
+  "pubs.funding": "finansiering",
   "pubs.in": "i",
   "pubs.person": "person",
   "pubs.linked_data": "maskinlesbare metadata",
