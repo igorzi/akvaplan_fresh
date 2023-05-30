@@ -139,3 +139,9 @@
   padding-left: 2.25rem;
   list-style: circle;
 }
+
+.article h2 {
+  font-weight: bold;
+  padding-top: 1rem;
+  padding-bottom: 0.125rem;
+}
