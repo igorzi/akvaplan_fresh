@@ -235,6 +235,9 @@ export const priorAkvaplanists = [
   { "family": "White", "count": 1 },
   { "family": "White", "given": "P.", "count": 1 },
   { "family": "White", "given": "Patrick", "count": 1 },
+  //Alexey K. Pavlov
+  { "family": "Pavlov", "given": "Alexey K.", "count": 13 },
+  { "family": "Pavlov", "given": "Alexey", "count": 1 },
   // bad { given: "Olexander", family: "Kozlovets" },10.20535/ibb.2020.4.4.211227
 ];
 

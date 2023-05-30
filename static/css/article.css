@@ -133,3 +133,9 @@
     color: var(--text2);
   }
 }
+
+.article ul {
+  margin-left: 0;
+  padding-left: 2.25rem;
+  list-style: circle;
+}

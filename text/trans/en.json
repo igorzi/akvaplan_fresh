@@ -150,6 +150,7 @@
   "type.book": "book",
   "type.news": "news",
   "type.person": "employee",
+  "type.posted-content": "posted online",
   "type.preprint": "pre-print",
   "type.pressrelease": "press release",
   "type.news.1": "news article",
