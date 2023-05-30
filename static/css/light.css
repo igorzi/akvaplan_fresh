@@ -15,7 +15,7 @@
   --logo-green: hsl(185, 100%, 35%);
   --logo-wave-1: hsl(206, 100%, 29%);
   --logo-wave-0: hsl(185, 100%, 35%);
-  --accent: hsl(181, 46%, 42%);
+  --accent: hsl(181, 66%, 32%);
   --error: red;
 }
 
@@ -32,8 +32,7 @@
   --surface-shadow: var(--brand-hue) 30% 13%;
   --shadow-strength: .2;
   --link: hsl(182, 49%, 56%);
-  --accent: hsl(200deg 55.64% 46.04%);
-  --accent2: hsl(197deg 100% 51%);
+  --accent: hsl(200deg 99.64% 66.04%);
   --logo-wave-1: hsl(206, 100%, 29%);
   --logo-wave-0: hsl(185, 100%, 35%);
   --error: red;
