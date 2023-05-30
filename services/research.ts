@@ -33,21 +33,23 @@ const buildLevelFilter = (n: Number) => ({ level }: Svc) => level === n;
 export const getResearchLevel0 = async (lang: string) => {
   const r0 = (await getResearch() ?? [])?.filter(buildLevelFilter(0));
   const en0 = r0.map((
-    { topic, en, no, details, detaljer, ...s }: Svc,
+    { topic, en, no, details, detaljer, img, ...s }: Svc,
   ) => ({
     ...s,
     topic,
     name: en ?? no,
+    img: img?.replace("/preview_big/", "/preview/"),
     desc: details ?? detaljer,
     lang: "en",
     href: researchTopicURL({ lang: "en", topic }),
   }));
 
   const no0 = r0.map((
-    { no, en, tema, details, detaljer, ...s }: Svc,
+    { no, en, tema, details, detaljer, img, ...s }: Svc,
   ) => ({
     ...s,
     name: no ?? en,
+    img: img?.replace("/preview_big/", "/preview/"),
     desc: detaljer ?? details,
     topic: tema,
     lang: "no",
