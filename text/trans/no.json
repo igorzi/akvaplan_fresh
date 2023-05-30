@@ -117,6 +117,7 @@
   "sort.label": "sortering",
   "sort.increasing": "alfabetisk (a↦)",
   "sort.decreasing": "synkende (å↦)",
+  "type.erratum": "erratum",
   "type.proceedings paper": "konferanse-artikkel",
   "type.person": "person",
   "type.preprint": "forhåndsutgave",

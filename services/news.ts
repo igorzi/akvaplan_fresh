@@ -72,9 +72,12 @@ export const searchNews = async (
   return [...articles, ...pubs, ...akvaplanists].sort(sort);
 };
 export const latestNews = async (params: Search) =>
-  (await searchNews(params)).sort((a, b) =>
-    b.published.localeCompare(a.published)
-  ).slice(0, params.limit ?? 128);
+  (await searchNews(params))
+    .filter(({ type }) => !["erratum"].includes(type))
+    .sort((a, b) => b.published.localeCompare(a.published)).slice(
+      0,
+      params.limit ?? 128,
+    );
 
 export const searchNewsArticles = async (
   { q = "", limit = 10, lang = "", sort = sortLatest } = {},
