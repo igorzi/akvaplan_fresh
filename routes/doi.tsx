@@ -164,7 +164,7 @@ export default function DoiPublication(
         </Card>
         <div style={{ marginTop: "2rem" }} />
         <Card>
-          <h2 style={{ color: "var(--accent)" }}>
+          <h2>
             {authors?.length > 1 ? t("pubs.Authors") : t("pubs.Author")}
           </h2>
           {current > 0 && (
@@ -214,7 +214,7 @@ export default function DoiPublication(
         </Card>
         <div style={{ marginTop: "2rem" }} />
         <Card>
-          <h2 style={{ color: "var(--accent)" }}>
+          <h2>
             Metadata
           </h2>
           <dl class="ellipsis" style={{ fontSize: "1rem" }}>
