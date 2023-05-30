@@ -74,9 +74,6 @@ h1 {
 
 h2 {
   font-size: var(--font-size-fluid-1);
-  font-weight: 650;
-  padding-top: 1rem;
-  padding-bottom: 0.125rem;
 }
 
 h3 {
