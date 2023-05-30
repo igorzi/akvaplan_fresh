@@ -124,6 +124,7 @@
   "type.doi": "forskningsartikkel",
   "type.journal-article": "forskningsartikkel",
   "type.peer-review": "forskningsartikkel",
+  "type.posted-content": "internett-innhold",
   "type.news_article": "nyhet",
   "type.news": "nyhet",
   "type.book": "bok",

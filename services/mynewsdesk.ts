@@ -79,7 +79,9 @@ export const fetchItem = async (
 };
 
 const preprocess = (s) =>
-  s.replaceAll('"', "").replaceAll("å", "a").replaceAll("/", "-");
+  s.replaceAll("<em>", "").replaceAll("</em>", "")
+    .replaceAll('"', "").replaceAll("å", "a").replaceAll("/", "-");
+
 const postprocess = (s) => s.replaceAll("-aa-", "-a-").replace(/[-]{2,}/g, "-");
 
 // export const href = ({ header }) =>
