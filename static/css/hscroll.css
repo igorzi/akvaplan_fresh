@@ -8,6 +8,10 @@
   display: flex;
 }
 
+.scroll-container:hover .scroller-button {
+  opacity: 1;
+}
+
 .hscroll {
   display: flex;
   padding: var(--size-1) 0 var(--size-3) 0;
@@ -39,17 +43,20 @@
 }
 
 :root .scroller-button {
-  background: var(--surface4);
+  background: var(--accent);
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
+  border-radius: var(--radius-2);
   width: 1rem;
   padding: 0;
-  border-radius: 0;
+  border: none;
   height: 2rem;
   font-size: 1rem;
   min-width: 2rem;
-  opacity: 0.8;
+  z-index: 100;
+  opacity: 0;
+  transition: 0.25s ease-in-out opacity;
 }
 
 :root .scroller-button:disabled {
