@@ -1,102 +1,42 @@
 const alta = {
   name: "Alta",
-  addr: {},
+  addr: {
+    post: "Markveien 38b, 9510 Alta",
+    visit: "Markedsgata 3, 9510 Alta",
+  },
   tel: "+47 41 67 68 29",
   email: "alta@akvaplan.niva.no",
-  links: {},
 };
-/* Postadresse
-
-Markveien 38b, Alta, Norway
-Besøk og pakker
-
-Markedsgata 3, 9510 Alta
-+47 41 67 68 29
-
-alta@akvaplan.niva.no*/
 
 const bergen = {
   name: "Bergen",
   email: "bergen@akvaplan.niva.no",
   tel: "+47 45 03 56 57",
-  /*Postadresse
-
-Thormøhlensgata 53 D, 5006 Bergen
-Besøk og pakker
-
-Thormøhlensgata 53 D, 5006 Bergen
-
-
-  */
+  addr: {
+    post: "Thormøhlensgata 53d, 5006 Bergen",
+    visit: "Thormøhlensgata 53d, 5006 Bergen",
+  },
 };
 
 const bodø = {
   name: "Bodø",
   email: "apnbodo@akvaplan.niva.no",
   tel: "+47 77 75 03 00",
-  /* Postadresse
-
-Akvaplan-niva AS, C/O Salmon Center, Bodø, Sjøgata 21, 3.etg, 8006 Bodø
-Besøk og pakker
-
-Akvaplan-niva AS, C/O Salmon Center, Bodø, Sjøgata 21, 3.etg, 8006 Bodø
-
-
- */
+  addr: {
+    post: "c/o Salmon Center, Sjøgata 21, 3.etg, 8006 Bodø",
+    visit: "c/o Salmon Center, Sjøgata 21, 3.etg, 8006 Bodø",
+  },
 };
 
 const oslo = {
   name: "Oslo",
   email: "oslo@akvaplan.niva.no",
   tel: "+47 94 84 93 12",
-  /*Postadresse
-
-Økernveien 94, 0579 Oslo
-Besøk og pakker
-
-Økernveien 94, 0579 Oslo
-+47 94 84 93 12
-
-oslo@akvaplan.niva.no */
+  addr: {
+    post: "Økernveien 94, 0579 Oslo",
+    visit: "Økernveien 94, 0579 Oslo",
+  },
 };
-
-/* Reykjavik
-Postadresse
-
-Akralind 4, 201 Kopavogi, Iceland
-Besøk og pakker
-
-Akralind 4, 201 Kopavogi, Iceland
-+354 56 25 80 0
-
-+354 69 10 70 7
-
-iceland@akvaplan.niva.no
-
-Ski
-Postadresse
-
-Idrettsveien 6, 1400 Ski, Norway
-Besøk og pakker
-
-Idrettsveien 6, 1400 Ski, Norway
-+47 92 80 41 93
-
-sense@akvaplan.niva.no
-
-Stord
-Postadresse
-
-Kunnskapshuset, Sæ 132, 5417 Stord
-Besøk og pakker
-
-Sæ 132, 5417, Stord, Norway
-+47 91 85 08 34
-
-sense@akvaplan.niva.no
-
-
-*/
 
 const reykjavík = {
   name: "Reykjavík",
@@ -109,6 +49,26 @@ const reykjavík = {
   tel2: "+354 69 10 70 7",
   email: "iceland@akvaplan.niva.no",
   links: { map: "https://goo.gl/maps/JYinWtgSLpqRcEXs6" },
+};
+
+const ski = {
+  name: "Ski",
+  addr: {
+    visit: "Idrettsveien 6, 1400 Ski",
+    post: "Idrettsveien 6, 1400 Ski",
+  },
+  tel: "+47 92 80 41 93",
+  email: "sense@akvaplan.niva.no",
+};
+
+const stord = {
+  name: "Stord",
+  addr: {
+    visit: "Kunnskapshuset, Sæ 132, 5417 Stord",
+    post: "Kunnskapshuset, Sæ 132, 5417 Stord",
+  },
+  tel: "+47 91 85 08 34",
+  email: "sense@akvaplan.niva.no",
 };
 
 const trondheim = {
@@ -141,6 +101,8 @@ export const offices = new Map<string, Record<string, unknown>>([
   ["Bodø", bodø],
   ["Oslo", oslo],
   ["Reykjavík", reykjavík],
+  ["Ski", ski],
+  ["Stord", stord],
   ["Tromsø", tromsø],
   ["Trondheim", trondheim],
 ]);
