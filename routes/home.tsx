@@ -115,7 +115,7 @@ export default function Home(
           text={t(`home.album.${lang}.articles`)}
           href={routes(lang).get("news")}
         />
-        <HScroll maxVisibleChildren={maxVisNews}>
+        <HScroll scrollerId="hscroll-articles" maxVisibleChildren={maxVisNews}>
           {articles.map(ArticleSquare)}
         </HScroll>
       </section>
@@ -126,18 +126,18 @@ export default function Home(
           href={routes(lang).get("news")}
           _lang="en|no"
         />
-        {
-          /* <span style={{ fontSize: "1rem" }}>
+        {/* <span style={{ fontSize: "1rem" }}>
           {t(`news.Only_in_alt_lang`)} {t(`lang.alt.${lang}`)}
-        </span> */
-        }
-        <HScroll maxVisibleChildren={maxVisNews}>
+        </span> */}
+        <HScroll
+          scrollerId="hscroll-articles-no-sitemap"
+          maxVisibleChildren={maxVisNews}
+        >
           {articlesNotInSiteLang.map(ArticleSquare)}
         </HScroll>
       </section>
 
-      {
-        /* <section style={_section}>
+      {/* <section style={_section}>
         <AlbumHeader
           text={t("pubs.Latest_peer_reviewed_research_articles")}
           href={routes(lang).get("pubs") + "?q=journal-article"}
@@ -145,8 +145,7 @@ export default function Home(
         <HScroll maxVisibleChildren={maxVisNews}>
           {researchArticles.map(ArticleSquare)}
         </HScroll>
-      </section> */
-      }
+      </section> */}
 
       <section style={_section}>
         <AlbumHeader
@@ -154,6 +153,7 @@ export default function Home(
           href={routes(lang).get("services")}
         />
         <HScroll
+          scrollerId="hscroll-services"
           maxVisibleChildren={Math.min(services?.length, 6.5)}
         >
           {services.map(ArticleSquare)}
@@ -165,18 +165,19 @@ export default function Home(
           text={t("home.album.research")}
           href={routes(lang).get("research")}
         />
-        <HScroll maxVisibleChildren={Math.min(topics?.length, 6.5)}>
+        <HScroll
+          scrollerId="hscroll-topics"
+          maxVisibleChildren={Math.min(topics?.length, 6.5)}
+        >
           {topics?.map(ArticleSquare)}
         </HScroll>
       </section>
 
-      {
-        /* <AlbumHeader
+      {/* <AlbumHeader
         text={t("home.album.projects")}
         href={routes(lang).get("projects")}
       />
-        */
-      }
+        */}
 
       {/* Research facilities (Fisk Loise) Sensor platforms */}
     </Page>
