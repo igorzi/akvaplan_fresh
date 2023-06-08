@@ -3,7 +3,6 @@
 }
 
 .scroll-container {
-  overflow: hidden;
   position: relative;
   display: flex;
 }
@@ -64,10 +63,9 @@
 }
 
 .scroller-button--left {
-  left: 0;
-  top: 50%;
+  left: -20px;
 }
 
 .scroller-button--right {
-  right: 0;
+  right: -20px;
 }
