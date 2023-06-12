@@ -176,3 +176,9 @@ html:has(dialog[open]) {
   backdrop-filter: blur(30px);
   /* background: var(--surface0); */
 }
+
+@media screen and (max-width: 768px) {
+  .hide-s {
+    display: none;
+  }
+}

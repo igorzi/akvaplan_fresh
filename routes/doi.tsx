@@ -245,22 +245,20 @@ export default function DoiPublication(
 
             <dt>{t("pubs.funding")}</dt>
             {openalex?.grants?.map(({ funder_display_name, award_id }) => (
-              <dd>{funder_display_name}: {award_id}</dd>
+              <dd>{funder_display_name} {award_id && `: ${award_id}`}</dd>
             ))}
 
             <dt>{t("pubs.linked_data")}</dt>
             <dd>
-              Crossref:{" "}
-              <a href={`https://api.crossref.org/works/${doi}`}>{doi}</a>
+              <a href={`https://api.crossref.org/works/${doi}`}>Crossref</a>
             </dd>
             <dd>
-              OpenAlex:{" "}
               <a
                 target="_blank"
                 hrefLang="en"
                 href={openalex.id.replace("https://", "https://api.")}
               >
-                {openalex.id.split(".org/").at(1)}
+                OpenAlex
               </a>
             </dd>
             <dt>{t("ui.updated")}</dt>
@@ -270,8 +268,12 @@ export default function DoiPublication(
           </dl>
         </Card>
         <nav>
-          {t("nav.Back_to")} <Icon name="west" hidden />
-          <a href={pubsURL()}>{t("nav.Pubs")}</a>
+          <a
+            href={pubsURL()}
+            aria-label={t("nav.Back_to") + " " + t("nav.Pubs")}
+          >
+            <Icon name="arrow_back_ios_new" height="1rem" /> {t("nav.Pubs")}
+          </a>
         </nav>
       </article>
     </Page>

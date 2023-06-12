@@ -18,8 +18,10 @@ export function CleanHeader(
         margin: 0,
         padding: borders["--border-size-3"],
         display: "grid",
+        gap: "2rem",
         gridTemplateColumns: "1fr auto 1fr",
         color: "var(--text1)",
+        placeItems: "end",
       }}
     >
       <Left lang={lang} />
