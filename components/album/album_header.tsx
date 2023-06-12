@@ -6,7 +6,7 @@ export const AlbumHeader = ({ text, href, icon = "arrow_forward_ios" }) => (
       href={href}
       style={{ color: "var(--text1)" }}
     >
-      {text} {/* <Icon name={icon} /> */}
+      {text} <Icon name={icon} width="1rem" height="1rem" />
     </a>
   </span>
 );
