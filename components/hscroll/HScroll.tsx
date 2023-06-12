@@ -13,7 +13,9 @@ type HScrollButtonProps = {
 
 //unicode: ˂˃
 
-function HScrollButton({ extraClass, dataFor, value, ariaLabel }: HScrollButtonProps) {
+function HScrollButton(
+  { extraClass, dataFor, value, ariaLabel }: HScrollButtonProps,
+) {
   return (
     <button
       class={`scroller-button scroller-button--${extraClass}`}
@@ -28,7 +30,7 @@ function HScrollButton({ extraClass, dataFor, value, ariaLabel }: HScrollButtonP
 
 export function HScroll({
   children,
-  scrollerId,
+  scrollerId = crypto.randomUUID(),
   staticFirstElement,
   maxVisibleChildren,
 }: HScrollProps) {
@@ -55,13 +57,11 @@ export function HScroll({
       <core-scroll
         id={scrollerId}
         class={`hscroll ${maxVisibleChildrenClass}`}
-        style={
-          maxVisibleChildren
-            ? {
-                "--max-visible-children": maxVisibleChildren,
-              }
-            : {}
-        }
+        style={maxVisibleChildren
+          ? {
+            "--max-visible-children": maxVisibleChildren,
+          }
+          : {}}
       >
         {children}
       </core-scroll>
