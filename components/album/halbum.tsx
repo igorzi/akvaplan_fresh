@@ -19,7 +19,7 @@ export function HAlbum({
   lang: string;
 }) {
   return (
-    <HScroll scrollerId={customClass}>
+    <HScroll>
       {album.map((image, position) => (
         <PreviewFigure
           image={image}

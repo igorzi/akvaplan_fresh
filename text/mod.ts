@@ -101,7 +101,7 @@ export const setLang = (
     }
     // set lang attribute
     el = el ?? getRoot();
-    if (el.getAttribute("lang") !== name) {
+    if (el && el?.getAttribute("lang") !== name) {
       el.setAttribute("lang", name);
     }
   }

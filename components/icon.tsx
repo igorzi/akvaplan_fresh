@@ -2,13 +2,8 @@
 //
 // Run "deno task icons" to fetch icons here into static/icon/*.svg
 // Icons are from Google's [Material Symbols](https://developers.google.com/fonts/docs/material_symbols#use_in_web)
-import {
-  fetchIcon,
-  icons,
-  svgMapFromStaticDir,
-} from "akvaplan_fresh/utils/materialsymbols/mod.ts";
-
-const svg = await svgMapFromStaticDir();
+import icons from "./icons.json" assert { type: "json" };
+const svg = new Map(icons);
 
 export const Icon = (
   { name = "", usehref, width = 44, height = 44, ...props } = {},
@@ -22,13 +17,17 @@ export const Icon = (
       </svg>
     )
     : (
-      <svg
-        width={width}
-        height={height}
-        class="icon"
-        {...props}
-        dangerouslySetInnerHTML={{ __html: svg.get(name) ?? "" }}
-      />
+      (
+        <svg
+          width={width}
+          height={height}
+          class="icon"
+          {...props}
+          dangerouslySetInnerHTML={{
+            __html: svg.get(name) ?? "",
+          }}
+        />
+      )
     );
 
 export const HiddenIcons = () => (

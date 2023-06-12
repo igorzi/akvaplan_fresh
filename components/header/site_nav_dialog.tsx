@@ -40,7 +40,7 @@ export const SiteNavDialog = ({ lang }) => (
     >
       <form method="dialog">
         <button>
-          {t("menu.Close")}
+          {t("menu.close")}
         </button>
       </form>
     </footer>
