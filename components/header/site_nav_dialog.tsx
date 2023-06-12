@@ -1,4 +1,4 @@
-import { ApnLogo, SiteNav } from "akvaplan_fresh/components/mod.ts";
+import { ApnLogo, Icon, SiteNav } from "akvaplan_fresh/components/mod.ts";
 
 import { t } from "akvaplan_fresh/text/mod.ts";
 
@@ -40,6 +40,7 @@ export const SiteNavDialog = ({ lang }) => (
     >
       <form method="dialog">
         <button>
+          <Icon name="close" />
           {t("menu.close")}
         </button>
       </form>

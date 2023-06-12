@@ -3,6 +3,7 @@ export const icons = new Set([
   "arrow_back_ios_new",
   "arrow_forward_ios",
   "cell_tower",
+  "close",
   "contact_mail",
   "mail",
   "exit_to_app",
