@@ -17,7 +17,7 @@ export const Icon = (
     ? (
       // Referencing icon via <use href="…"/> requires pre-injecting SVG into the current page,
       // eg. using <HiddenIcons />
-      <svg width={width} height={height} {...props}>
+      <svg class="icon" width={width} height={height} {...props}>
         <use href={`#materialsymbols_${name}`} />
       </svg>
     )
@@ -25,6 +25,7 @@ export const Icon = (
       <svg
         width={width}
         height={height}
+        class="icon"
         {...props}
         dangerouslySetInnerHTML={{ __html: svg.get(name) ?? "" }}
       />
