@@ -11,10 +11,10 @@ export const doiImage = new Map([
     "10.1021/acs.est.2c07459",
     "https://pubs.acs.org/cms/10.1021/acs.est.2c07459/asset/images/medium/es2c07459_0002.gif",
   ],
-  [
-    "10.1002/ece3.9779",
-    "https://onlinelibrary.wiley.com/cms/asset/b98045f0-b424-4e7e-b624-e66025c5cd0c/ece39779-fig-0002-m.jpg",
-  ],
+  // [
+  //   "10.1002/ece3.9779",
+  //   "https://onlinelibrary.wiley.com/cms/asset/b98045f0-b424-4e7e-b624-e66025c5cd0c/ece39779-fig-0002-m.jpg",
+  // ],
   [
     "10.1016/j.jembe.2022.151855",
     "https://ars.els-cdn.com/content/image/1-s2.0-S0022098122001630-gr1.jpg",
