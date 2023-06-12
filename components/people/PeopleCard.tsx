@@ -115,12 +115,13 @@ export function PeopleCard(
             <span>
               <a
                 href={`tel:${tel}`}
-                aria-label={`call ${tel}`}
+                style={{ color: "var(--text2)" }}
               >
-                {/* <Icon name="phone_in_talk"></Icon> */}
-              </a>
+                <Icon name="phone_in_talk">
+                </Icon>
 
-              {[...tel].map((c, i) => i % 2 ? c : `${c} `)}
+                {[...tel].map((c, i) => i % 2 ? c : `${c} `)}
+              </a>
             </span>
           )}
         </div>
@@ -128,19 +129,11 @@ export function PeopleCard(
       {icons && (
         <div class="people-workplace">
           {email && (
-            // <a
-            //   href={`mailto:${email}`}
-            //   aria-label={`send mail to ${email}`}
-            // >
-            // <Icon name="contact_mail" />
-
-            //   {email}
-            // </a>
             <a
               href={`mailto:${email}`}
-              aria-label={`send mail to ${email}`}
+              style={{ color: "var(--text2)" }}
             >
-              {email}
+              <Icon name="contact_mail" /> {email}
             </a>
           )}
         </div>
