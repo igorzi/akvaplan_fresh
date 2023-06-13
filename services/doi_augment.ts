@@ -91,4 +91,12 @@ export const doiImage = new Map([
     "10.1002/ece3.9569",
     "https://onlinelibrary.wiley.com/cms/asset/b6391f3c-1a5d-4e55-abd2-263efd7d4d33/ece39569-fig-0005-m.jpg",
   ],
+  [
+    "10.1016/j.marenvres.2023.106046",
+    "https://ars.els-cdn.com/content/image/1-s2.0-S0141113623001745-gr6.jpg",
+  ],
+  [
+    "10.1080/15287394.2023.2209115",
+    "https://www.tandfonline.com/na101/home/literatum/publisher/tandf/journals/content/uteh20/2023/uteh20.v086.i12/15287394.2023.2209115/20230517/images/large/uteh_a_2209115_f0004_oc.jpeg",
+  ],
 ]);

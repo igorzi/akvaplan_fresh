@@ -4,7 +4,7 @@
 import { buildContainsFilter } from "akvaplan_fresh/search/filter.ts";
 import { lang, t } from "akvaplan_fresh/text/mod.ts";
 
-import { SlimCard } from "../components/slim_card.tsx";
+import { SlimCard } from "akvaplan_fresh/components/slim_card.tsx";
 
 import { type SlimPublication } from "../@interfaces/slim_publication.ts";
 
@@ -27,7 +27,7 @@ export default function DoiSearch(
   const query = useSignal(q);
   const filtered = useSignal(results);
   const first = useSignal(true);
-  const numFound = useSignal(all.length);
+  const numFound = useSignal(results.length);
   const total = all.length;
 
   const handleSearch = ({ target: { value } }: Event) => {
