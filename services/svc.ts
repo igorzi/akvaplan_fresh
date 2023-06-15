@@ -19,11 +19,10 @@ export const getServicesLevel0 = async (lang: string) => {
   const svc0 = (await getServices() ?? [])?.filter(servicesLevelFilter(0));
 
   const en0 = svc0.map((
-    { topic, en, no, details, detaljer, img, ...s }: Svc,
+    { topic, en, no, details, detaljer, ...s }: Svc,
   ) => ({
     ...s,
     topic,
-    img: img?.replace("/preview_big/", "/preview/"),
     name: en ?? no,
     desc: details ?? detaljer,
     lang: "en",
@@ -31,11 +30,10 @@ export const getServicesLevel0 = async (lang: string) => {
   }));
 
   const no0 = svc0.map((
-    { no, en, tema, details, detaljer, img, ...s }: Svc,
+    { no, en, tema, details, detaljer, ...s }: Svc,
   ) => ({
     ...s,
     name: no ?? en,
-    img: img?.replace("/preview_big/", "/thumbnail_big/"),
     desc: detaljer ?? details,
     topic: tema,
     lang: "no",
