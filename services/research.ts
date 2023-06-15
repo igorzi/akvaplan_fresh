@@ -1,7 +1,7 @@
 import { researchTopicURL } from "./nav.ts";
 import { shuffle } from "akvaplan_fresh/grouping/mod.ts";
 
-type Research = Record<string, string | umber | string[]>;
+type Research = Record<string, string | number | string[]>;
 
 const getResearch = async () => {
   const r = await fetch("https://research.deno.dev/").catch(() => {});
@@ -28,28 +28,26 @@ const getResearch = async () => {
 //   }
 // };
 
-const buildLevelFilter = (n: Number) => ({ level }: Svc) => level === n;
+const buildLevelFilter = (n: Number) => ({ level }: Research) => level === n;
 
 export const getResearchLevel0 = async (lang: string) => {
   const r0 = (await getResearch() ?? [])?.filter(buildLevelFilter(0));
   const en0 = r0.map((
-    { topic, en, no, details, detaljer, img, ...s }: Svc,
+    { topic, en, no, details, detaljer, ...s }: Research,
   ) => ({
     ...s,
     topic,
     name: en ?? no,
-    img: img?.replace("/preview_big/", "/preview/"),
     desc: details ?? detaljer,
     lang: "en",
     href: researchTopicURL({ lang: "en", topic }),
   }));
 
   const no0 = r0.map((
-    { no, en, tema, details, detaljer, img, ...s }: Svc,
+    { no, en, tema, details, detaljer, ...s }: Research,
   ) => ({
     ...s,
     name: no ?? en,
-    img: img?.replace("/preview_big/", "/preview/"),
     desc: detaljer ?? details,
     topic: tema,
     lang: "no",
