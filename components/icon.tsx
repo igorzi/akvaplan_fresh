@@ -6,14 +6,14 @@ import icons from "./icons.json" assert { type: "json" };
 const svg = new Map(icons);
 
 export const Icon = (
-  { name = "", usehref, width = 44, height = 44, ...props } = {},
+  { name = "", usehref = true, width = 44, height = 44, ...props } = {},
 ) =>
   usehref
     ? (
       // Referencing icon via <use href="…"/> requires pre-injecting SVG into the current page,
       // eg. using <HiddenIcons />
       <svg class="icon" width={width} height={height} {...props}>
-        <use href={`#materialsymbols_${name}`} />
+        <use href={`#${name}`} />
       </svg>
     )
     : (
@@ -21,7 +21,7 @@ export const Icon = (
         <svg
           width={width}
           height={height}
-          class="icon"
+          class={`icon ${name}`}
           {...props}
           dangerouslySetInnerHTML={{
             __html: svg.get(name) ?? "",
