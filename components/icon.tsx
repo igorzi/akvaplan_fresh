@@ -6,7 +6,7 @@ import icons from "./icons.json" assert { type: "json" };
 const svg = new Map(icons);
 
 export const Icon = (
-  { name = "", usehref = true, width = 44, height = 44, ...props } = {},
+  { name = "", usehref = false, width = 44, height = 44, ...props } = {},
 ) =>
   usehref
     ? (
