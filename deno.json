@@ -2,7 +2,7 @@
   "tasks": {
     "dev": "deno run --unstable --allow-env --allow-read --allow-write=fresh.gen.ts,/tmp --allow-run --allow-net=:7777,:8000,deno.land,esm.sh,unpkg.com,www.mynewsdesk.com,svc.deno.dev,dois.deno.dev,mediebank.deno.dev,akvaplanists.deno.dev,datacite.deno.dev,research.deno.dev,api.datacite.org,api.openalex.org,api.cristin.no --watch=static/,routes/ dev.ts",
     "prod": "DENO_DEPLOYMENT_ID=\"$(git rev-parse HEAD)\" deno run -A main.ts",
-    "icons": "deno run --allow-net=fonts.gstatic.com --allow-read=static --allow-write=static components/icon.tsx",
+    "icons": "deno run --allow-net=fonts.gstatic.com --allow-read=static --allow-write=components/icons.json tasks.ts icons",
     "esm:add": "deno run -A https://esm.sh/v115 add",
     "esm:update": "deno run -A https://esm.sh/v115 update",
     "esm:remove": "deno run -A https://esm.sh/v115 remove"

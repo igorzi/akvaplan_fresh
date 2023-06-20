@@ -7,6 +7,7 @@ export * from "./card.tsx";
 export * from "./card/office.tsx";
 export * from "./footer.tsx";
 export * from "./header/clean_header.tsx";
+export * from "./header/left_header.tsx";
 export * from "./header/site_nav_dialog.tsx";
 export * from "./hscroll/HScroll.tsx";
 export * from "./icon.tsx";
@@ -20,6 +21,7 @@ export * from "./service_summary.tsx";
 export * from "./site_lang_links.tsx";
 export * from "./site_nav.tsx";
 export * from "./slim_card.tsx";
+export * from "./styles.tsx";
 export * from "./why_us.tsx";
 
 import ArticleContact from "akvaplan_fresh/components/article/ArticleContact.tsx";

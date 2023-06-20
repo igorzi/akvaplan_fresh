@@ -1,6 +1,6 @@
 import { Card } from "./card.tsx";
 import { SlimPublication } from "akvaplan_fresh/@interfaces/slim_publication.ts";
-
+import { doiImage } from "akvaplan_fresh/services/doi_augment.ts";
 export function SlimCard(
   props: { slim: SlimPublication; n: number; lang: string },
 ) {
@@ -26,15 +26,25 @@ export function SlimCard(
             dangerouslySetInnerHTML={{ __html: title }}
           />
         </header>{" "}
-        <p style={{ fontSize: "1rem" }}>
-          {
-            /* {authors.map(({ family }, n) => (
-            <span>{family}{n === authors.length - 1 ? null : ", "}</span>
-          ))}.*/
-          } <em dangerouslySetInnerHTML={{ __html: container }} />{" "}
-          (<time>{published}</time>)
+        <p
+          style={{
+            fontSize: "1rem",
+            display: "grid",
+            gridTemplateColumns: "12ch 1fr",
+          }}
+        >
+          <span>
+            <time>{published}</time>
+          </span>
+          <span>
+            <em dangerouslySetInnerHTML={{ __html: container }} />
+            {" "}
+          </span>
         </p>
       </Card>
     </li>
   );
 }
+/* {authors.map(({ family }, n) => (
+            <span>{family}{n === authors.length - 1 ? null : ", "}</span>
+          ))}.*/
