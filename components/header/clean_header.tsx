@@ -1,34 +1,26 @@
 import { ApnLogo } from "akvaplan_fresh/components/mod.ts";
-import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
-import borders from "open-props/src/props.borders.js";
+import { lang as langSignal } from "akvaplan_fresh/text/mod.ts";
 import { SiteMenu } from "./site_menu.tsx";
 export function CleanHeader(
   {
     href = "/",
     lang = langSignal.value,
     Logo = ApnLogo,
-    Right = SiteMenu,
-    Left = () => <div />,
   },
 ) {
   return (
     <header
       id="top"
       style={{
-        margin: 0,
-        padding: borders["--border-size-3"],
         display: "grid",
-        gap: "2rem",
-        gridTemplateColumns: "1fr auto 1fr",
+        gridTemplateColumns: "1fr auto",
         color: "var(--text1)",
-        placeItems: "end",
       }}
     >
-      <Left lang={lang} />
-      <a href={href}>
+      <a href={href} style={{ margin: "1rem", padding: "0rem" }}>
         <Logo />
       </a>
-      <Right lang={lang} />
+      <SiteMenu lang={lang} />
     </header>
   );
 }

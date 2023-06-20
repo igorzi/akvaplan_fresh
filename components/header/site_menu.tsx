@@ -7,6 +7,8 @@ export const SiteMenu = ({ lang }) => (
     style={{
       display: "grid",
       justifyContent: "end",
+      marginTop: "0.5rem",
+      marginRight: "0.5rem",
     }}
   >
     <nav>
@@ -15,4 +17,3 @@ export const SiteMenu = ({ lang }) => (
     <SiteNavDialog lang={lang} />
   </span>
 );
-// Note: regular translations using t in ButtonOpenDialog text gives circularity issues
