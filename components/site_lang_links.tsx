@@ -2,6 +2,7 @@ import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 
 const _style = {
   color: "var(--text1)",
+  fontSize: "var(--font-size-4)",
 };
 export const SiteLangLinks = (
   { lang = langSignal.value, native = false, style = _style, ...props } = {},

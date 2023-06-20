@@ -9,7 +9,9 @@ const sortPublishedLatest = (a, b) =>
 // https://www.mynewsdesk.com/docs/webservice_pressroom#services_view
 const base = "https://www.mynewsdesk.com";
 
-const mynewsdesk_key: string = Deno?.env?.get("mynewsdesk_key") ?? "";
+const mynewsdesk_key: string = globalThis.Deno && Deno.env.has("mynewsdesk_key")
+  ? Deno.env.get("mynewsdesk_key") ?? ""
+  : "";
 
 const path = (action: string, unique_key = mynewsdesk_key) =>
   `/services/pressroom/${action}/${unique_key}`;

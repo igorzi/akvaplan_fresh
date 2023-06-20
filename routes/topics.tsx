@@ -138,10 +138,7 @@ export default function TopicsOrTopic(
                     {topics?.at(0)?.name ?? topic}
                   </span>
                 }
-                image={topics?.at(0)?.img?.replace(
-                  "/preview/",
-                  "/preview_big/",
-                )}
+                image={topics?.at(0)?.img}
                 imageCaption={"cap"}
               />
               <div>

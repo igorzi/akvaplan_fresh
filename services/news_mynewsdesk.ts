@@ -19,6 +19,7 @@ export const newsFromMynewsdesk = ({ lang }: NewsMapper) =>
     header,
     published_at,
     image,
+    image_thumbnail_large,
     type_of_media,
     rels,
     ...item
@@ -29,7 +30,7 @@ export const newsFromMynewsdesk = ({ lang }: NewsMapper) =>
   published: published_at.datetime,
   href: href({ header, language, published_at, type_of_media }, lang),
   hreflang: language,
-  img: thumbURL(extractID(image ?? ""), { w: 512, h: 512 }),
+  img: image_thumbnail_large, //thumbURL(extractID(image ?? ""), { w: 512, h: 512 }),
   caption: image_caption ?? header,
   thumb: thumbURL(extractID(image ?? "")),
   type: type_of_media,

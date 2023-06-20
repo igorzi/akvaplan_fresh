@@ -9,7 +9,7 @@ type Props = {
 
 export function PeopleScroll({ people }: Props) {
   return (
-    <HScroll scrollerId="people-scroll">
+    <HScroll>
       {people.map((person) => <PeopleCard person={person} key={person.id} />)}
     </HScroll>
   );
@@ -48,7 +48,7 @@ export const GroupedPeople = (
           </a>
         </h2>
 
-        <HScroll scrollerId="news-scroll">
+        <HScroll>
           {grpmembers.map((person) => (
             <PeopleCard
               id={person.id}

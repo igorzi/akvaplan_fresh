@@ -1,6 +1,6 @@
 const style = `@media only screen and (min-width: 1440px) {
   svg.Akvaplan-niva {
-    height: 96px;
+    height: 64px;
   }
  };`;
 

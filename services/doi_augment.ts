@@ -11,10 +11,10 @@ export const doiImage = new Map([
     "10.1021/acs.est.2c07459",
     "https://pubs.acs.org/cms/10.1021/acs.est.2c07459/asset/images/medium/es2c07459_0002.gif",
   ],
-  [
-    "10.1002/ece3.9779",
-    "https://onlinelibrary.wiley.com/cms/asset/b98045f0-b424-4e7e-b624-e66025c5cd0c/ece39779-fig-0002-m.jpg",
-  ],
+  // [
+  //   "10.1002/ece3.9779",
+  //   "https://onlinelibrary.wiley.com/cms/asset/b98045f0-b424-4e7e-b624-e66025c5cd0c/ece39779-fig-0002-m.jpg",
+  // ],
   [
     "10.1016/j.jembe.2022.151855",
     "https://ars.els-cdn.com/content/image/1-s2.0-S0022098122001630-gr1.jpg",
@@ -90,5 +90,13 @@ export const doiImage = new Map([
   [
     "10.1002/ece3.9569",
     "https://onlinelibrary.wiley.com/cms/asset/b6391f3c-1a5d-4e55-abd2-263efd7d4d33/ece39569-fig-0005-m.jpg",
+  ],
+  [
+    "10.1016/j.marenvres.2023.106046",
+    "https://ars.els-cdn.com/content/image/1-s2.0-S0141113623001745-gr6.jpg",
+  ],
+  [
+    "10.1080/15287394.2023.2209115",
+    "https://www.tandfonline.com/na101/home/literatum/publisher/tandf/journals/content/uteh20/2023/uteh20.v086.i12/15287394.2023.2209115/20230517/images/large/uteh_a_2209115_f0004_oc.jpeg",
   ],
 ]);

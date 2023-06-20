@@ -101,12 +101,15 @@ option {
   touch-action: manipulation;
   outline-offset: 5px;
 
-  color: var(--text2);
-  fill: var(--text2); 
+  vertical-align: middle;
+  display: inline-block;
+  
+  /*color: var(--text2);
+  fill: var(--text2);*/ 
 }
 
 .icon:hover {
-  fill:var(--accent);
+  fill: var(--accent);
 }
 
 .target {
@@ -172,4 +175,10 @@ html:has(dialog[open]) {
 *::backdrop {
   backdrop-filter: blur(30px);
   /* background: var(--surface0); */
+}
+
+@media screen and (max-width: 768px) {
+  .hide-s {
+    display: none;
+  }
 }

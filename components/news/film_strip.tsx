@@ -42,7 +42,7 @@ export function NewsFilmStrip(
   const href = lang === "en" ? "news" : "nyheter";
 
   return (
-    <HScroll scrollerId="news-film-strip">
+    <HScroll>
       <BeforeAfter href={href} title={more} />
       {news.map((
         { title, href, caption, published, thumb, type, hreflang },

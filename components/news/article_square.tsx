@@ -8,6 +8,8 @@ export const ArticleSquare = (
     published,
     duration,
     img,
+    img512,
+    thumb,
     desc,
     href,
     hreflang,
@@ -34,7 +36,7 @@ export const ArticleSquare = (
         height={height}
         alt=""
         loading="lazy"
-        src={img}
+        src={img512 ?? img ?? thumb}
       />
 
       <p

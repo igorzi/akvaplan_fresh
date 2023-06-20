@@ -226,26 +226,8 @@ export default function DoiPublication(
               {license ? license.toUpperCase() : t("ui.unknown")}
             </dd>
 
-            <dt>{t("pubs.cites")}</dt>
-            <dd>
-              {cites}
-            </dd>
-
-            <dt>{t("pubs.linked_data")}</dt>
-            <dd>
-              Crossref:{" "}
-              <a href={`https://api.crossref.org/works/${doi}`}>{doi}</a>
-            </dd>
-            <dd>
-              OpenAlex:{" "}
-              <a
-                target="_blank"
-                hrefLang="en"
-                href={openalex.id.replace("https://", "https://api.")}
-              >
-                {openalex.id.split(".org/").at(1)}
-              </a>
-            </dd>
+            <dt>language</dt>
+            <dd>{t(`lang.${openalex?.language}`)}</dd>
 
             {pdf && (
               <>
@@ -255,6 +237,30 @@ export default function DoiPublication(
                 </dd>
               </>
             )}
+
+            <dt>{t("pubs.cites")}</dt>
+            <dd>
+              {cites}
+            </dd>
+
+            <dt>{t("pubs.funding")}</dt>
+            {openalex?.grants?.map(({ funder_display_name, award_id }) => (
+              <dd>{funder_display_name} {award_id && `: ${award_id}`}</dd>
+            ))}
+
+            <dt>{t("pubs.linked_data")}</dt>
+            <dd>
+              <a href={`https://api.crossref.org/works/${doi}`}>Crossref</a>
+            </dd>
+            <dd>
+              <a
+                target="_blank"
+                hrefLang="en"
+                href={openalex.id.replace("https://", "https://api.")}
+              >
+                OpenAlex
+              </a>
+            </dd>
             <dt>{t("ui.updated")}</dt>
             <dd>
               {isodate(openalex.updated_date)}
@@ -262,8 +268,12 @@ export default function DoiPublication(
           </dl>
         </Card>
         <nav>
-          {t("nav.Back_to")} <Icon name="west" hidden />
-          <a href={pubsURL()}>{t("nav.Pubs")}</a>
+          <a
+            href={pubsURL()}
+            aria-label={t("nav.Back_to") + " " + t("nav.Pubs")}
+          >
+            <Icon name="arrow_back_ios_new" height="1rem" /> {t("nav.Pubs")}
+          </a>
         </nav>
       </article>
     </Page>
