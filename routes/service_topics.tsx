@@ -114,7 +114,7 @@ export default function ServiceTopics(
                   <a href=".">{t(`nav.Services`)}</a>: {service.name}
                 </span>
               }
-              image={service.img}
+              image={service?.img ?? service?.img512}
               imageCaption={""}
             />
             <div>

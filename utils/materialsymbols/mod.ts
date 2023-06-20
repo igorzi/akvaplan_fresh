@@ -20,7 +20,7 @@ export const processIcon = (text, name) =>
   text.replace(/(width|height)="[0-9]+"/g, "")
     .replace(
       'xmlns="http://www.w3.org/2000/svg"',
-      `id="materialsymbols_${name}" fill="currentColor"`,
+      `id="${name}" fill="currentColor"`,
     )
     .replace(
       /\s{2,}/g,

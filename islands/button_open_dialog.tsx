@@ -24,10 +24,10 @@ export default (
     aria-label={props.label}
     onClick={handleClick}
     {...props}
-    style={{ fontSize: "var(--font-size-4)", color: "var(--text2)" }}
+    style={{ fontSize: "var(--font-size-1)", color: "var(--text2)" }}
   >
     {children}
-    <Icon name="hamburger_menu_right" height="1.5rem" width="1.5rem" />
+    <Icon name="hamburger_menu_right" height="1.25rem" width="1.25rem" />
     <span _class="hide-s">{props.lang === "no" ? "meny" : "menu"}</span>
   </button>
 );

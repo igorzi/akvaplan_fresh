@@ -3,21 +3,22 @@
     "akvaplan_fresh/": "./",
     "std/": "https://deno.land/std@0.185.0/",
     "$fresh/": "https://deno.land/x/fresh@1.1.4/",
-    "marked": "https://esm.sh/v118/marked@5.0.0/es2022/marked.mjs",
-    "accept-language-parser": "https://esm.sh/v118/accept-language-parser@1.5.0",
-    "open-props": "https://esm.sh/v118/open-props@1.5.7",
-    "open-props/": "https://esm.sh/v118/open-props@1.5.7/",
-    "preact-render-to-string": "https://esm.sh/v118/*preact-render-to-string@6.0.2",
-    "preact-render-to-string/": "https://esm.sh/v118/*preact-render-to-string@6.0.2/",
-    "preact": "https://esm.sh/v118/preact@10.13.2",
-    "preact/": "https://esm.sh/v118/preact@10.13.2/",
-    "@preact/signals-core": "https://esm.sh/v118/@preact/signals-core@1.2.3",
+    "fresh_seo": "https://deno.land/x/fresh_seo@0.2.1/mod.ts",
+    "@preact/signals-core": "https://esm.sh/v115/@preact/signals-core@1.2.3",
     "@preact/signals": "https://esm.sh/v115/*@preact/signals@1.1.3",
-    "fresh_seo": "https://deno.land/x/fresh_seo@0.2.1/mod.ts"
+    "accept-language-parser": "https://esm.sh/v115/accept-language-parser@1.5.0",
+    "marked": "https://esm.sh/v115/marked@5.0.5",
+    "marked/": "https://esm.sh/v115/marked@5.0.5/",
+    "open-props": "https://esm.sh/v115/open-props@1.5.9",
+    "open-props/": "https://esm.sh/v115/open-props@1.5.9/",
+    "preact-render-to-string": "https://esm.sh/v115/*preact-render-to-string@6.0.3",
+    "preact-render-to-string/": "https://esm.sh/v115/*preact-render-to-string@6.0.3/",
+    "preact": "https://esm.sh/v115/preact@10.13.2",
+    "preact/": "https://esm.sh/v115/preact@10.13.2/"
   },
   "scopes": {
     "https://esm.sh/v115/": {
-      "pretty-format": "https://esm.sh/v118/pretty-format@3.8.0"
+      "pretty-format": "https://esm.sh/v115/pretty-format@3.8.0"
     }
   }
 }

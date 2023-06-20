@@ -96,7 +96,8 @@ export default function Home(
     },
   },
 ) {
-  const maxVisNews = 5.5;
+  const maxVisNews = 4.5; //5.5;
+  const maxVisResearchServices = 4.5; //6.5;
 
   return (
     <Page>
