@@ -40,7 +40,7 @@ export const SiteNavDialog = ({ lang }) => (
     >
       <form method="dialog">
         <button>
-          <Icon name="close" />
+          <Icon name="close" width="1.5rem" height="1.5rem" />
           {t("menu.close")}
         </button>
       </form>
