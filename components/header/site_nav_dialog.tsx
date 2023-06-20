@@ -39,8 +39,8 @@ export const SiteNavDialog = ({ lang }) => (
       }}
     >
       <form method="dialog">
-        <button>
-          <Icon name="close" width="1.5rem" height="1.5rem" />
+        <button style={{ fontSize: "var(--font-size-1)" }}>
+          <Icon name="close" width="1.25rem" height="1.25rem" />
           {t("menu.close")}
         </button>
       </form>
