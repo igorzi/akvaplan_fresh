@@ -94,7 +94,7 @@ option {
 /*   
   inline-size: var(--size);
   block-size: var(--size); */
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
 
   cursor: pointer;
@@ -132,10 +132,10 @@ option {
 }
 
 .ellipsis {
-  maxLines: 1;
+  line-clamp: 1;
   overflow: hidden;
-  whiteSpace: nowrap;
-  textOverflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .limit-lines {
@@ -149,9 +149,10 @@ option {
 
 .line-clamp3 {
   display: -webkit-box;
-   -webkit-line-clamp: 3;
-   -webkit-box-orient: vertical; 
-   overflow: hidden;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+  overflow: hidden;
 }
 
 dialog {

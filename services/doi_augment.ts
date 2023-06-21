@@ -99,4 +99,8 @@ export const doiImage = new Map([
     "10.1080/15287394.2023.2209115",
     "https://www.tandfonline.com/na101/home/literatum/publisher/tandf/journals/content/uteh20/2023/uteh20.v086.i12/15287394.2023.2209115/20230517/images/large/uteh_a_2209115_f0004_oc.jpeg",
   ],
+  [
+    "10.3390/ani13121993",
+    "https://pub.mdpi-res.com/animals/animals-13-01993/article_deploy/html/images/animals-13-01993-g003.png?1686792740",
+  ],
 ]);
