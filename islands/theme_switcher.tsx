@@ -14,6 +14,13 @@ const buttonsGrid = {
   placeItems: "center",
 };
 
+const style = {
+  borderRadius: "var(--radius-2)",
+  padding: 0,
+  width: "44px",
+  height: "44px",
+};
+
 export const handleThemeClick = (e: MouseEvent) => {
   e.preventDefault();
 
@@ -40,6 +47,7 @@ export default function ThemeSwitcher({ mini = false, auto = !mini } = {}) {
           color-scheme="dark"
           aria-label={t("theme.set.dark")}
           aria-pressed={theme === "dark"}
+          style={style}
         >
           {mini ? <span>&nbsp;</span> : t("theme.dark")}
         </button>
@@ -49,6 +57,7 @@ export default function ThemeSwitcher({ mini = false, auto = !mini } = {}) {
           data-theme="auto"
           aria-label={t("theme.set.blue")}
           aria-pressed={theme === "blue"}
+          style={style}
         >
           {mini ? <span>&nbsp;</span> : t("theme.blue")}
         </button>
@@ -57,6 +66,7 @@ export default function ThemeSwitcher({ mini = false, auto = !mini } = {}) {
           color-scheme="light"
           aria-label={t("theme.set.light")}
           aria-pressed={theme === "light"}
+          style={style}
         >
           {mini ? <span>&nbsp;</span> : t("theme.light")}
         </button>
@@ -67,6 +77,7 @@ export default function ThemeSwitcher({ mini = false, auto = !mini } = {}) {
               data-theme="auto"
               color-scheme="blue"
               aria-pressed={theme === null}
+              style={style}
             >
               {mini ? <span>&nbsp;</span> : t("theme.auto")}
             </button>
