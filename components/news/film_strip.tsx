@@ -43,7 +43,7 @@ export function NewsFilmStrip(
 
   return (
     <HScroll>
-      <BeforeAfter href={href} title={more} />
+      {BeforeAfter && <BeforeAfter href={href} title={more} />}
       {news.map((
         { title, href, caption, published, thumb, type, hreflang },
       ) => (
@@ -58,7 +58,7 @@ export function NewsFilmStrip(
           lang={lang}
         />
       ))}
-      <BeforeAfter href={href} title={more} />
+      {BeforeAfter && <BeforeAfter href={href} title={more} />}
     </HScroll>
   );
 }
