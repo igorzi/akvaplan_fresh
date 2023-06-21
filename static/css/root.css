@@ -132,7 +132,7 @@ option {
 }
 
 .ellipsis {
-  max-lines: 1;
+  line-clamp: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -149,9 +149,10 @@ option {
 
 .line-clamp3 {
   display: -webkit-box;
-   -webkit-line-clamp: 3;
-   -webkit-box-orient: vertical; 
-   overflow: hidden;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+  overflow: hidden;
 }
 
 dialog {
