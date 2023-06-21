@@ -11,7 +11,7 @@ const handleClick = (e: MouseEvent) => {
   if (dialog) {
     const { open } = dialog;
     if (open) {
-      //
+      dialog.close();
     } else {
       dialog.showModal();
     }
