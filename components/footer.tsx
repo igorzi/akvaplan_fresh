@@ -1,9 +1,4 @@
-import {
-  ApnLogo,
-  SiteLangLinks,
-  SiteNav,
-} from "akvaplan_fresh/components/mod.ts";
-import { LinkLang } from "akvaplan_fresh/islands/lang_switcher.tsx";
+import { SiteNav } from "akvaplan_fresh/components/mod.ts";
 import ThemeSwitcher from "akvaplan_fresh/islands/theme_switcher.tsx";
 import { t } from "akvaplan_fresh/text/mod.ts";
 
@@ -22,7 +17,9 @@ export function Footer({ lang }) {
     <footer>
       <nav style={footerStyle}>
         <a href="/" aria-label={t("nav.go_home")} style={{ marginTop: "3rem" }}>
-          <ApnLogo height="400px" />
+          <svg>
+            <use href="#apn-logo" />
+          </svg>
         </a>
 
         <SiteNav />
