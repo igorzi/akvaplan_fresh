@@ -1,4 +1,4 @@
-import { CleanHeader } from "akvaplan_fresh/components/mod.ts";
+import { CleanHeader } from "./header/clean_header.tsx";
 import { Footer } from "./footer.tsx";
 import { Styles } from "./styles.tsx";
 
@@ -10,7 +10,7 @@ import { FunctionComponent, JSX } from "preact";
 
 import { computed } from "@preact/signals-core";
 import { StringSignal } from "akvaplan_fresh/@interfaces/signal.ts";
-import { symbolDataURI } from "akvaplan_fresh/components/akvaplan/symbol.tsx";
+//import { symbolDataURI } from "akvaplan_fresh/components/akvaplan/symbol.tsx";
 
 export type StdProps =
   & JSX.HTMLAttributes<HTMLElement>
@@ -30,7 +30,7 @@ export function Page(
     title,
     base = baseForLang,
     href,
-    Logo = CleanHeader,
+    Header = CleanHeader,
     Left = null,
     Right = null,
     ...props
@@ -75,7 +75,7 @@ export function Page(
       {head}
 
       <body {...propsExceptChildren}>
-        <Logo href={href} lang={lang.value} />
+        <Header href={href} lang={lang.value} />
         <main style={{ minHeight: "100vh", padding: "0 var(--size-3)" }}>
           {children}
         </main>
