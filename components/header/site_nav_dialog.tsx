@@ -1,5 +1,5 @@
 import { ApnLogo, Icon, SiteNav } from "akvaplan_fresh/components/mod.ts";
-
+import ThemeSwitcher from "akvaplan_fresh/islands/theme_switcher.tsx";
 import { t } from "akvaplan_fresh/text/mod.ts";
 
 export const SiteNavDialog = ({ lang }) => (
@@ -39,11 +39,14 @@ export const SiteNavDialog = ({ lang }) => (
       }}
     >
       <form method="dialog">
-        <button style={{ fontSize: "var(--font-size-1)" }}>
+        <button
+          style={{ fontSize: "var(--font-size-1)" }}
+          aria-label={t("menu.close")}
+        >
           <Icon name="close" width="1.25rem" height="1.25rem" />
-          {t("menu.close")}
         </button>
       </form>
+      <ThemeSwitcher mini />
     </footer>
   </dialog>
 );
