@@ -5,13 +5,13 @@ export const icons = new Set([
   "cell_tower",
   "close",
   "contact_mail",
-  "mail",
   "exit_to_app",
   "language",
+  "mail",
   "phone_in_talk",
-  "west",
   "search",
   "sms_failed",
+  "west",
 ]);
 export const iconurl = (name: string) =>
   `https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/${name}/wght300/48px.svg`;
