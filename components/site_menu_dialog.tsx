@@ -9,6 +9,7 @@ export default ({ lang }) => (
     style={{
       border: "0",
       background: "var(--surface1) 0.2",
+      minWidth: "20rem",
       color: "var(--text1)",
     }}
   >
@@ -48,9 +49,8 @@ export default ({ lang }) => (
             position: "absolute",
             top: 0,
             right: 0,
-            margin: 0,
+            margin: "0.5rem",
             padding: "0.5rem",
-            border: 0,
           }}
           aria-label={t("menu.close")}
           title={t("menu.close")}
