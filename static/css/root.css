@@ -94,7 +94,7 @@ option {
 /*   
   inline-size: var(--size);
   block-size: var(--size); */
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
 
   cursor: pointer;
