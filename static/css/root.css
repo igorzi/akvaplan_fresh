@@ -132,10 +132,10 @@ option {
 }
 
 .ellipsis {
-  maxLines: 1;
+  max-lines: 1;
   overflow: hidden;
-  whiteSpace: nowrap;
-  textOverflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .limit-lines {
