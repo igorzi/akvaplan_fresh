@@ -6,6 +6,7 @@ import {
 } from "akvaplan_fresh/theming/mod.ts";
 
 import { t } from "akvaplan_fresh/text/mod.ts";
+import Button from "../components/button/button.tsx";
 
 const buttonsGrid = {
   display: "grid",
@@ -43,16 +44,16 @@ export default function ThemeSwitcher({ mini = false, auto = !mini } = {}) {
       onClick={handleThemeClick}
     >
       <div>
-        <button
+        <Button
           color-scheme="dark"
           aria-label={t("theme.set.dark")}
           aria-pressed={theme === "dark"}
           style={style}
         >
           {mini ? <span>&nbsp;</span> : t("theme.dark")}
-        </button>
+        </Button>
 
-        <button
+        <Button
           color-scheme="blue"
           data-theme="auto"
           aria-label={t("theme.set.blue")}
@@ -60,16 +61,16 @@ export default function ThemeSwitcher({ mini = false, auto = !mini } = {}) {
           style={style}
         >
           {mini ? <span>&nbsp;</span> : t("theme.blue")}
-        </button>
+        </Button>
 
-        <button
+        <Button
           color-scheme="light"
           aria-label={t("theme.set.light")}
           aria-pressed={theme === "light"}
           style={style}
         >
           {mini ? <span>&nbsp;</span> : t("theme.light")}
-        </button>
+        </Button>
 
         {auto
           ? (

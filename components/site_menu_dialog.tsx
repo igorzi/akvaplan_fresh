@@ -1,6 +1,7 @@
 import { Icon, SiteNav } from "akvaplan_fresh/components/mod.ts";
 import ThemeSwitcher from "akvaplan_fresh/islands/theme_switcher.tsx";
 import { t } from "akvaplan_fresh/text/mod.ts";
+import Button from "./button/button.tsx";
 
 export default ({ lang }) => (
   <dialog
@@ -44,7 +45,7 @@ export default ({ lang }) => (
       }}
     >
       <form method="dialog">
-        <button
+        <Button
           style={{
             position: "absolute",
             top: 0,
@@ -56,7 +57,7 @@ export default ({ lang }) => (
           title={t("menu.close")}
         >
           <Icon name="close" width="1.5rem" height="1.5rem" />
-        </button>
+        </Button>
       </form>
       <ThemeSwitcher mini />
     </footer>

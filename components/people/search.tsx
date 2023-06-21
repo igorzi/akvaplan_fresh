@@ -1,4 +1,5 @@
 import { t } from "akvaplan_fresh/text/mod.ts";
+import Button from "../button/button.tsx";
 
 const pipe = <span>{" "}|{" "}</span>;
 export const PeopleSearchForm = ({ q, sortdir }) => (
@@ -18,7 +19,7 @@ export const PeopleSearchForm = ({ q, sortdir }) => (
         placeholder={t("people.search.placeholder")}
       />
 
-      <button type="submit">{t("Search")}</button>
+      <Button type="submit">{t("Search")}</Button>
     </div>
 
     <menu
