@@ -1,4 +1,4 @@
-import { ApnLogo, Icon, SiteNav } from "akvaplan_fresh/components/mod.ts";
+import { Icon, SiteNav } from "akvaplan_fresh/components/mod.ts";
 import ThemeSwitcher from "akvaplan_fresh/islands/theme_switcher.tsx";
 import { t } from "akvaplan_fresh/text/mod.ts";
 
@@ -18,7 +18,9 @@ export default ({ lang }) => (
         aria-label={t("nav.go_home")}
         style={{ marginTop: "1rem" }}
       >
-        <ApnLogo />
+        <svg width="100%" height="3rem">
+          <use href="#apn-logo" />
+        </svg>
       </a>
     </header>
 
