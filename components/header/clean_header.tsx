@@ -5,7 +5,6 @@ export function CleanHeader(
   {
     href = "/",
     lang = langSignal.value,
-    Logo = ApnLogo,
   },
 ) {
   return (
@@ -17,8 +16,8 @@ export function CleanHeader(
         color: "var(--text1)",
       }}
     >
-      <a href={href} style={{ margin: "1rem", padding: "0rem" }}>
-        <Logo />
+      <a href={href} style={{ margin: "0rem", padding: "1rem" }}>
+        <ApnLogo id="apn-logo" />
       </a>
       <SiteMenu lang={lang} />
     </header>

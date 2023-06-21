@@ -1,4 +1,4 @@
-import { Icon, SiteNavDialog } from "akvaplan_fresh/components/mod.ts";
+import SiteNavDialog from "akvaplan_fresh/components/site_menu_dialog.tsx";
 import ButtonOpenDialog from "akvaplan_fresh/islands/button_open_dialog.tsx";
 
 export const SiteMenu = ({ lang }) => (

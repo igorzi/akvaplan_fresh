@@ -3,18 +3,17 @@ const style = `@media only screen and (min-width: 1440px) {
     height: 64px;
   }
  };`;
-
-export const ApnLogo = ({ width = "100%", height = "48px" } = {}) => (
+export const ApnLogo = (props = {}) => (
   <svg
-    width={width}
-    height={height}
+    width={props?.width ?? "100%"}
+    height={props.height ?? "3rem"}
     viewBox="0 0 127.11 30.276"
     aria-label="Akvaplan-niva"
-    alt="logo"
+    alt="Akvaplan-niva logo"
     role="img"
     class="Akvaplan-niva"
+    {...props}
   >
-    <style>{style}</style>
     <g fill="var(--logo-blue)">
       <path d="M8.25 5.59l1.43 5.15h-3zM5.86 0L0 16.71h4.93l.71-2.39h5.06l.67 2.39h5.08L10.66 0z">
       </path>
