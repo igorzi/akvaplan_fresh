@@ -28,7 +28,7 @@
   bottom: 2rem;
   left: 2rem;
   color: var(--text1);
-  font-size: var(--font-size-fluid-2);
+  font-size: 2rem;
   backdrop-filter: blur(16px);
   max-width: 80%;
   padding: var(--size-2);
