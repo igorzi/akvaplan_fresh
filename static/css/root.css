@@ -64,7 +64,7 @@ footer {
 }
 
 p {
-  line-height: var(--font-lineheight-1); 
+  line-height: 1.35; 
 }
 
 h1 {
