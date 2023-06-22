@@ -62,11 +62,10 @@ header,
 footer {
   color: var(--text1);
 }
-/*
+
 p {
-  line-height: var(--font-lineheight-2); 
+  line-height: 1.35; 
 }
-*/
 
 h1 {
   font-size: 2rem;
