@@ -1,6 +1,7 @@
 import { Icon } from "akvaplan_fresh/components/mod.ts";
 import { t } from "akvaplan_fresh/text/mod.ts";
 import { JSX } from "preact";
+import Button from "../components/button/button.tsx";
 
 // Here t breaks down (always translates to NO (at first ok, presumably on server, but after browser load it fails ?:/)
 // aria-label={props.label ?? t("menu.open_menu")}
@@ -21,7 +22,7 @@ const handleClick = (e: MouseEvent) => {
 export default (
   { children, ...props }: JSX.HTMLAttributes<HTMLElement>,
 ) => (
-  <button
+  <Button
     onClick={handleClick}
     style={{ fontSize: "var(--font-size-1)", color: "var(--text2)" }}
     {...props}
@@ -29,5 +30,5 @@ export default (
     {children}
     <Icon name="hamburger_menu_right" height="1.5rem" width="1.5rem" />
     <span style="display: none">{props.lang === "no" ? "meny" : "menu"}</span>
-  </button>
+  </Button>
 );

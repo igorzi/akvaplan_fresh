@@ -1,12 +1,13 @@
-button:not([color-scheme]) {
-  background-color: transparent
+.custom-button:not([color-scheme]) {
+  background-color: transparent;
 }
 
-button[color-scheme] {
+.custom-button[color-scheme] {
   background-color: var(--surface1);
 }
 
-.button, button {
+.button,
+.custom-button {
   color: var(--text1);
   min-height: 1rem;
   min-width: 1rem;
@@ -26,32 +27,24 @@ button[color-scheme] {
   text-align: center;
   justify-content: center;
   align-items: center;
-  /* transition: border-color .5s var(--ease-2) 1s; */
 }
 
-.button:hover,button:hover,button:focus {
+.button:hover,
+.custom-button:hover,
+.custom-button:focus {
   border: var(--border-size-2) solid var(--surface4);
   text-decoration: none;
 }
 
-button[aria-pressed="true"],button:focus {
+.custom-button[aria-pressed="true"],
+.custom-button:focus {
   border: var(--border-size-2) solid var(--accent);
 }
 
-/* :where(button,input:is([type=button],[type=submit],[type=reset]))[disabled]{
-  cursor:not-allowed
-} */
-:where(button,input:is([type=button],[type=submit],[type=reset])):where(:not(:active):hover){
-  transition-delay:0s;
-  transition-duration:.25s;
+:where(
+    .custom-button,
+    input:is([type="button"], [type="submit"], [type="reset"])
+  ):where(:not(:active):hover) {
+  transition-delay: 0s;
+  transition-duration: 0.25s;
 }
-
-:where(button,input:is([type=button],[type=submit],[type=reset]))>:where(svg) {
-  /*block-size: var(--_icon-size);
-  inline-size:var(--_icon-size)*/
-}
-:where(button,input:is([type=button],[type=submit],[type=reset]))>:where(svg>*) {
-  /*stroke:var(--_icon-color);
-  stroke-width:var(--border-size-2)*/
-}
-

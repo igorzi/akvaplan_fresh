@@ -6,6 +6,7 @@ import {
 } from "akvaplan_fresh/text/mod.ts";
 import { JSX } from "preact";
 import { IS_BROWSER } from "$fresh/runtime.ts";
+import Button from "../components/button/button.tsx";
 
 const _grid = { display: "grid", gridTemplateColumns: "1fr 1fr" };
 
@@ -43,20 +44,20 @@ export default function LangSwitcherBtns(
       onClick={handleLangClick}
       style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
     >
-      <button
+      <Button
         data-lang="en"
         aria-pressed={lang === "en"}
         disabled={!IS_BROWSER || props.disabled}
       >
         EN
-      </button>
-      <button
+      </Button>
+      <Button
         data-lang="no"
         aria-pressed={["no", "nb", "nn", ""].includes(lang)}
         disabled={!IS_BROWSER || props.disabled}
       >
         NO
-      </button>
+      </Button>
     </div>
   );
 }

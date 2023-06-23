@@ -1,4 +1,6 @@
 import { Icon } from "akvaplan_fresh/components/mod.ts";
+import Button from "../button/button.tsx";
+
 type HScrollProps = HTMLElement & {
   scrollerId: string;
   staticFirstElement?: HTMLElement;
@@ -18,7 +20,7 @@ function HScrollButton(
   { extraClass, dataFor, value, ariaLabel }: HScrollButtonProps,
 ) {
   return (
-    <button
+    <Button
       class={`scroller-button scroller-button--${extraClass}`}
       data-for={dataFor}
       value={value}
@@ -27,7 +29,7 @@ function HScrollButton(
       {value === "left"
         ? <Icon name="arrow_back_ios_new" width="1rem" height="1rem" />
         : <Icon name="arrow_forward_ios" width="1rem" height="1rem" />}
-    </button>
+    </Button>
   );
 }
 

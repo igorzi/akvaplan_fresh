@@ -9,6 +9,7 @@ import { SlimCard } from "akvaplan_fresh/components/slim_card.tsx";
 import { type SlimPublication } from "../@interfaces/slim_publication.ts";
 
 import { useSignal } from "@preact/signals";
+import Button from "../components/button/button.tsx";
 
 export interface DoiSearchResultsProps {
   results: SlimPublication[];
@@ -77,7 +78,7 @@ export default function DoiSearch(
            "
         />
 
-        <button type="submit">{t("pubs.Search")}</button>
+        <Button type="submit">{t("pubs.Search")}</Button>
       </form>
       <p style={{ fontSize: "1rem" }}>{numFound}/{total}</p>
 
