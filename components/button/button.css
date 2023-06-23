@@ -57,3 +57,7 @@
 .icon-button-reversed {
   flex-direction: row-reverse;
 }
+
+.custom-button.custom-button-filled {
+  background-color: var(--surface2);
+}
