@@ -7,6 +7,7 @@ type IconButtonProps = {
   iconHeight?: string;
   iconWidth?: string;
   onClick?: () => void;
+  children: any;
 } & JSX.HTMLAttributes<HTMLButtonElement>;
 
 export default function IconButton({
@@ -15,11 +16,17 @@ export default function IconButton({
   iconHeight,
   iconWidth,
   onClick,
+  children,
   ...props
 }: IconButtonProps) {
   return (
-    <Button {...props} onClick={onClick}>
+    <Button
+      {...props}
+      onClick={onClick}
+      additionalClass={`icon-button ${reverse ? "icon-button-reversed" : ""}`}
+    >
       <Icon name={icon} width={iconWidth} height={iconHeight} />
+      {children}
     </Button>
   );
 }

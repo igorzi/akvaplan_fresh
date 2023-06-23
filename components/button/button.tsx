@@ -1,10 +1,12 @@
 import { HTMLProps } from "preact";
 
-type Props = HTMLProps<HTMLButtonElement>;
+type Props = HTMLProps<HTMLButtonElement> & {
+  additionalClass?: string;
+};
 
-export default function Button({ children, ...props }: Props) {
+export default function Button({ additionalClass = "", children, ...props }: Props) {
   return (
-    <button class="custom-button" {...props}>
+    <button class={`custom-button ${additionalClass}`} {...props}>
       {children}
     </button>
   );

@@ -48,3 +48,12 @@
   transition-delay: 0s;
   transition-duration: 0.25s;
 }
+
+.icon-button {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-button-reversed {
+  flex-direction: row-reverse;
+}
