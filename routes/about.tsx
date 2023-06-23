@@ -182,6 +182,15 @@ export default (
                     {t("policy.gender")}
                   </a>
                 </li>
+                <li>
+                  <a
+                    hreflang="no"
+                    href={t("policy.openness.url")}
+                    target="_blank"
+                  >
+                    {t("policy.openness")}
+                  </a>
+                </li>
               </menu>
             </Card>
           </section>

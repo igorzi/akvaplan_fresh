@@ -63,12 +63,18 @@ export default function Documents(
                 {t("policy.gender")}
               </a>
             </li>
+            <li>
+              <a
+                hreflang="no"
+                href={t("policy.openness.url")}
+                target="_blank"
+              >
+                {t("policy.openness")}
+              </a>
+            </li>
           </menu>
         </Card>
       </section>
-
-      Den første redegjørelsen for Akvaplan-nivas aktsomhetsvurderinger vil bli
-      tilgjengelig her på virksomhetens nettsider innen 30. juni 2023
     </Page>
   );
 }
