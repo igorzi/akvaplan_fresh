@@ -1,7 +1,7 @@
-import { Icon, SiteNav } from "akvaplan_fresh/components/mod.ts";
+import { SiteNav } from "akvaplan_fresh/components/mod.ts";
 import ThemeSwitcher from "akvaplan_fresh/islands/theme_switcher.tsx";
 import { t } from "akvaplan_fresh/text/mod.ts";
-import Button from "./button/button.tsx";
+import IconButton from "./button/icon_button.tsx";
 
 export default ({ lang }) => (
   <dialog
@@ -15,11 +15,7 @@ export default ({ lang }) => (
     }}
   >
     <header>
-      <a
-        href="/"
-        aria-label={t("nav.go_home")}
-        style={{ marginTop: "1rem" }}
-      >
+      <a href="/" aria-label={t("nav.go_home")} style={{ marginTop: "1rem" }}>
         <svg width="100%" height="3rem">
           <use href="#apn-logo" />
         </svg>
@@ -45,7 +41,7 @@ export default ({ lang }) => (
       }}
     >
       <form method="dialog">
-        <Button
+        <IconButton
           style={{
             position: "absolute",
             top: 0,
@@ -55,9 +51,10 @@ export default ({ lang }) => (
           }}
           aria-label={t("menu.close")}
           title={t("menu.close")}
-        >
-          <Icon name="close" width="1.5rem" height="1.5rem" />
-        </Button>
+          icon="close"
+          iconHeight="1.5rem"
+          iconWidth="1.5rem"
+        ></IconButton>
       </form>
       <ThemeSwitcher mini />
     </footer>
