@@ -96,8 +96,8 @@ export default function Home(
     },
   },
 ) {
-  const maxVisNews = 4.5; //5.5;
-  const maxVisResearchServices = 4.5; //6.5;
+  const maxVisNews = 5.5;
+  const maxVisResearchServices = 6.5;
 
   return (
     <Page>
@@ -127,9 +127,11 @@ export default function Home(
           href={routes(lang).get("news")}
           _lang="en|no"
         />
-        {/* <span style={{ fontSize: "1rem" }}>
+        {
+          /* <span style={{ fontSize: "1rem" }}>
           {t(`news.Only_in_alt_lang`)} {t(`lang.alt.${lang}`)}
-        </span> */}
+        </span> */
+        }
         <HScroll
           scrollerId="hscroll-articles-no-sitemap"
           maxVisibleChildren={maxVisNews}
@@ -138,7 +140,8 @@ export default function Home(
         </HScroll>
       </section>
 
-      {/* <section style={_section}>
+      {
+        /* <section style={_section}>
         <AlbumHeader
           text={t("pubs.Latest_peer_reviewed_research_articles")}
           href={routes(lang).get("pubs") + "?q=journal-article"}
@@ -146,7 +149,8 @@ export default function Home(
         <HScroll maxVisibleChildren={maxVisNews}>
           {researchArticles.map(ArticleSquare)}
         </HScroll>
-      </section> */}
+      </section> */
+      }
 
       <section style={_section}>
         <AlbumHeader
@@ -155,7 +159,10 @@ export default function Home(
         />
         <HScroll
           scrollerId="hscroll-services"
-          maxVisibleChildren={Math.min(services?.length, 6.5)}
+          maxVisibleChildren={Math.min(
+            services?.length,
+            maxVisResearchServices,
+          )}
         >
           {services.map(ArticleSquare)}
         </HScroll>
@@ -168,17 +175,19 @@ export default function Home(
         />
         <HScroll
           scrollerId="hscroll-topics"
-          maxVisibleChildren={Math.min(topics?.length, 6.5)}
+          maxVisibleChildren={Math.min(topics?.length, maxVisResearchServices)}
         >
           {topics?.map(ArticleSquare)}
         </HScroll>
       </section>
 
-      {/* <AlbumHeader
+      {
+        /* <AlbumHeader
         text={t("home.album.projects")}
         href={routes(lang).get("projects")}
       />
-        */}
+        */
+      }
 
       {/* Research facilities (Fisk Loise) Sensor platforms */}
     </Page>
