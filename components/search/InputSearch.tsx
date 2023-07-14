@@ -6,9 +6,9 @@ export function InputSearch({ ...props }: InputSearchProps) {
   return (
     <div className="search-container">
       <input className="search-input" type="search" {...props} />
-      <div className="search-icon">
+      <button type="submit" className="search-icon">
         <Icon name="search" width={20} height={20} />
-      </div>
+      </button>
     </div>
   );
 }
