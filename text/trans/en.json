@@ -168,6 +168,8 @@
   "ui.updated": "updated",
   "ui.published": "published",
   "ui.Google_maps": "Google maps",
+  "ui.scroll_left": "scroll from left",
+  "ui.scroll_right": "scroll from right",
   "unit.BIOLT": "Biological Analyses and Taxonomy",
   "unit.DIGIS": "Digital Solutions",
   "unit.FILOG": "Field Infrastructure and Logistics",
