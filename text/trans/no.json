@@ -164,6 +164,8 @@
   "ui.unknown": "ukjent",
   "ui.updated": "oppdatert",
   "ui.published": "publisert",
+  "ui.scroll_left": "rull fra venstre",
+  "ui.scroll_right": "rull fra høyre", 
   "unit.BIOLT": "Biologiske analyser og taksonomi",
   "unit.DIGIS": "Digitale løsninger",
   "unit.FILOG": "Feltinfrastruktur og logistikk",

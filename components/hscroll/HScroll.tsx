@@ -1,3 +1,4 @@
+import {t} from "akvaplan_fresh/text/mod.ts";
 import { Icon } from "akvaplan_fresh/components/mod.ts";
 import Button from "../button/button.tsx";
 
@@ -49,13 +50,13 @@ export function HScroll({
         extraClass={"left"}
         dataFor={scrollerId}
         value={"left"}
-        ariaLabel={"Rull til venstre"}
+        ariaLabel={t("ui.scroll_left")}
       />
       <HScrollButton
         extraClass={"right"}
         dataFor={scrollerId}
         value={"right"}
-        ariaLabel={"Rull til høyre"}
+        ariaLabel={t("ui.scroll_right")}
       />
 
       {staticFirstElement && staticFirstElement}
