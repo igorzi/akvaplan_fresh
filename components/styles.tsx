@@ -7,8 +7,9 @@ if (!IS_BROWSER) {
   const button = Deno.readTextFile(`./components/button/button.css`);
   const hscroll = Deno.readTextFile(`./components/album/halbum.css`);
   const inputSearch = Deno.readTextFile(`./components/search/input-search.css`);
+  const pill = Deno.readTextFile(`./islands/pill/pill.css`);
 
-  const cssfiles = ["reset", "fonts", "openprops", "root", "dark", "light"].map(
+  const cssfiles = ['reset', 'fonts', 'openprops', 'root', 'dark', 'light'].map(
     (f) => Deno.readTextFile(`./static/css/${f}.css`)
   );
   defaultStyles = await Promise.all([
@@ -16,6 +17,7 @@ if (!IS_BROWSER) {
     button,
     hscroll,
     inputSearch,
+    pill,
   ]);
 }
 
