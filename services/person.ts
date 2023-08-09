@@ -3,8 +3,8 @@
 // multiple!
 //А. В. Сикорский [A. V. Sikorskij]
 const familyAliasMap = new Map([
-  ["clh", "Halsband-Lenk"],
-  ["avs", "SIKORSKI"],
+  ["clh", ["Halsband-Lenk"]],
+  ["avs", ["SIKORSKI", "Сикорский", "сикорскии", "Sikorskij"]],
 ]);
 export const familyAlias = (id: string) => familyAliasMap.get(id);
 
@@ -14,7 +14,7 @@ export const givenAliasMap = new Map(
   [
     ["aki", ["Albert Kjartansson", "Albert"]],
     ["skc", ["Sabine Karin J.", "S. J.", "Sabine K."]],
-    ["avs", ["ANDREY", "Andrej Vladimirovich"]],
+    ["avs", ["ANDREY", "Andrej Vladimirovich", "А. В."]],
     ["per", ["Paul Eric"]],
     ["anb", ["A. N."]],
     ["nmi", ["Nina Therese"]],
@@ -25,8 +25,12 @@ export const givenAliasMap = new Map(
 );
 
 // Used by DOI page to lookup author alias
+// FIXME @todo Add redirect for known author spelling variants,
+// eg. /no/folk/id/avs/Сикорский/А.%20В.
+
 export const alias = new Map([
   ["ANDREY|SIKORSKI", "avs"],
+  ["А. В.|Сикорский", "avs"], // Sikorskij
   ["Sofia|Aniceto", "asa"], // /no/doi/10.1101/2022.10.05.510968
 ]);
 
