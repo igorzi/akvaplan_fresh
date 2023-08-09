@@ -109,7 +109,6 @@ export const setLang = (
 
 export const t = (key: string) => {
   const k = key?.value ?? key;
-  // fix #184
   // if (k && !dict?.value?.has(k)) {
   //   console.warn(`${lang} translation missing "${k}": "${k}",`);
   // }

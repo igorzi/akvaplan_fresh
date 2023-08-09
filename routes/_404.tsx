@@ -7,11 +7,6 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
 
   // Disallow: /wp-admin/
   // Disallow: /wp-content/
-
-  // fix: #184
-  //if (!url.pathname.endsWith(".php")) {
-  //  console.debug(404, url.pathname);
-  //}
   return (
     <html>
       <Head>
