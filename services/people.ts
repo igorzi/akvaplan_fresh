@@ -35,14 +35,16 @@ export const extractInitials = (given: string) =>
 // For a  `person`, check if at least one of authors (named `family` / `given`) matches,
 // ie. are identical or share family name + initials
 export const personInAuthors = (person) => ({ family, given, name }) => {
-  //bail on name, it's very uncommon (only 5 pubs )
+  //bail on name and no family name; it's very uncommon (only 5 pubs)
   if (name && !family) {
     return false;
   }
 
+  const famAliases = familyAlias(person.id)?.map((f) => n(f)) ?? [];
+
   const fam = family === person.family ||
     n(family) === n(person.family) ||
-    n(familyAlias(person.id)) === n(family);
+    famAliases.includes(n(family));
 
   const authorInitials = extractInitials(given);
 
@@ -79,7 +81,8 @@ export const personInAuthors = (person) => ({ family, given, name }) => {
 export const pubsFromPerson = async (
   { person, lang, limit, mapper = newsFromPubs({ lang }) },
 ) => {
-  const { data } = await searchPubs({ q: person.family, limit: -1 }) ?? {};
+  const q = ""; // q was `person.family`, but that would exclude spelling variants like Сикорский
+  const { data } = await searchPubs({ q, limit: -1 }) ?? {};
 
   return data
     .filter(({ authors }) =>
