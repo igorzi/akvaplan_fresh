@@ -1,4 +1,3 @@
-import { homeAlbums } from "akvaplan_fresh/services/mediebank.ts";
 import { getServicesLevel0 } from "akvaplan_fresh/services/svc.ts";
 import { getResearchLevel0 } from "akvaplan_fresh/services/research.ts";
 import { latestNews } from "akvaplan_fresh/services/news.ts";
@@ -109,7 +108,7 @@ export default function Home(
         <script src={asset("/@nrk/core-scroll.min.js")} />
       </Head>
 
-      <NewsFilmStrip news={news} lang={lang.value} BeforeAfter={MoreNews} />
+      <NewsFilmStrip news={news} lang={lang.value} />
 
       <section style={_section}>
         <AlbumHeader
