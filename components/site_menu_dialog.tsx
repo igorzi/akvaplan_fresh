@@ -7,6 +7,7 @@ export default ({ lang }) => (
   <dialog
     id="menu"
     color-scheme
+    popover
     style={{
       border: "0",
       background: "var(--surface1) 0.2",
@@ -54,7 +55,8 @@ export default ({ lang }) => (
           icon="close"
           iconHeight="1.5rem"
           iconWidth="1.5rem"
-        ></IconButton>
+        >
+        </IconButton>
       </form>
       <ThemeSwitcher mini />
     </footer>

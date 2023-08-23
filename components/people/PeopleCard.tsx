@@ -4,7 +4,7 @@
 import { akvaplanistMap } from "akvaplan_fresh/services/akvaplanist.ts";
 import { peopleURL, personURL } from "akvaplan_fresh/services/nav.ts";
 
-import { ApnSym, Card, Icon } from "akvaplan_fresh/components/mod.ts";
+import { Card, Icon, UseApnSym } from "akvaplan_fresh/components/mod.ts";
 
 import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 
@@ -64,8 +64,9 @@ export function PeopleCard(
             </a>
           )}
       </div>
-      <ApnSym
+      <UseApnSym
         width="2rem"
+        height="2rem"
         style={prior === true ? { filter: "grayscale(1)" } : {}}
       />{" "}
       {person.prior === true && <span>{t("people.akvaplanist(prior)")}</span>}
