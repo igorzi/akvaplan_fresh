@@ -18,8 +18,15 @@ const style = `.akvaplan_symbol {
   .lower-wave{ fill: var(--green); }
   .circle { fill: var(--black); }
 }`;
+
+export const UseApnSym = (props) => (
+  <svg class="icon" {...props}>
+    <use href={`#akvaplan_symbol`} />
+  </svg>
+);
 export const ApnSym = (props) => (
   <svg
+    id="akvaplan_symbol"
     class="akvaplan_symbol"
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
