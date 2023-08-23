@@ -21,24 +21,25 @@ export const MiniNewsCard = (
     <li
       style={newsItemStyle}
     >
-      {type === "person" ? <ApnSym width="96" /> : (
-        <a href={href}>
-          <img
-            src={img}
-            width="128"
-            alt={caption ?? title}
-            title={caption ?? title}
-            loading="lazy"
-            style={{ height: "96px" }}
-          />
-        </a>
-      )}
+      {type === "person"
+        ? <ApnSym width="96" />
+        : (
+          <a href={href} target={/(f_|\.)pdf/.test(href) ? "_blank" : "_self"}>
+            <img
+              src={img}
+              width="128"
+              alt={caption ?? title}
+              title={caption ?? title}
+              loading="lazy"
+              style={{ height: "96px" }}
+            />
+          </a>
+        )}
 
       <span>
         <a
           href={href}
           class="line-clamp3"
-          style={{ paddingBlockEnd: "var(--size-1)" }}
           dangerouslySetInnerHTML={{ __html: title }}
         />
 

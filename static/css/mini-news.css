@@ -45,7 +45,3 @@
   background: var(--accent);
   flex-shrink: 0;
 }
-.line-clamp3 {
-  line-clamp: 3;
-  overflow: hidden;
- }
