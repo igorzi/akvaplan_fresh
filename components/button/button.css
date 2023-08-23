@@ -61,3 +61,17 @@
 .custom-button.custom-button-filled {
   background-color: var(--surface2);
 }
+
+.pill {
+  font-size: 1rem;
+  padding: var(--size-1) var(--size-2);
+  width: fit-content;
+  background-color: var(--surface2) !important;
+  opacity: 0.9;
+  position: relative;
+}
+
+.pill-selected {
+  background-color: var(--surface4) !important;
+  opacity: 1;
+}

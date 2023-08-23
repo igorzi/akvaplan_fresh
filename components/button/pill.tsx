@@ -6,19 +6,18 @@ export type PillProps = PropsWithChildren & {
   selected: boolean;
 };
 
-
 export function Pill(
   { children, selected, icon = "close", ...props }: PillProps = {},
 ) {
   return (
     <Button
-      additionalClass={`pill-button ${selected ? "pill-button-selected" : ""}`}
+      additionalClass={`pill ${selected ? "pill-selected" : ""}`}
       {...props}
     >
       {children}
       {selected && (
         <>
-          &nbsp;
+          {icon && <span>&nbsp;{props.ariaSelected}</span>}
           <Icon name={icon} style={{ width: "1rem", height: "1rem" }} />
         </>
       )}
