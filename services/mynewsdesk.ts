@@ -25,10 +25,14 @@ const path = (action: string, unique_key = mynewsdesk_key) =>
 //   callback=callback&
 //   pressroom=pressroom&
 //   tags=category1,category2,category3
-export const searchURL = (query, type_of_media, { limit = 10 } = {}) =>
+export const searchURL = (
+  query,
+  type_of_media,
+  { limit = 10, strict = true } = {},
+) =>
   new URL(
     path("search") +
-      `?format=json&type_of_media=${type_of_media}&strict=true&limit=${limit}&query=${query}`,
+      `?format=json&type_of_media=${type_of_media}&strict=${strict}&limit=${limit}&query=${query}&sort=created`,
     base,
   );
 
@@ -50,10 +54,15 @@ export const fetchItemBySlug = async (
   type_of_media = "news",
 ) => {
   const url = searchURL(slug, type_of_media);
-  //console.debug(url.href);
 
-  const r = await fetch(url.href);
-  if (r.ok) {
+  const r = await fetch(url.href).catch((error) => {
+    console.warn(
+      `Mynewsdesk: Failed fetching ${
+        JSON.stringify({ id, slug, type_of_media, error })
+      }`,
+    );
+  });
+  if (r?.ok) {
     const { search_result } = await r.json();
 
     const { id } = search_result?.items?.find(({ url }) =>
@@ -91,7 +100,7 @@ const postprocess = (s) => s.replaceAll("-aa-", "-a-").replace(/[-]{2,}/g, "-");
 //   postprocess(_slug(preprocess(header)));
 
 export const searchMynewsdesk = async (
-  { q = "", type_of_media = "news", limit = 100 } = {},
+  { q = "", type_of_media = "news", sort, strict = true, limit = 100 } = {},
 ) => {
   const url = searchURL(q, type_of_media, { limit });
 
