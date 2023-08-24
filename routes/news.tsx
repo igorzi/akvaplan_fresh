@@ -3,10 +3,8 @@ import { href } from "akvaplan_fresh/services/mynewsdesk.ts";
 
 import { ArticleSquare, HScroll, Page } from "akvaplan_fresh/components/mod.ts";
 
-import HScrollWithDynamicImage from "akvaplan_fresh/islands/HScrollWithDynamicImage.tsx";
-
 import { lang, t } from "akvaplan_fresh/text/mod.ts";
-import { isodate, monthname } from "akvaplan_fresh/time/mod.ts";
+import { monthname } from "akvaplan_fresh/time/mod.ts";
 import { groupIntoMap } from "akvaplan_fresh/grouping/mod.ts";
 
 import {
