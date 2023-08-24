@@ -18,11 +18,18 @@ const handleClick = (e: MouseEvent) => {
   }
 };
 
-export default ({ children, ...props }: JSX.HTMLAttributes<HTMLElement>) => (
+export default (
+  { children, ...props }: JSX.HTMLAttributes<HTMLButtonElement>,
+) => (
   <IconButton
     onClick={handleClick}
     icon="hamburger_menu_right"
     iconHeight="1.5rem"
     iconWidth="1.5rem"
-  ></IconButton>
+    popovertargetaction="show"
+    aria-label={t("menu.open")}
+    {//popovertarget={popovertarget}
+    ...props}
+  >
+  </IconButton>
 );
