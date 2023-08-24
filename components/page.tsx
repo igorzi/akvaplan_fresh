@@ -1,6 +1,4 @@
-import { CleanHeader } from "./header/clean_header.tsx";
-import { Footer } from "./footer.tsx";
-import { Styles } from "./styles.tsx";
+import { ApnSym, CleanHeader, Footer, Styles } from "./mod.ts";
 
 import { base as baseForLang, lang, t } from "akvaplan_fresh/text/mod.ts";
 import { buildInitTheming } from "akvaplan_fresh/theming/mod.ts";
@@ -8,8 +6,8 @@ import { buildInitTheming } from "akvaplan_fresh/theming/mod.ts";
 import { Head } from "$fresh/runtime.ts";
 import { FunctionComponent, JSX } from "preact";
 
-import { computed } from "@preact/signals-core";
-import { StringSignal } from "akvaplan_fresh/@interfaces/signal.ts";
+//import { computed } from "@preact/signals-core";
+import { type StringSignal } from "akvaplan_fresh/@interfaces/signal.ts";
 //import { symbolDataURI } from "akvaplan_fresh/components/akvaplan/symbol.tsx";
 
 export type StdProps =
@@ -80,6 +78,9 @@ export function Page(
           {children}
         </main>
         <Footer lang={lang.value} />
+        <div hidden>
+          <ApnSym />
+        </div>
       </body>
     </>
   );

@@ -1,6 +1,7 @@
 import { buildContainsFilter } from "akvaplan_fresh/search/filter.ts";
 
-const DOIS_BASE = "https://dois.deno.dev";
+export const DOIS_BASE = globalThis?.Deno?.env?.get("dois_base") ??
+  "https://dois.deno.dev";
 
 const defaults = {
   q: "",
@@ -11,7 +12,7 @@ const defaults = {
 const { entries } = Object;
 
 export const search = async (params: Record<string, string> = {}) => {
-  const base = Deno?.env?.get("dois_base") ?? DOIS_BASE;
+  const base = DOIS_BASE;
   const url = new URL("/doi", base);
   const { searchParams } = url;
 
@@ -30,6 +31,11 @@ export const search = async (params: Record<string, string> = {}) => {
     return res;
   }
 };
+
+export const buildYearFilter = (year) =>
+  Number(year) > 1900
+    ? ({ published }) => published.startsWith(year)
+    : () => true;
 
 // export const multiSearchPubs = async (
 //   queries: string[],

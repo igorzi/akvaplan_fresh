@@ -31,13 +31,9 @@ export const priorAkvaplanists = [
 
   { "family": "Butts", "given": "Jo Lynn", "count": 1 },
   { "family": "Butts", "given": "Jolynn", "count": 1 },
-  {
-    given: "Michael L.",
-    family: "Carroll",
-    workplace: "Tromsø",
-    country: "NO",
-    id: "mlc",
-  },
+  { given: "Michael L.", family: "Carroll", id: "mlc" },
+  { given: "Michael L", family: "Carroll", id: "mlc" }, //@todo Always handle naked initials
+
   {
     given: "Ole Anders",
     family: "Nøst",

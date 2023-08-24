@@ -1,3 +1,5 @@
+// FIXME pressreleases add media
+// FIXME Compare /en/press/2958380 with https://www.mynewsdesk.com/no/akvaplan-niva/pressreleases/ny-rapport-evaluering-av-nye-oppdrettsarter-2958380
 import {
   defaultImage,
   fetchItem,
@@ -36,7 +38,9 @@ export const handler: Handlers = {
     langSignal.value = lang;
     const type_of_media = typeOfMedia(type);
 
-    const item = await fetchItemBySlug(slug, type_of_media);
+    const item = (Number(slug) > 0)
+      ? await fetchItem(slug, type_of_media)
+      : await fetchItemBySlug(slug, type_of_media);
     if (!item) {
       return ctx.renderNotFound();
     }
