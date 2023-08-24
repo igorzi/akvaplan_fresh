@@ -30,3 +30,9 @@ input.search-input:focus-visible {
   display: grid;
   place-items: center;
 }
+
+
+.search-input::placeholder {
+  opacity: 0.5;
+  color: var(--text1);
+}
