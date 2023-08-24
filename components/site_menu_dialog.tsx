@@ -13,6 +13,7 @@ export default ({ lang }) => (
       background: "var(--surface1) 0.2",
       minWidth: "20rem",
       color: "var(--text1)",
+      padding: "2rem",
     }}
   >
     <header>
@@ -23,7 +24,7 @@ export default ({ lang }) => (
       </a>
     </header>
 
-    <menu
+    <div
       style={{
         margin: 0,
         marginBlockStart: "1rem",
@@ -34,7 +35,7 @@ export default ({ lang }) => (
       }}
     >
       <SiteNav />
-    </menu>
+    </div>
     <footer
       style={{
         display: "grid",
