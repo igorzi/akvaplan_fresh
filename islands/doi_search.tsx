@@ -8,7 +8,7 @@ import { type SlimPublication } from "../@interfaces/slim_publication.ts";
 import { InputSearch } from "akvaplan_fresh/components/search/InputSearch.tsx";
 
 import Button from "../components/button/button.tsx";
-import Pill from "akvaplan_fresh/islands/pill/pill.tsx";
+import { Pill } from "akvaplan_fresh/components/button/pill.tsx";
 
 import { useSignal } from "@preact/signals";
 
@@ -18,10 +18,10 @@ export interface DoiSearchResultsProps {
   q: string;
   start?: number;
   title?: string;
-  params?: Record<string, string>;
+  params?: Record<string, string> | URLSearchParams;
 }
 
-const lastNYears = (n, start = new Date().getFullYear()) =>
+const lastNYears = (n: number, start = new Date().getFullYear()) =>
   [...new Array(n)].map((_, i) => start - i);
 
 // @todo DoiSearch calc/show num Apn people (current/prior)
