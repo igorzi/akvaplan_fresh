@@ -84,62 +84,12 @@ export default function Documents(
     <Page title={title} base={base} lang={lang}>
       <h1 style={style.header}>{title}</h1>
 
-      <section style={style.section}>
-        {/** Pills from tags: Åpenhetsloven GEP? */}
-        <Card>
-          <ul>
-            <li>
-              <a
-                hrefLang="no"
-                href={t("policy.data.url")}
-                target="_blank"
-              >
-                {t("policy.data")}
-              </a>
-            </li>
-            <li>
-              <a
-                href={t("policy.quality.url")}
-                target="_blank"
-              >
-                {t("policy.quality")}
-              </a>
-            </li>
-            <li>
-              <a href={t("policy.terms.url")} target="_blank">
-                {t("policy.terms")}
-              </a>
-            </li>
-            <li>
-              <a
-                href={t("policy.equality.url")}
-                target="_blank"
-              >
-                {t("policy.equality")}
-              </a>
-            </li>
-            <li>
-              <a
-                href={t("policy.gender.url")}
-                target="_blank"
-              >
-                {t("policy.gender")}
-              </a>
-            </li>
-            <li>
-              <a
-                hrefLang="no"
-                href={t("policy.openness.url")}
-                target="_blank"
-              >
-                {t("policy.openness")}
-              </a>
-            </li>
-          </ul>
-        </Card>
-      </section>
       <section
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}
+        style={{
+          display: "grid",
+          gap: "1rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(390px, 1fr))",
+        }}
       >
         {docs.map((
           {
@@ -165,25 +115,11 @@ export default function Documents(
               published={new Date(published_at.datetime)}
               _type={t(document_format.replace(".", ""))}
               href={document}
+              target="_blank"
             />
           </>
         ))}
-
-        <ul>
-          <li style={itemstyle}>
-            <img />
-            <span>
-              Redegjørelse etter kravene i Åpenhetsloven om arbeidet med å
-              vurdere, forebygge og redusere risikoen for
-              menneskerettighetsbrudd og uanstendige arbeidsforhold i egen
-              virksomhet, for forretningspartnere og i verdikjeden
-              <time>2023-06-23</time>{" "}
-              <span style="color:var(--text2);">type.2023-08-10T15:20:15Z</span>
-            </span>
-          </li>
-        </ul>
       </section>
     </Page>
   );
 }
-//<a href="https://resources.mynewsdesk.com/image/upload/f_pdf/gobzff1ne9tkqxgtvmkh" target="_blank"><img src="https://resources.mynewsdesk.com/image/upload/c_fill,dpr_auto,f_auto,g_auto,h_500,q_auto:good,w_500/gobzff1ne9tkqxgtvmkh" width="128" alt="Redegjørelse etter kravene i Åpenhetsloven om arbeidet med å vurdere, forebygge og redusere risikoen for menneskerettighetsbrudd og uanstendige arbeidsforhold i egen virksomhet, for forretningspartnere og i verdikjeden" title="Redegjørelse etter kravene i Åpenhetsloven om arbeidet med å vurdere, forebygge og redusere risikoen for menneskerettighetsbrudd og uanstendige arbeidsforhold i egen virksomhet, for forretningspartnere og i verdikjeden" loading="lazy" style="height:96px;"></a><span><a href="https://resources.mynewsdesk.com/image/upload/f_pdf/gobzff1ne9tkqxgtvmkh" class="line-clamp3" style="padding-block-end:var(--size-1);
