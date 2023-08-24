@@ -123,8 +123,7 @@ export default function DoiSearch(
               <SlimCard slim={slim} n={n} lang={lang.value} />
             ))}
           </ol>
-          <hr />
-          <p style={{ fontSize: "1rem" }}>{numFound}/{total}</p>
+          <p style={{ fontSize: "0.75rem" }}>{numFound}/{total}</p>
         </div>
       )}
     </main>
