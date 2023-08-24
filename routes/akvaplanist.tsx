@@ -15,6 +15,7 @@ import {
 
 import {
   AlbumHeader,
+  ApnSym,
   ArticleSquare,
   Card,
   GroupedPeople,
@@ -313,7 +314,11 @@ export default function Akvaplanists(
 
       {filter?.length > 0 ? <OnePersonGroup members={results} /> : (
         <>
-          <PeopleSearchForm q={q} sortdir={searchParams.get("sortdir")} />
+          <PeopleSearchForm
+            q={q}
+            sortdir={searchParams.get("sortdir")}
+            group={group}
+          />
           <GroupedPeople group={group} grouped={grouped} />
         </>
       )}
@@ -373,7 +378,11 @@ export default function Akvaplanists(
                 )
                 : (
                   <div>
-                    <h3>
+                    <h3
+                      title={`${t("pubs.Pubs")} ${
+                        t("pubs.in")
+                      } ${grpkey}: ${grppubs.length} `}
+                    >
                       {grpkey}
                     </h3>
                     <NewsFilmStrip
