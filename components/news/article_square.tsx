@@ -17,6 +17,7 @@ export const ArticleSquare = (
     width,
     height,
     type,
+    target = "_self",
   },
 ) => (
   <div
@@ -29,6 +30,7 @@ export const ArticleSquare = (
     <a
       class="image-container"
       href={href}
+      target={target}
       title={desc}
     >
       <img
