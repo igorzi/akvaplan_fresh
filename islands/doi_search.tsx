@@ -2,7 +2,7 @@ import { buildContainsFilter } from "akvaplan_fresh/search/filter.ts";
 import { buildYearFilter } from "akvaplan_fresh/services/dois.ts";
 import { lang, t } from "akvaplan_fresh/text/mod.ts";
 
-import { SlimCard } from "akvaplan_fresh/components/slim_card.tsx";
+import { HScroll, SlimCard } from "akvaplan_fresh/components/mod.ts";
 
 import { type SlimPublication } from "../@interfaces/slim_publication.ts";
 import { InputSearch } from "akvaplan_fresh/components/search/InputSearch.tsx";
@@ -24,6 +24,10 @@ export interface DoiSearchResultsProps {
 const lastNYears = (n: number, start = new Date().getFullYear()) =>
   [...new Array(n)].map((_, i) => start - i);
 
+const thisYear = new Date().getFullYear();
+
+const numYears = thisYear - (thisYear - 5);
+
 // @todo DoiSearch calc/show num Apn people (current/prior)
 export default function DoiSearch(
   { q, results, start, all, ...rest }: DoiSearchResultsProps,
@@ -32,6 +36,9 @@ export default function DoiSearch(
     ? new URL(globalThis?.document?.URL)
     : rest.params;
   const params = new URLSearchParams(searchParams);
+
+  const thisYear = new Date().getFullYear();
+  const numYears = thisYear - (thisYear - 5);
 
   const query = useSignal(q);
   const filtered = useSignal(results);
@@ -71,9 +78,7 @@ export default function DoiSearch(
     first.value = false;
     handleSearch({ target: { value: q } });
   }
-  const thisYear = new Date().getFullYear();
 
-  const n = thisYear - (thisYear - 20);
   return (
     <main style={{ background: "var(--surface1)" }}>
       <form
@@ -98,7 +103,7 @@ export default function DoiSearch(
           onInput={handleSearch}
         />
         <div>
-          {lastNYears(n).map((y, i) => (
+          {lastNYears(numYears).map((y) => (
             <Pill
               value={y}
               selected={y === year.value}

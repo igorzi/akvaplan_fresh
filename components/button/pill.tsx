@@ -17,7 +17,7 @@ export function Pill(
       {children}
       {selected && (
         <>
-          {icon && <span>&nbsp;{props.ariaSelected}</span>}
+          {icon && <span>&nbsp;</span>}
           <Icon name={icon} style={{ width: "1rem", height: "1rem" }} />
         </>
       )}
