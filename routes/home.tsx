@@ -45,7 +45,8 @@ export const handler: Handlers = {
 
     const maxNumNews = 32;
     const articles = news.filter(({ type, hreflang, title }) =>
-      ["news", "pressrelease"].includes(type) && hreflang === sitelang &&
+      ["news", "pressrelease", "blog_post"].includes(type) &&
+      hreflang === sitelang &&
       !/stillingsannonse/i.test(title)
     ).slice(
       0,

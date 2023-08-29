@@ -7,11 +7,11 @@ import { lang, t } from "akvaplan_fresh/text/mod.ts";
 import {
   AlbumHeader,
   ArticleSquare,
-  Card,
+  //Card,
   HScroll,
   Page,
-  PeopleCard as PersonCard,
-  repeatAutoFitMinMaxGrid,
+  //PeopleCard as PersonCard,
+  //repeatAutoFitMinMaxGrid,
 } from "akvaplan_fresh/components/mod.ts";
 
 import {
@@ -36,7 +36,7 @@ const _header = {
 
 export const groupReducer = (fx) =>
 (
-  previous: Map<string, Array>,
+  previous: Map<string, Array<unknown>>,
   current: unknown,
 ) => {
   const grp = fx(current);
@@ -69,7 +69,7 @@ export const handler: Handlers = {
       .filter(({ type }) => ["journal-article"].includes(type))
       .map(newsFromPubs({ lang: lang.value }));
 
-    const grouped = (pubs).reduce(
+    const grouped = pubs.reduce(
       groupReducer(({ published }) => published.substring(0, 7)),
       new Map(),
     );

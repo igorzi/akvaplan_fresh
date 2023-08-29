@@ -56,7 +56,7 @@ export const handler: Handlers<SlimPublication> = {
 
     if (slim || doi) {
       //const news = await buildoiNewsMap() ?? {};
-      const openalex = await getOpenAlexWork({ doi }) ?? {};
+      const openalex = await getOpenAlexWork({ doi }) ?? { open_access: {} };
       const image = await doiImage.get(doi);
       let i = 0;
       let current = 0;
@@ -110,6 +110,7 @@ export default function DoiPublication(
     cites,
     ...rest
   } = slim ?? {};
+
   const {
     open_access: {
       is_retracted,
@@ -119,7 +120,7 @@ export default function DoiPublication(
       oa_url,
       any_repository_has_fulltext,
     },
-  } = openalex || {};
+  } = openalex;
   const oa = license && /cc/i.test(license) ? true : oa_status;
   const pdf = slim?.pdf || oa_url;
   const href = `https://doi.org/${doi}`;
@@ -212,7 +213,7 @@ export default function DoiPublication(
                     : <span>{name}</span>}
                 </dt>
 
-                {openalex.authorships.at(n)?.institutions.map((
+                {openalex?.authorships?.at(n)?.institutions.map((
                   { display_name, id, ror, country_code, type, ...r },
                 ) => <dd lang="en">{display_name}</dd>)}
               </>
@@ -263,7 +264,7 @@ export default function DoiPublication(
               <a
                 target="_blank"
                 hrefLang="en"
-                href={openalex.id.replace("https://", "https://api.")}
+                href={openalex?.id?.replace("https://", "https://api.")}
               >
                 OpenAlex
               </a>

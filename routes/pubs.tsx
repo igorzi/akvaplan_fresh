@@ -71,7 +71,10 @@ export default function ApnPubs({ data }: PageProps<DoiSearchResultsProps>) {
   console.log(searchParams.get("year"));
   return (
     <Page title={t("nav.Pubs")} base={base}>
-      {/* <Head></Head> */}
+      <Head>
+        <link rel="stylesheet" href="/css/hscroll.css" />
+        <script src="/@nrk/core-scroll.min.js" />
+      </Head>
       <h1>{title}</h1>
       <DoiSearch
         q={q}
