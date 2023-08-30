@@ -57,7 +57,8 @@ export const handler: Handlers<SlimPublication> = {
     if (slim || doi) {
       //const news = await buildoiNewsMap() ?? {};
       const openalex = await getOpenAlexWork({ doi }) ?? { open_access: {} };
-      const image = await doiImage.get(doi);
+      const image = slim?.figures?.[0].src ?? doiImage.get(doi);
+
       let i = 0;
       let current = 0;
       let priors = 0;
@@ -90,8 +91,8 @@ export const handler: Handlers<SlimPublication> = {
   },
 };
 
-const imgURL = (image) =>
-  `https://image-resizing-api.deno.dev/?image=${image}&width=400`;
+// const imgURL = (image) =>
+//   `https://image-resizing-api.deno.dev/?image=${image}&width=400`;
 
 export default function DoiPublication(
   { params, data: { slim, openalex, lang, image, current, priors } }: PageProps<
@@ -161,9 +162,9 @@ export default function DoiPublication(
           {oa === true ? t("pubs.oa") : null}
 
           <p>
-            {license && image && (
+            {image && (
               <img
-                src={imgURL(image)}
+                src={image}
                 alt={t("")}
                 width="400"
               />
