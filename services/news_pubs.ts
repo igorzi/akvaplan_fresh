@@ -12,12 +12,13 @@ export const newsFromPubs = ({ lang }: NewsMapper) =>
   doi,
   published,
   type,
+  figures,
 }: SlimPublication): News => ({
   title: `${title}`,
   published,
   href: `/${lang}/doi/${doi}`,
   hreflang: "en",
-  img: doiImage.get(doi) ?? defaultThumbnail,
-  thumb: doiImage.get(doi) ?? defaultThumbnail,
+  img: figures?.[0].src ?? doiImage.get(doi) ?? defaultThumbnail,
+  thumb: figures?.[0].src ?? doiImage.get(doi) ?? defaultThumbnail,
   type,
 });
