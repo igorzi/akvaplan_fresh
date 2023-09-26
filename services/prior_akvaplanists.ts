@@ -34,15 +34,17 @@ export const priorAkvaplanists = [
   { given: "Michael L.", family: "Carroll", id: "mlc" },
   { given: "Michael L", family: "Carroll", id: "mlc" }, //@todo Always handle naked initials
 
-  {
-    given: "Ole Anders",
-    family: "Nøst",
-    workplace: "Trondheim",
-    country: "NO",
-    id: "oan",
-  },
-  // {family:"Nøst",given:"Ole Anders",count:16}
+  // $ cat slim/* | ./bin/family_spellings Lønne
 
+  { "family": "LØNNE", "given": "OLE JØRGEN", "count": 1 },
+  { "family": "Lønne", "given": "Ole Jørgen", "count": 10 },
+  { "family": "Lønne", "given": "Ole-Jørgen", "count": 1 },
+  { "family": "Lønne", "given": "Ole", "count": 1 },
+  { "family": "Lønne", "given": "O.J.", "count": 1 },
+  { "family": "Lønne", "given": "O. J.", "count": 2 },
+  { "family": "Lønne", "given": "Ole J.", "count": 1 },
+
+  { family: "Nøst", given: "Ole Anders", count: 16, id: "oan" },
   { family: "Nøst", given: "O. A.", count: 4 },
   { family: "Nøst", given: "O.-A.", count: 1 },
   { family: "Nøst", given: "Ole A.", count: 1 },
@@ -151,7 +153,18 @@ export const priorAkvaplanists = [
   { given: "Martin Torp", family: "Dahl" },
   { given: "Katherine M.", family: "Dunlop" }, // 2020 Akvaplan: https://doi.org/10.1007/s00300-020-02773-5
 
-  { given: "William G.", family: "Ambrose" },
+  //{ given: "William G.", family: "Ambrose" }, // William G. Ambrose Jr.
+  { "family": "Ambrose", "given": "William G.", "count": 46 },
+  { "family": "Ambrose", "given": "WG", "count": 4 },
+  { "family": "Ambrose", "given": "W.G.", "count": 1 },
+  { "family": "Ambrose Jr.", "given": "William G.", "count": 1 },
+  { "family": "Ambrose Jr.", "given": "William G", "count": 1 },
+  { "family": "Ambrose WG", "given": "Jr", "count": 2 },
+  { "family": "AMBROSE", "given": "WILLIAM G.", "count": 1 },
+  { "family": "AMBROSE, JR.", "given": "WILLIAM G.", "count": 1 },
+  { "family": "Ambrose", "given": "William G.", "count": 1 },
+  { "family": "Ambrose", "given": "William", "count": 1 },
+
   { given: "A", family: "Moldes-Anaya" }, // Unilab 2013
   { given: "G S", family: "Eriksen" }, // Unilab 2013
   { given: "A A", family: "Lukin" }, // 2010

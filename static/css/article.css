@@ -30,7 +30,7 @@
   color: var(--text1);
   font-size: 2rem;
   backdrop-filter: blur(16px);
-  max-width: 80%;
+  max-width: 95%;
   padding: var(--size-2);
   color: var(--text2);
 }
