@@ -2,6 +2,7 @@
 // FIXME Compare /en/press/2958380 with https://www.mynewsdesk.com/no/akvaplan-niva/pressreleases/ny-rapport-evaluering-av-nye-oppdrettsarter-2958380
 import {
   defaultImage,
+  fetchContacts,
   fetchItem,
   fetchItemBySlug,
 } from "akvaplan_fresh/services/mynewsdesk.ts";
@@ -50,19 +51,8 @@ export const handler: Handlers = {
     const alternate = href ? { href, hreflang } : null;
 
     item.links = item.links?.filter(({ text }) => "alternate" !== text);
-
-    const relcontact = item.related_items.find(({ type_of_media }) =>
-      type_of_media === "contact_person"
-    );
-    if (relcontact) {
-      const { item_id } = relcontact;
-      const contact_person = await fetchItem(item_id, "contact_person");
-      const { email } = contact_person;
-      const contact = email?.split("@")?.at(0);
-      return ctx.render({ item, lang, contact, contact_person, alternate });
-    } else {
-      return ctx.render({ item, lang, alternate, contact: null });
-    }
+    const contacts = await fetchContacts(item);
+    return ctx.render({ item, lang, contacts, alternate });
   },
 };
 
@@ -88,7 +78,7 @@ interface ArticleProps {
 //console.log("@todo News article needs bullet points for <li> elements");
 
 export default function NewsArticle(
-  { data: { item, lang, contact, contact_person, alternate } }: PageProps<
+  { data: { item, lang, contacts, contact_person, alternate } }: PageProps<
     ArticleProps
   >,
 ) {
@@ -171,11 +161,15 @@ export default function NewsArticle(
             </section>
           )}
 
-        {contact && (
-          <section class="article-content">
-            <PersonCard id={contact} person={contact_person} />
-          </section>
-        )}
+        <li style="display:grid;grid-template-columns:repeat(auto-fit, minmax(440px, 1fr));grid-gap:1rem;">
+          {contacts && contacts.map(
+            (contact) => (
+              <section class="article-content">
+                <PersonCard id={contact} icons={false} />
+              </section>
+            ),
+          )}
+        </li>
         {alternate && (
           <p style={_caption}>
             <AlsoInNative

@@ -1,5 +1,6 @@
 import {
   defaultImage,
+  fetchContacts,
   fetchItem,
   fetchItemBySlug,
   multiSearchMynewsdesk,
@@ -46,9 +47,7 @@ export const handler: Handlers = {
     // if (["project", "prosjekt"].includes(type) && "no" === lang) {
     //   item.header = t(`project.${slug}.title`);
     // }
-    const relcontact = item.related_items.find(({ type_of_media }) =>
-      type_of_media === "contact_person"
-    );
+    const contacts = await fetchContacts(item);
 
     let { searchwords, logo } = projectMap.get(slug) ?? {};
     searchwords = [...new Set([...searchwords ?? [], slug].map(normalize))];
@@ -65,16 +64,7 @@ export const handler: Handlers = {
       needle.test(normalize(JSON.stringify(news)))
     );
     const news = _matching?.map(newsFromMynewsdesk({ lang }));
-
-    if (relcontact) {
-      const { item_id } = relcontact;
-      const contact_person = await fetchItem(item_id, "contact_person");
-      const { email } = contact_person;
-      const contact = email?.split("@")?.at(0);
-      return ctx.render({ item, lang, logo, news, contact, contact_person });
-    } else {
-      return ctx.render({ item, lang, logo, news, contact: null });
-    }
+    return ctx.render({ item, lang, logo, news, contacts });
   },
 };
 
@@ -88,7 +78,7 @@ interface ArticleProps {
 }
 
 export default function ProjectHome(
-  { data: { item, lang, news, contact, contact_person, logo } }: PageProps<
+  { data: { item, lang, news, contacts, logo } }: PageProps<
     ArticleProps
   >,
 ) {
@@ -189,11 +179,15 @@ export default function ProjectHome(
             </section>
           )}
 
-        {contact && (
-          <section class="article-content">
-            <PersonCard id={contact} person={contact_person} />
-          </section>
-        )}
+        <li style="display:grid;grid-template-columns:repeat(auto-fit, minmax(440px, 1fr));grid-gap:1rem;">
+          {contacts && contacts.map(
+            (contact) => (
+              <section class="article-content">
+                <PersonCard id={contact} icons={false} />
+              </section>
+            ),
+          )}
+        </li>
       </Article>
     </Page>
   );

@@ -89,6 +89,25 @@ export const fetchItem = async (
   }
 };
 
+export const fetchContactEmail = async (item_id) => {
+  const contact_person = await fetchItem(item_id, "contact_person");
+  const { email } = contact_person;
+  const contact = email?.split("@")?.at(0);
+  return contact;
+};
+
+export const fetchContacts = async ({ related_items }) => {
+  const relcontacts = related_items.filter(({ type_of_media }) =>
+    type_of_media === "contact_person"
+  ).map((i) => i.item_id);
+  const contacts = [];
+  for await (const mynewsdeskid of relcontacts) {
+    const email = await fetchContactEmail(mynewsdeskid);
+    contacts.push(email);
+  }
+  return contacts;
+};
+
 const preprocess = (s) =>
   s.replaceAll("<em>", "").replaceAll("</em>", "")
     .replaceAll('"', "").replaceAll("å", "a").replaceAll("/", "-");
