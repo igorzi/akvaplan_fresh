@@ -27,10 +27,9 @@ export const projectMap = new Map([
 
 const type_of_media = "event";
 
-const projectFilter = (items: MynewsdeskItem[]) =>
-  items.filter(
-    (item: MynewsdeskItem) => [type_of_media].includes(item.type_of_media),
-  );
+const projectFilter = (items: MynewsdeskItem[]) => (item: MynewsdeskItem) =>
+  [type_of_media].includes(item.type_of_media) &&
+  /project|prosjekt/.test(JSON.stringify(item));
 
 const year = ({ datetime }) =>
   datetime ? new Date(datetime).getFullYear() : "????";
@@ -102,7 +101,7 @@ export const newsFromProjects = ({ lang }) => (myn: MynewsdeskItem): News => {
 };
 export const latestProjects = async (): Promise<MynewsdeskItem[]> => {
   const { items } =
-    await searchMynewsdesk({ q: "", type_of_media, sort: "" }) ?? [];
-  const projects = items.filter(projectFilter);
+    await searchMynewsdesk({ q: "", type_of_media, sort: "" }) ?? { items: [] };
+  const projects = items?.filter(projectFilter);
   return projects;
 };
