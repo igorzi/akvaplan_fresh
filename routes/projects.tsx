@@ -72,19 +72,22 @@ export const handler: Handlers = {
 
     const projects = items
       ?.map(projectFromMynewsdesk({ lang }))
-      .sort((a, b) => b.start.localeCompare(a.start));
+      .sort((a, b) => b.end.localeCompare(a.end));
     projectYears;
+
     const grouped = groupIntoMap(
       projects,
-      ({ start }) => start.substring(0, 4) ?? "????",
+      ({ end }) => end.substring(0, 4) ?? "????",
     );
 
-    return ctx.render({ ...props, projects, grouped });
+    const title = t(`nav.Projects`);
+
+    return ctx.render({ ...props, title, grouped });
   },
 };
 
 export default function Projects(
-  { data: { title, lang, base, projects, grouped } }: PageProps<
+  { data: { title, base, grouped } }: PageProps<
     InternationalProps
   >,
 ) {
@@ -96,14 +99,14 @@ export default function Projects(
       </Head>
 
       <h1>
-        {t(`nav.Projects`)}
+        {title}
       </h1>
 
       <section>
         {[...grouped].map(([k, v]) => (
           <section style={style.section}>
             <AlbumHeader
-              text={`${t("ui.From")} ${k}`}
+              text={`${t("ui.Until")} ${k}`}
               href=""
             />
             <HScroll maxVisibleChildren={5.5}>
