@@ -1,6 +1,10 @@
 import { getServicesLevel0 } from "akvaplan_fresh/services/svc.ts";
 import { getResearchLevel0 } from "akvaplan_fresh/services/research.ts";
 import { latestNews } from "akvaplan_fresh/services/news.ts";
+import {
+  latestProjects,
+  newsFromProjects,
+} from "akvaplan_fresh/services/projects.ts";
 import { routes } from "akvaplan_fresh/services/nav.ts";
 import { getLangFromURL, lang, t } from "akvaplan_fresh/text/mod.ts";
 
@@ -37,11 +41,13 @@ export const handler: Handlers = {
     const limit = 64;
     const q = "";
 
-    const services = await getServicesLevel0(sitelang);
-
     const news = await latestNews({ q, lang: sitelang, limit });
 
+    const services = await getServicesLevel0(sitelang);
+
     const topics = await getResearchLevel0(sitelang);
+
+    //projects
 
     const maxNumNews = 32;
     const articles = news.filter(({ type, hreflang, title }) =>
@@ -69,6 +75,10 @@ export const handler: Handlers = {
         16, //maxNumNews,
       );
 
+    const projects = (await latestProjects()).map((myn) =>
+      newsFromProjects({ lang: sitelang })(myn)
+    );
+
     return ctx.render({
       news,
       services,
@@ -76,7 +86,8 @@ export const handler: Handlers = {
       lang,
       articles,
       articlesNotInSiteLang,
-      researchArticles,
+      //researchArticles,
+      projects,
     });
   },
 };
@@ -92,7 +103,8 @@ export default function Home(
       services,
       articles,
       articlesNotInSiteLang,
-      researchArticles,
+      //researchArticles,
+      projects,
     },
   },
 ) {
@@ -113,7 +125,7 @@ export default function Home(
 
       <section style={_section}>
         <AlbumHeader
-          text={t(`home.album.${lang}.articles`)}
+          text={t(`home.section.${lang}.articles`)}
           href={routes(lang).get("news")}
         />
         <HScroll scrollerId="hscroll-articles" maxVisibleChildren={maxVisNews}>
@@ -123,7 +135,7 @@ export default function Home(
 
       <section style={_section}>
         <AlbumHeader
-          text={t("home.album.articles_not_in_site_lang")}
+          text={t("home.section.articles_not_in_site_lang")}
           href={routes(lang).get("news")}
           _lang="en|no"
         />
@@ -154,7 +166,7 @@ export default function Home(
 
       <section style={_section}>
         <AlbumHeader
-          text={t("home.album.services")}
+          text={t("home.section.services")}
           href={routes(lang).get("services")}
         />
         <HScroll
@@ -170,7 +182,7 @@ export default function Home(
 
       <section style={_section}>
         <AlbumHeader
-          text={t("home.album.research")}
+          text={t("home.section.research")}
           href={routes(lang).get("research")}
         />
         <HScroll
@@ -182,8 +194,20 @@ export default function Home(
       </section>
 
       {
+        /* <section style={_section}>
+        <AlbumHeader
+          text={t(`home.section.projects`)}
+          href={routes(lang).get("projects")}
+        />
+        <HScroll scrollerId="hscroll-articles" maxVisibleChildren={maxVisNews}>
+          {projects.map(ArticleSquare)}
+        </HScroll>
+      </section> */
+      }
+
+      {
         /* <AlbumHeader
-        text={t("home.album.projects")}
+        text={t("home.section.projects")}
         href={routes(lang).get("projects")}
       />
         */
