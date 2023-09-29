@@ -3,7 +3,7 @@ export interface MynewsdeskItem {
   summary?: string;
   caption?: string;
   newsdeskML?: string;
-  type_of_media?: string;
+  type_of_media: string;
   language?: string;
   source_id?: number;
   source_name?: string;

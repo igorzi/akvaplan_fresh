@@ -57,6 +57,7 @@ export const buildNav = (lang: string | StringSignal) => [
   { href: _tr(lang).get("services"), text: t("nav.Services") },
   { href: _tr(lang).get("research"), text: t("nav.Research") },
   { href: _tr(lang).get("pubs"), text: t("nav.Publications") },
+  { href: _tr(lang).get("projects"), text: t("nav.Projects") },
   //{ href: _tr(lang).get("dcat"), text: t("Datasets") },
 
   //{ href: _tr(lang).get("documents"), text: t("Documents") },

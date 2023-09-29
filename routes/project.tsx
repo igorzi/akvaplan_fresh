@@ -137,14 +137,16 @@ export default function ProjectHome(
       <h1>
         {title}
       </h1>
-      <p>
-        <img
-          alt="project logo"
-          width="350"
-          height="auto"
-          src={logo}
-        />
-      </p>
+      {logo && (
+        <p>
+          <img
+            alt="project logo"
+            width="350"
+            height="auto"
+            src={logo}
+          />
+        </p>
+      )}
 
       <HScroll maxVisibleChildren={5.5}>
         {news.map(ArticleSquare)}

@@ -1,6 +1,6 @@
 export interface News {
   title: string;
-  published: Date;
+  published?: Date;
   hreflang?: string;
   href?: string;
   img?: string;

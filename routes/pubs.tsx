@@ -68,7 +68,7 @@ export const handler: Handlers<DoiSearchResultsProps> = {
 
 export default function ApnPubs({ data }: PageProps<DoiSearchResultsProps>) {
   const { all, results, title, q, base, lang, searchParams } = data;
-  console.log(searchParams.get("year"));
+
   return (
     <Page title={t("nav.Pubs")} base={base}>
       <Head>
