@@ -193,7 +193,8 @@ export default function Home(
         </HScroll>
       </section>
 
-      <section style={_section}>
+      {
+        /* <section style={_section}>
         <AlbumHeader
           text={t(`home.section.projects`)}
           href={routes(lang).get("projects")}
@@ -201,7 +202,8 @@ export default function Home(
         <HScroll scrollerId="hscroll-articles" maxVisibleChildren={maxVisNews}>
           {projects.map(ArticleSquare)}
         </HScroll>
-      </section>
+      </section> */
+      }
 
       {
         /* <AlbumHeader
