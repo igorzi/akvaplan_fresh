@@ -16,6 +16,8 @@ import { akvaplanistMap } from "akvaplan_fresh/services/akvaplanist.ts";
 import { MynewsdeskItem } from "akvaplan_fresh/@interfaces/mynewsdesk.ts";
 
 import {
+  AlsoInNative,
+  AltLangInfo,
   Article,
   ArticleContact,
   ArticleHeader,
@@ -50,9 +52,9 @@ export const handler: Handlers = {
     const contacts = await fetchContacts(item);
 
     let { searchwords, logo } = projectMap.get(slug) ?? {};
+
     searchwords = [...new Set([...searchwords ?? [], slug].map(normalize))];
     const regex = searchwords.join("|");
-    //console.debug({ regex });
     const needle = new RegExp(normalize(regex), "ui");
 
     const _news = await multiSearchMynewsdesk(
@@ -64,12 +66,11 @@ export const handler: Handlers = {
       needle.test(normalize(JSON.stringify(news)))
     );
     const news = _matching?.map(newsFromMynewsdesk({ lang }));
-    return ctx.render({ item, lang, logo, news, contacts });
-  },
-};
 
-const OnlyIn = ({ language, lang }) => {
-  return <div lang={lang}>{t(`lang.Only.${String(language)}`)}</div>;
+    const alternate = null;
+
+    return ctx.render({ item, lang, logo, news, contacts, alternate });
+  },
 };
 
 interface ArticleProps {
@@ -78,7 +79,7 @@ interface ArticleProps {
 }
 
 export default function ProjectHome(
-  { data: { item, lang, news, contacts, logo } }: PageProps<
+  { data: { item, lang, news, contacts, logo, alternate } }: PageProps<
     ArticleProps
   >,
 ) {
@@ -137,33 +138,30 @@ export default function ProjectHome(
       <h1>
         {title}
       </h1>
-      {logo && (
-        <p>
-          <img
-            alt="project logo"
-            width="350"
-            height="auto"
-            src={logo}
-          />
-        </p>
-      )}
-
+      <figure style={_caption}>
+        {logo && (
+          <p>
+            <img
+              alt="project logo"
+              width="350"
+              height="auto"
+              src={logo}
+            />
+          </p>
+        )}
+        <figcaption>{image_caption}</figcaption>
+      </figure>
       <HScroll maxVisibleChildren={5.5}>
         {news.map(ArticleSquare)}
       </HScroll>
+
       <Article language={language}>
-        {
-          /* <section style={_caption}>
-          <em style={{ color: "var(--text2)" }}>
-            {lang !== language ? OnlyIn({ lang, language }) : null}
-          </em>
-        </section> */
-        }
-
-        <figure style={_caption}>
-          <figcaption>{image_caption}</figcaption>
-        </figure>
-
+        <ArticleHeader
+          header={header}
+          image={img}
+          imageCaption={image_caption}
+        />
+        <AltLangInfo lang={lang} language={language} alternate={alternate} />
         <section
           class="article-content"
           dangerouslySetInnerHTML={{ __html }}

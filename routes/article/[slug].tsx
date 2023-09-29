@@ -10,9 +10,13 @@ import { isodate } from "akvaplan_fresh/time/mod.ts";
 import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 import { akvaplanistMap } from "akvaplan_fresh/services/akvaplanist.ts";
 
-import Article from "akvaplan_fresh/components/article/Article.tsx";
-import ArticleContact from "akvaplan_fresh/components/article/ArticleContact.tsx";
-import ArticleHeader from "akvaplan_fresh/components/article/ArticleHeader.tsx";
+import {
+  AlsoInNative,
+  Article,
+  ArticleContact,
+  ArticleHeader,
+  OnlyIn,
+} from "akvaplan_fresh/components/mod.ts";
 
 //import { YouTube } from "akvaplan_fresh/components/video/youtube.tsx";
 
@@ -54,20 +58,6 @@ export const handler: Handlers = {
     const contacts = await fetchContacts(item);
     return ctx.render({ item, lang, contacts, alternate });
   },
-};
-
-const AlsoInNative = ({ href, hreflang, lang }) => {
-  return (
-    <span lang={lang}>
-      {t(`lang.Also_in_native.${String(hreflang)}`)}
-      {": "}
-      <a hreflang={hreflang} href={href}>{href}</a>
-    </span>
-  );
-};
-
-const OnlyIn = ({ language, lang }) => {
-  return <div lang={lang}>{t(`lang.Only.${String(language)}`)}</div>;
 };
 
 interface ArticleProps {

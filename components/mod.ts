@@ -14,6 +14,7 @@ export * from "./icon.tsx";
 export * from "./news/article_square.tsx";
 export * from "./news/film_strip.tsx";
 export * from "./news/mini_news.tsx";
+export * from "./alt_lang.tsx";
 export * from "./page.tsx";
 export * from "./people/PeopleCard.tsx";
 export * from "./people/PeopleScroll.tsx";
