@@ -134,7 +134,7 @@ export default function ProjectHome(
         <link rel="stylesheet" href={asset("/css/hscroll.css")} />
         <link rel="stylesheet" href={asset("/css/article.css")} />
         <script src={asset("/@nrk/core-scroll.min.js")} />
-      </Head>{" "}
+      </Head>
       <h1>
         {title}
       </h1>

@@ -16,6 +16,9 @@ const mynewsdesk_key: string = globalThis.Deno && Deno.env.has("mynewsdesk_key")
 const path = (action: string, unique_key = mynewsdesk_key) =>
   `/services/pressroom/${action}/${unique_key}`;
 
+export const newsFilter = (item: MynewsdeskItem) =>
+  ["news", "pressrelease"].includes(item.type_of_media);
+
 // GET https://www.mynewsdesk.com/services/pressroom/search/unique_key?
 //   query=query&
 //   type_of_media=[pressrelease|news|blog_post|event|image|video|document|contact_person]&
@@ -106,6 +109,21 @@ export const fetchContacts = async ({ related_items }) => {
     contacts.push(email);
   }
   return contacts;
+};
+
+export const fetchRelated = async (
+  item: MynewsdeskItem,
+  opts = { exclude: ["contact_person", "image"] },
+) => {
+  const { exclude } = opts ?? [];
+  const list = item?.related_items?.filter(
+    ({ type_of_media }) => !exclude.includes(type_of_media),
+  );
+  const items = [];
+  for await (const { item_id, type_of_media } of list) {
+    items.push(await fetchItem(item_id, type_of_media));
+  }
+  return items;
 };
 
 const preprocess = (s) =>

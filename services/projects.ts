@@ -20,21 +20,19 @@ const criptic = {
     "https://resources.mynewsdesk.com/image/upload/f_auto,t_limit_1000/icba6p15vg8yhelepmkb.jpg",
 };
 
+const type_of_media = "event";
 export const projectMap = new Map([
   ["polarfront", polarfront],
   ["criptic", criptic],
 ]);
-
-const type_of_media = "event";
-
-const projectFilter = (items: MynewsdeskItem[]) => (item: MynewsdeskItem) =>
-  [type_of_media].includes(item.type_of_media) &&
-  /project|prosjekt/.test(JSON.stringify(item));
-
-const year = ({ datetime }) =>
+const year = ({ datetime } = {}) =>
   datetime ? new Date(datetime).getFullYear() : "????";
 export const projectYears = (start_at, end_at) =>
   `${year(start_at)} – ${year(end_at)}`;
+
+export const projectFilter = (item: MynewsdeskItem) =>
+  [type_of_media].includes(item.type_of_media) &&
+  /project|prosjekt/.test(JSON.stringify(item));
 
 // lookup acronym from url?
 export const projectFromMynewsdesk = ({ lang }: NewsMapper) =>
