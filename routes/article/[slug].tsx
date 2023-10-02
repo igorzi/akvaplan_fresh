@@ -1,48 +1,69 @@
 // FIXME pressreleases add media
 // FIXME Compare /en/press/2958380 with https://www.mynewsdesk.com/no/akvaplan-niva/pressreleases/ny-rapport-evaluering-av-nye-oppdrettsarter-2958380
+//console.log("@todo News article: auto-fetch related contacts");
 import {
   defaultImage,
   fetchContacts,
   fetchItem,
   fetchItemBySlug,
-} from "akvaplan_fresh/services/mynewsdesk.ts";
+  fetchRelated,
+  newsFilter,
+  newsFromMynewsdesk,
+  projectFilter,
+  projectFromMynewsdesk,
+} from "akvaplan_fresh/services/mod.ts";
 import { isodate } from "akvaplan_fresh/time/mod.ts";
 import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
-import { akvaplanistMap } from "akvaplan_fresh/services/akvaplanist.ts";
 
 import {
-  AlsoInNative,
+  AlbumHeader,
+  AltLangInfo,
   Article,
-  ArticleContact,
   ArticleHeader,
-  OnlyIn,
+  ArticleSquare,
+  Card,
+  HScroll,
+  Page,
+  PeopleCard as PersonCard,
 } from "akvaplan_fresh/components/mod.ts";
 
-//import { YouTube } from "akvaplan_fresh/components/video/youtube.tsx";
-
 import { MynewsdeskItem } from "akvaplan_fresh/@interfaces/mynewsdesk.ts";
-
-import { Card, Page } from "akvaplan_fresh/components/mod.ts";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { PeopleCard as PersonCard } from "../../components/mod.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 
 export const config: RouteConfig = {
   routeOverride:
     "{/:lang(no|en)}?/:type(news|nyhet|pressrelease|pressemelding|press){/:isodate}?/:slug",
 };
 
-//console.log("@todo News article: auto-fetch related contacts");
+interface ArticleProps {
+  item: MynewsdeskItem;
+  lang: string;
+  alternate: Link;
+  contacts: Person[];
+  projects: MynewsdeskItem[];
+  news: MynewsdeskItem[];
+}
+
+interface Link {
+  href: URL;
+  hreflang: string;
+}
 
 const typeOfMedia = (type: string) => {
   return type.startsWith("press") ? "pressrelease" : "news";
 };
-
+const _section = {
+  marginTop: "2rem",
+  marginBottom: "3rem",
+};
 export const handler: Handlers = {
   async GET(req, ctx) {
     const { slug, lang, type } = ctx.params;
     langSignal.value = lang;
     const type_of_media = typeOfMedia(type);
 
+    // Fetch item
     const item = (Number(slug) > 0)
       ? await fetchItem(slug, type_of_media)
       : await fetchItemBySlug(slug, type_of_media);
@@ -50,25 +71,33 @@ export const handler: Handlers = {
       return ctx.renderNotFound();
     }
 
+    // Alternate language version?
     const href = item.links?.find(({ text }) => "alternate" === text)?.url;
     const hreflang = href ? new URL(href)?.pathname.substring(1, 3) : null;
     const alternate = href ? { href, hreflang } : null;
 
+    // Fetch contacts
     item.links = item.links?.filter(({ text }) => "alternate" !== text);
     const contacts = await fetchContacts(item);
-    return ctx.render({ item, lang, contacts, alternate });
+
+    // Related
+    const related = await fetchRelated(item);
+    const projects = related.filter(projectFilter).map((myn) =>
+      projectFromMynewsdesk({ lang })(myn)
+    );
+    const news = related.filter(newsFilter).map((myn) =>
+      newsFromMynewsdesk({ lang })(myn)
+    );
+
+    //const documents...
+    return ctx.render({ item, lang, contacts, alternate, projects, news });
   },
 };
-
-interface ArticleProps {
-  item: MynewsdeskItem;
-  lang: string;
-}
 
 //console.log("@todo News article needs bullet points for <li> elements");
 
 export default function NewsArticle(
-  { data: { item, lang, contacts, contact_person, alternate } }: PageProps<
+  { data: { item, lang, contacts, alternate, projects, news } }: PageProps<
     ArticleProps
   >,
 ) {
@@ -97,7 +126,7 @@ export default function NewsArticle(
   } = item;
 
   //https://cloudinary.com/documentation/transformation_reference#ar_aspect_ratio
-  const img = image?.replace(",w_1782", ",w_1600,ar_16:9") ?? defaultImage;
+  const img = image?.replace(",w_1782", ",w_1024,ar_16:9") ?? defaultImage;
 
   const published = isodate(published_at.datetime);
 
@@ -109,21 +138,12 @@ export default function NewsArticle(
 
   return (
     <Page title={header}>
+      <Head>
+        <link rel="stylesheet" href={asset("/css/hscroll.css")} />
+        <script src={asset("/@nrk/core-scroll.min.js")} />
+      </Head>
       <Article language={language}>
-        <section style={_caption}>
-          <em style={{ color: "var(--text2)" }}>
-            {alternate && lang !== language
-              ? (
-                <AlsoInNative
-                  href={alternate.href}
-                  hreflang={alternate.hreflang}
-                  lang={alternate.hreflang}
-                />
-              )
-              : null}
-            {!alternate && lang !== language && OnlyIn({ lang, language })}
-          </em>
-        </section>
+        <AltLangInfo lang={lang} language={language} alternate={alternate} />
         <ArticleHeader
           header={header}
           image={img}
@@ -139,6 +159,30 @@ export default function NewsArticle(
           dangerouslySetInnerHTML={{ __html }}
         >
         </section>
+
+        {projects?.length > 0 && (
+          <section style={_section}>
+            <AlbumHeader
+              text={t("ui.Read_more")}
+            />
+            <HScroll maxVisibleChildren={5.5}>
+              {projects.map(ArticleSquare)}
+            </HScroll>
+          </section>
+        )}
+
+        {
+          /* {news?.length > 0 && (
+          <section style={_section}>
+            <AlbumHeader
+              text={t("nav.News")}
+            />
+            <HScroll maxVisibleChildren={5.5}>
+              {news.map(ArticleSquare)}
+            </HScroll>
+          </section>
+        )} */
+        }
 
         {(links && links?.length > 0) &&
           (
@@ -160,15 +204,7 @@ export default function NewsArticle(
             ),
           )}
         </li>
-        {alternate && (
-          <p style={_caption}>
-            <AlsoInNative
-              href={alternate.href}
-              hreflang={alternate.hreflang}
-              lang={alternate.hreflang}
-            />
-          </p>
-        )}
+
         <p style={_caption}>
           {t(`type.${type_of_media}`)} {t("ui.published")} {published}
         </p>
