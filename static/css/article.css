@@ -33,6 +33,7 @@
   max-width: 95%;
   padding: var(--size-2);
   color: var(--text2);
+  background-color: var(--surface0_backdrop);
 }
 
 .article-header img {

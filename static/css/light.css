@@ -23,6 +23,7 @@
   color-scheme: light;
   --text1: hsl(var(--brand-hue) calc(var(--brand-saturation)/1.5) 85%);
   --text2: hsl(var(--brand-hue) calc(var(--brand-saturation)/1.6) 99%);
+  --surface0_backdrop: hsl(var(--brand-hue) var(--brand-saturation) calc(var(--brand-lightness)/1.5) / 0.5);  
   --surface0: hsl(var(--brand-hue) var(--brand-saturation) calc(var(--brand-lightness)/1.5));  
   --surface1: hsl(var(--brand-hue) var(--brand-saturation) calc(var(--brand-lightness)/1.0));  
   --surface2: hsl(var(--brand-hue) var(--brand-saturation) calc(var(--brand-lightness)/0.9));
