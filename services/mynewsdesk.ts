@@ -170,6 +170,8 @@ export const href = (
   let page = lang === "en" ? "news" : "nyhet";
   if ("pressrelease" === type_of_media) {
     page = lang === "en" ? "pressrelease" : "pressemelding";
+  } else if ("blog_post" === type_of_media) {
+    page = "blog";
   }
   return `/${lang}/${page}/${isodate}/${slug({ header })}`;
 };
