@@ -59,7 +59,7 @@ export const handler: Handlers = {
 
     const _news = await multiSearchMynewsdesk(
       searchwords,
-      ["news", "pressrelease"],
+      ["news", "pressrelease", "blog_post"],
       { limit: 64 },
     ) ?? [];
     const _matching = _news.filter((news) =>
