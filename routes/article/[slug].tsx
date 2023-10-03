@@ -51,8 +51,9 @@ interface Link {
 }
 
 const typeOfMedia = (type: string) => {
-  switch (type.substring(0, 4)) {
-    case "press":
+  const _type = type.substring(0, 4).toLowerCase();
+  switch (_type) {
+    case "pres":
       return "pressrelease";
     case "blog":
       return "blog_post";
@@ -69,7 +70,7 @@ export const handler: Handlers = {
     const { slug, lang, type } = ctx.params;
     langSignal.value = lang;
     const type_of_media = typeOfMedia(type);
-
+    console.log({ type_of_media });
     // Fetch item
     const item = (Number(slug) > 0)
       ? await fetchItem(slug, type_of_media)
