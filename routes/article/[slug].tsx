@@ -33,7 +33,7 @@ import { asset, Head } from "$fresh/runtime.ts";
 
 export const config: RouteConfig = {
   routeOverride:
-    "{/:lang(no|en)}?/:type(news|nyhet|pressrelease|pressemelding|press){/:isodate}?/:slug",
+    "{/:lang(no|en)}?/:type(news|nyhet|blog|pressrelease|pressemelding|press){/:isodate}?/:slug",
 };
 
 interface ArticleProps {
@@ -51,7 +51,14 @@ interface Link {
 }
 
 const typeOfMedia = (type: string) => {
-  return type.startsWith("press") ? "pressrelease" : "news";
+  switch (type.substring(0, 4)) {
+    case "press":
+      return "pressrelease";
+    case "blog":
+      return "blog_post";
+    default:
+      return "news";
+  }
 };
 const _section = {
   marginTop: "2rem",
