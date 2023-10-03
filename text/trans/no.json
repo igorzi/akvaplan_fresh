@@ -124,6 +124,7 @@
   "sort.label": "sortering",
   "sort.increasing": "alfabetisk (a↦)",
   "sort.decreasing": "synkende (å↦)",
+  "type.blog_post": "blogg",
   "type.erratum": "erratum",
   "type.proceedings paper": "konferanse-artikkel",
   "type.person": "person",

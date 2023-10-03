@@ -59,7 +59,7 @@ export const handler: Handlers = {
       maxNumNews,
     );
     const articlesNotInSiteLang = news.filter(({ type, hreflang, title }) =>
-      ["news"].includes(type) &&
+      ["news", "pressrelease"].includes(type) &&
       hreflang !== sitelang &&
       !/stillingsannonse/i.test(title)
     ).slice(
