@@ -63,7 +63,8 @@ export const handler: Handlers = {
       { limit: 64 },
     ) ?? [];
     const _matching = _news.filter((news) =>
-      needle.test(normalize(JSON.stringify(news)))
+      needle.test(normalize(JSON.stringify(news))) &&
+      !/skottelus/.test(news.url)
     );
     const news = _matching?.map(newsFromMynewsdesk({ lang }));
 

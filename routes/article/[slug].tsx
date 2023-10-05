@@ -70,7 +70,7 @@ export const handler: Handlers = {
     const { slug, lang, type } = ctx.params;
     langSignal.value = lang;
     const type_of_media = typeOfMedia(type);
-    console.log({ type_of_media });
+
     // Fetch item
     const item = (Number(slug) > 0)
       ? await fetchItem(slug, type_of_media)
