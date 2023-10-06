@@ -111,13 +111,20 @@ export const fetchContacts = async ({ related_items }) => {
   return contacts;
 };
 
+export const fetchImages = (item) =>
+  fetchRelated(item, { include: ["image"], exclude: [] });
+
 export const fetchRelated = async (
   item: MynewsdeskItem,
-  opts = { exclude: ["contact_person", "image"] },
+  opts,
 ) => {
-  const { exclude } = opts ?? [];
+  const { exclude, include } = opts ??
+    { include: undefined, exclude: ["contact_person", "image"] };
+
   const list = item?.related_items?.filter(
-    ({ type_of_media }) => !exclude.includes(type_of_media),
+    ({ type_of_media }) =>
+      (include ? include.includes(type_of_media) : true) &&
+      !exclude.includes(type_of_media),
   );
   const items = [];
   for await (const { item_id, type_of_media } of list) {
