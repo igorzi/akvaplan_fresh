@@ -20,10 +20,15 @@ const criptic = {
     "https://resources.mynewsdesk.com/image/upload/f_auto,t_limit_1000/icba6p15vg8yhelepmkb.jpg",
 };
 
+const slice = {
+  exclude: [{ id: 2869616 }],
+};
+
 const type_of_media = "event";
 export const projectMap = new Map([
   ["polarfront", polarfront],
   ["criptic", criptic],
+  ["slice", slice],
 ]);
 const year = ({ datetime } = {}) =>
   datetime ? new Date(datetime).getFullYear() : "????";

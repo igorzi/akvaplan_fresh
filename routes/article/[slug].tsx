@@ -134,7 +134,7 @@ export default function NewsArticle(
   } = item;
 
   //https://cloudinary.com/documentation/transformation_reference#ar_aspect_ratio
-  const img = image?.replace(",w_1782", ",w_1024,ar_16:9") ?? defaultImage;
+  const img = image?.replace(",w_1782", ",w_1440,ar_16:9") ?? defaultImage;
 
   const published = isodate(published_at.datetime);
 
@@ -157,10 +157,6 @@ export default function NewsArticle(
           image={img}
           imageCaption={image_caption}
         />
-
-        <figure style={_caption}>
-          <figcaption>{image_caption}</figcaption>
-        </figure>
 
         <section
           class="article-content"

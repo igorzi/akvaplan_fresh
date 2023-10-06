@@ -1,6 +1,7 @@
 import {
   defaultImage,
   fetchContacts,
+  fetchImages,
   fetchItem,
   fetchItemBySlug,
   multiSearchMynewsdesk,
@@ -46,12 +47,15 @@ export const handler: Handlers = {
     if (!item) {
       return ctx.renderNotFound();
     }
+
     // if (["project", "prosjekt"].includes(type) && "no" === lang) {
     //   item.header = t(`project.${slug}.title`);
     // }
     const contacts = await fetchContacts(item);
+    const [image] = await fetchImages(item);
+    item.image_caption = item.image_caption ?? image.header;
 
-    let { searchwords, logo } = projectMap.get(slug) ?? {};
+    let { searchwords, logo, exclude } = projectMap.get(slug) ?? {};
 
     searchwords = [...new Set([...searchwords ?? [], slug].map(normalize))];
     const regex = searchwords.join("|");
@@ -62,10 +66,12 @@ export const handler: Handlers = {
       ["news", "pressrelease", "blog_post"],
       { limit: 64 },
     ) ?? [];
-    const _matching = _news.filter((news) =>
-      needle.test(normalize(JSON.stringify(news))) &&
-      !/skottelus/.test(news.url)
-    );
+    const _matching = _news.filter((news) => {
+      if (exclude?.some(({ id }) => id === news.id)) {
+        return false;
+      }
+      return needle.test(normalize(JSON.stringify(news)));
+    });
     const news = _matching?.map(newsFromMynewsdesk({ lang }));
 
     const alternate = null;
@@ -150,19 +156,19 @@ export default function ProjectHome(
             />
           </p>
         )}
-        <figcaption>{image_caption}</figcaption>
       </figure>
       <HScroll maxVisibleChildren={5.5}>
         {news.map(ArticleSquare)}
       </HScroll>
 
       <Article language={language}>
+        <AltLangInfo lang={lang} language={language} alternate={alternate} />
         <ArticleHeader
-          header={header}
+          header={`${header} (${projectYears(start_at, end_at)})`}
           image={img}
           imageCaption={image_caption}
         />
-        <AltLangInfo lang={lang} language={language} alternate={alternate} />
+
         <section
           class="article-content"
           dangerouslySetInnerHTML={{ __html }}
