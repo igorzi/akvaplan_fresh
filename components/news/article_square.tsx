@@ -1,6 +1,9 @@
 import { lang, t } from "../../text/mod.ts";
 import { isodate } from "../../time/mod.ts";
-
+const _caption = {
+  fontSize: "0.75rem",
+  color: "var(--text2)",
+};
 export const ArticleSquare = (
   {
     title,
@@ -43,10 +46,10 @@ export const ArticleSquare = (
 
       <p
         dangerouslySetInnerHTML={{ __html: title ?? name ?? "" }}
-        style={{ textAlign: "left" }}
+        style={{ textAlign: "left", fontWeight: "normal" }}
       />
     </a>
-    <p>
+    <p style={_caption}>
       {duration ? duration : isodate(published)}{" "}
       {hreflang !== undefined && lang.value !== hreflang
         ? <span>({t(`lang.${hreflang}`)})</span>

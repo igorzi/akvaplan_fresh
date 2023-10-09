@@ -43,15 +43,16 @@ export const MiniNewsCard = (
           dangerouslySetInnerHTML={{ __html: title }}
         />
 
-        <time>{isodate(published)}</time>{" "}
-        <span style={{ color: "var(--text2)" }}>{t(`type.${type}`)}</span>
-        {hreflang !== lang
-          ? (
-            <span>
-              &nbsp;({t(`lang.${hreflang}`)})
-            </span>
-          )
-          : null}
+        <span style={{ color: "var(--text2)" }}>
+          <time>{isodate(published)}</time> <span>{t(`type.${type}`)}</span>
+          {hreflang !== lang
+            ? (
+              <span>
+                &nbsp;({t(`lang.${hreflang}`)})
+              </span>
+            )
+            : null}
+        </span>
       </span>
     </li>
   </MiniCard>
