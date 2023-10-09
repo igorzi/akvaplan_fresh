@@ -27,8 +27,8 @@ export default function ArticleHeader({
           title={imageCaption}
           alt={imageCaption}
           src={image}
-          width="1245"
-          height="700"
+          width="1024"
+          height="576"
         />
         <h1>{header}</h1>
       </header>
