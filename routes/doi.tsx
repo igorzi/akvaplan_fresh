@@ -90,10 +90,6 @@ export const handler: Handlers<SlimPublication> = {
     }
   },
 };
-
-// const imgURL = (image) =>
-//   `https://image-resizing-api.deno.dev/?image=${image}&width=400`;
-
 export default function DoiPublication(
   { params, data: { slim, openalex, lang, image, current, priors } }: PageProps<
     { slim: SlimPublication; image: string }
