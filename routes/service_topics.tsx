@@ -114,9 +114,7 @@ export default function ServiceTopics(
                   <a href=".">{t(`nav.Services`)}</a>: {service.name}
                 </span>
               }
-              image={`https://image-resizing-api.deno.dev/?image=${
-                service?.img ?? service?.img512
-              }&width=1024&height=576`}
+              image={service?.img ?? service?.img512}
               imageCaption={""}
             />
             <div>
