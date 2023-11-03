@@ -30,7 +30,9 @@ export default function ArticleHeader({
           width="1024"
           height="576"
         />
-        <h1>{header}</h1>
+        <h1>
+          <span class="backdrop-blur">{header}</span>
+        </h1>
       </header>
       <figure style={_caption}>
         <figcaption>{imageCaption}</figcaption>

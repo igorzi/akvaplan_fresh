@@ -1,4 +1,6 @@
 // FIXME akvaplanist.tsx – add noindex,nofollow on anything but root route to avoid search engine clutter
+// @todo inspiration/link: https://openalex.org/works?sort=publication_date%3Adesc&column=display_name,publication_year,type,open_access.is_oa,cited_by_count&page=1&filter=authorships.author.id%3AA5053761479
+// https://openalex.org/authors/A5053761479
 import {
   buildGroupFX,
   buildPeopleGrouper,
@@ -129,7 +131,7 @@ export const handler: Handlers = {
     const queryFilter = q?.length > 0 ? buildContainsFilter(q) : () => true;
     const results = filtered.filter(queryFilter);
 
-    const grouped = (results).reduce(
+    const grouped = results.reduce(
       buildPeopleGrouper(fx),
       new Map(),
     );
