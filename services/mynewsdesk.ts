@@ -72,7 +72,6 @@ export const fetchItemBySlug = async (
       url.includes(slug)
     ) ??
       {};
-    console.warn("fetchItemBySlug", slug, id, type_of_media);
     if (id) {
       return fetchItem(id, type_of_media);
     } else if (!id && search_result?.items.length === 1) {
@@ -85,7 +84,8 @@ export const fetchItem = async (
   id: number,
   type_of_media: string,
 ): Promise<MynewsdeskItem | undefined> => {
-  const r = await fetch(itemURL(id, type_of_media));
+  const url = itemURL(id, type_of_media);
+  const r = await fetch(url);
   if (r.ok) {
     const { item: [item] } = await r.json();
     return item;

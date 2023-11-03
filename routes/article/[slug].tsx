@@ -33,7 +33,7 @@ import { asset, Head } from "$fresh/runtime.ts";
 
 export const config: RouteConfig = {
   routeOverride:
-    "{/:lang(no|en)}?/:type(news|nyhet|blog|pressrelease|pressemelding|press){/:isodate}?/:slug",
+    "/:lang(no|en){/akvaplan-niva}?/:type(news|nyhet|blog|pressreleases|pressrelease|pressemelding){/:isodate}?/:slug",
 };
 
 interface ArticleProps {
@@ -72,7 +72,7 @@ export const handler: Handlers = {
     const type_of_media = typeOfMedia(type);
 
     const numid = Number(slug?.split("-").at(-1));
-
+    console.warn(numid, slug, numid > 0);
     // Fetch item
     const item = (numid > 0)
       ? await fetchItem(numid, type_of_media)
