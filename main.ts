@@ -3,6 +3,7 @@
 /// <reference lib="dom.iterable" />
 /// <reference lib="dom.asynciterable" />
 /// <reference lib="deno.ns" />
+
 import { getLangFromURL } from "./text/mod.ts";
 import {
   InnerRenderFunction,
@@ -10,6 +11,8 @@ import {
   RenderFunction,
   start,
 } from "$fresh/server.ts";
+import { base, mynewsdesk_key as key, path } from "./services/mynewsdesk.ts";
+import { syncMynewsdesk } from "./kv/jobs/sync_mynewsdesk.ts";
 import manifest from "./fresh.gen.ts";
 
 const render: RenderFunction = (
@@ -23,5 +26,7 @@ const render: RenderFunction = (
   }
   freshRender();
 };
+//Deno.cron("sync mynewsdesk", `*/5 * * * *`, syncMynewsdesk);
+setInterval(syncMynewsdesk, 300_000, { key, base });
 
 await start(manifest, { render, /*, plugins: [],*/ port: 7777 });

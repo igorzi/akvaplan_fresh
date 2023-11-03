@@ -1,3 +1,5 @@
+// https://openalex.org/works?sort=publication_date%3Adesc&column=display_name,publication_year,type,open_access.is_oa,cited_by_count&page=1&filter=authorships.institutions.lineage%3AI4210138062&tab=1&group_by=authorships.author.id
+
 import { routes } from "akvaplan_fresh/services/nav.ts";
 
 import {
@@ -44,6 +46,8 @@ export const handler: Handlers<DoiSearchResultsProps> = {
     const url = new URL(`/doi?limit=-1&sort=-published`, DOIS_BASE);
 
     const response = await fetch(url);
+
+    console.warn(response);
 
     if (response.ok) {
       const json = await response.json();

@@ -71,9 +71,11 @@ export const handler: Handlers = {
     langSignal.value = lang;
     const type_of_media = typeOfMedia(type);
 
+    const numid = Number(slug?.split("-").at(-1));
+
     // Fetch item
-    const item = (Number(slug) > 0)
-      ? await fetchItem(slug, type_of_media)
+    const item = (numid > 0)
+      ? await fetchItem(numid, type_of_media)
       : await fetchItemBySlug(slug, type_of_media);
     if (!item) {
       return ctx.renderNotFound();

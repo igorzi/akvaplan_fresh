@@ -70,7 +70,7 @@ export const handler: Handlers = {
     // @todo make sure first searchword is in English
     const { data } = await searchPubs({ q: queries[0], limit: -1 });
     const pubsToNewsMapper = newsFromPubs({ lang: lang.value });
-    const pubs = data.map(pubsToNewsMapper);
+    const pubs = data?.map(pubsToNewsMapper);
 
     const grouped = groupIntoMap(
       pubs,
