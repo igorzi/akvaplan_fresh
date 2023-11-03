@@ -7,13 +7,13 @@ const sortPublishedLatest = (a, b) =>
   b.published_at.datetime.localeCompare(a.published_at.datetime);
 
 // https://www.mynewsdesk.com/docs/webservice_pressroom#services_view
-const base = "https://www.mynewsdesk.com";
+export const base = "https://www.mynewsdesk.com";
 
-const mynewsdesk_key: string = globalThis.Deno && Deno.env.has("mynewsdesk_key")
+export const mynewsdesk_key: string = globalThis.Deno
   ? Deno.env.get("mynewsdesk_key") ?? ""
   : "";
 
-const path = (action: string, unique_key = mynewsdesk_key) =>
+export const path = (action: string, unique_key = mynewsdesk_key) =>
   `/services/pressroom/${action}/${unique_key}`;
 
 export const newsFilter = (item: MynewsdeskItem) =>
@@ -46,7 +46,7 @@ export const searchURL = (
 //     strict=true|false&
 //     callback=callback
 export const itemURL = (
-  id: string,
+  id: number,
   type_of_media: string,
   key: string = mynewsdesk_key,
 ) =>
@@ -72,7 +72,7 @@ export const fetchItemBySlug = async (
       url.includes(slug)
     ) ??
       {};
-
+    console.warn("fetchItemBySlug", slug, id, type_of_media);
     if (id) {
       return fetchItem(id, type_of_media);
     } else if (!id && search_result?.items.length === 1) {
@@ -82,7 +82,7 @@ export const fetchItemBySlug = async (
 };
 
 export const fetchItem = async (
-  id: string,
+  id: number,
   type_of_media: string,
 ): Promise<MynewsdeskItem | undefined> => {
   const r = await fetch(itemURL(id, type_of_media));
