@@ -23,19 +23,6 @@
   border-radius: var(--radius-2);
 }
 
-/* .article-header h1 {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  color: var(--text1);
-  font-size: 2rem;
-  backdrop-filter: blur(16px);
-  max-width: 95%;
-  padding: var(--size-2);
-  color: var(--text2);
-  background-color: var(--surface0_backdrop);
-} */
-
 .article-header h1 {
   position: absolute;
   bottom: 2rem;
@@ -44,15 +31,11 @@
   font-size: 2rem;
   max-width: 95%;
   padding: var(--size-2);
-  /* backdrop-filter: blur(16px); */
-  /* color: var(--text2);
- 
-  background-color: var(--surface0_backdrop); */
 }
 
 .backdrop-blur {
   color: var(--text1);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
   background-color: var(--surface0_backdrop);
 }
 
