@@ -122,7 +122,7 @@ export const getItemBySlug = async (
   }
 };
 
-let whoWon = Symbol("item.race");
+const whoWon = Symbol("item.race");
 export const getItem = async (
   id: number,
   type_of_media: string,
@@ -131,7 +131,7 @@ export const getItem = async (
   const _api = getItemFromMynewsdeskApi(id, type_of_media);
   const item = await Promise.race([_kv, _api]);
   //@ts-ignore next
-  console.debug("Won race", item[whoWon]);
+  console.debug("getItem", id, type_of_media, item[whoWon]);
   return item;
 };
 
