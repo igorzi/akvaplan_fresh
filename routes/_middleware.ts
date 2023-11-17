@@ -18,15 +18,28 @@ import {
 import { parse } from "accept-language-parser";
 
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
+import { projectURL } from "akvaplan_fresh/services/nav.ts";
 
 export function handler(
   req: Request,
   ctx: MiddlewareHandlerContext<Record<string, unknown>>,
 ) {
-  if (ctx.destination === "route") {
-    const url = new URL(req.url);
-    const { pathname, hostname } = url;
+  const url = new URL(req.url);
+  const { pathname, hostname } = url;
+  const requestHeaderAcceptLanguages = parse(
+    req.headers.get("accept-language") ?? "",
+  );
+  const acceptLanguages = requestHeaderAcceptLanguages.map(({ code }) => code);
+  const lang = acceptsNordic(acceptLanguages) ? "no" : "en";
 
+  if (pathname.startsWith("/events/")) {
+    const slug = pathname.split("/events/").at(1); //?.replace(/-[0-9]+$/, "");
+    const location = new URL(projectURL({ lang, title: slug }), url);
+    return response307XRobotsTagNoIndex(location.href);
+  }
+  // events is in this list, since projects are defined as events in mynewsdesk
+
+  if (ctx.destination === "route") {
     if (legacyHosts.includes(hostname)) {
       const fresh = req.url.replace("www.", "").replace(
         "akvaplan.niva.",
@@ -45,16 +58,10 @@ export function handler(
     // if ([...internationalHosts.keys()].includes(hostname)) {
     // }
 
-    if ("/" === pathname && req.headers.has("accept-language")) {
+    if ("/" === pathname && req.headers.has("accept-language") && lang) {
       // Special case for root path /
       // Redirect from accept-language header, if present
-      const requestHeaderAcceptLanguages = parse(
-        req.headers.get("accept-language") ?? "",
-      );
-      const acceptLanguages = requestHeaderAcceptLanguages.map(({ code }) =>
-        code
-      );
-      const lang = acceptsNordic(acceptLanguages) ? "no" : "en";
+
       return response307(`/${lang}`);
     } else {
       const lang = getLangFromURL(url);
