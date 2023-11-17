@@ -4,9 +4,9 @@
 import {
   defaultImage,
   fetchContacts,
-  fetchItem,
-  fetchItemBySlug,
   fetchRelated,
+  getItem,
+  getItemBySlug,
   newsFilter,
   newsFromMynewsdesk,
   projectFilter,
@@ -72,11 +72,11 @@ export const handler: Handlers = {
     const type_of_media = typeOfMedia(type);
 
     const numid = Number(slug?.split("-").at(-1));
-    console.warn(numid, slug, numid > 0);
+
     // Fetch item
     const item = (numid > 0)
-      ? await fetchItem(numid, type_of_media)
-      : await fetchItemBySlug(slug, type_of_media);
+      ? await getItem(numid, type_of_media)
+      : await getItemBySlug(slug, type_of_media);
     if (!item) {
       return ctx.renderNotFound();
     }

@@ -12,7 +12,7 @@ import {
   HScroll,
   Page,
   PeopleCard as PersonCard,
-  ServiceSummary,
+  ServiceTopicDesc,
 } from "akvaplan_fresh/components/mod.ts";
 
 import { lang, t } from "akvaplan_fresh/text/mod.ts";
@@ -71,6 +71,9 @@ export const handler: Handlers = {
   },
 };
 
+const _style = `summary { margin-top: 2rem; margin-bottom: 1rem; }
+`;
+
 export default function ServiceTopics(
   {
     data: {
@@ -97,6 +100,9 @@ export default function ServiceTopics(
         <link rel="stylesheet" href={asset("/css/hscroll.css")} />
         <link rel="stylesheet" href={asset("/css/article.css")} />
         <script src={asset("/@nrk/core-scroll.min.js")} />
+        <style
+          dangerouslySetInnerHTML={{ __html: _style }}
+        />
       </Head>
       <div>
         <div
@@ -117,16 +123,16 @@ export default function ServiceTopics(
               image={service?.img ?? service?.img512}
               imageCaption={""}
             />
-            <div>
-              <PersonCard id={service.contact} />
-            </div>
+
             <section>
-              <ServiceSummary topic={topic} lang={lang.value} />
+              <ServiceTopicDesc topic={topic} lang={lang.value} />
+            </section>
+
+            <section class="article-content">
+              <PersonCard id={service.contact} icons={false} />
             </section>
           </Article>
-          <div></div>
         </div>
-
         {[...news].slice(0, 3).map(([_name, children]) => (
           <div style={{ marginBlockStart: "3rem" }}>
             <HScroll maxVisibleChildren={5.5}>
