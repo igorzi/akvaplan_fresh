@@ -11,7 +11,7 @@
 //
 // Notice on 2023-11-03, Mynewsdesk was reconfigured to to use akvaplan.no, examples:
 // - https://akvaplan.no/news/nye-forskningsmidler-til-oppdrettstorsk-449890
-import { fetchItem, fetchItemBySlug, href } from "../../services/mynewsdesk.ts";
+import { getItem, getItemBySlug, href } from "../../services/mynewsdesk.ts";
 import { Handlers, RouteConfig } from "$fresh/server.ts";
 export const config: RouteConfig = {
   routeOverride: "/:type(news|pressreleases|mynewsdesk-articles)/:slug",
@@ -26,13 +26,13 @@ export const handler: Handlers = {
       : undefined;
 
     const newsitem = (Number(numid) > 0)
-      ? await fetchItem(numid!, "news")
-      : await fetchItemBySlug(slug, "news");
+      ? await getItem(numid!, "news")
+      : await getItemBySlug(slug, "news");
 
     if (!newsitem) {
       pr = (Number(numid) > 0)
-        ? await fetchItem(numid!, "pressrelease")
-        : await fetchItemBySlug(slug, "pressrelease");
+        ? await getItem(numid!, "pressrelease")
+        : await getItemBySlug(slug, "pressrelease");
     }
 
     const item = newsitem ?? pr;
@@ -61,7 +61,8 @@ export const handler: Handlers = {
 
     // Cannot use slug from mynewsdesk since it may differ from akvaplan.no slugs!
     const location = href(item);
-    //const location = `/${lang}/${type_of_media}/${id}`;
+    // This also works
+    // const location = `/${lang}/${type_of_media}/${id}`;
 
     return new Response("", {
       status: 301,

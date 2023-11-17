@@ -1,7 +1,7 @@
 import { lang as langSignal, t } from "akvaplan_fresh/text/mod.ts";
 import { SignalLike, StringSignal } from "akvaplan_fresh/@interfaces/signal.ts";
 
-import { slug } from "https://deno.land/x/slug/mod.ts";
+import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 import { computed } from "@preact/signals-core";
 export const siteNav: SignalLike<Array> = computed(() =>
   buildNav(langSignal.value)

@@ -18,7 +18,7 @@ import {
   NewsFilmStrip,
   Page,
   PeopleCard as PersonCard,
-  ServiceSummary as TopicSummary,
+  ServiceTopicDesc as TopicSummary,
 } from "akvaplan_fresh/components/mod.ts";
 
 import { lang, t } from "akvaplan_fresh/text/mod.ts";

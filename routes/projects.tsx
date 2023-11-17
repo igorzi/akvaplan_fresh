@@ -1,4 +1,5 @@
 import {
+  listURL,
   projectFromMynewsdesk,
   projectURL,
   projectYears,
@@ -63,17 +64,22 @@ export const config: RouteConfig = {
 
 export const handler: Handlers = {
   async GET(req: Request, ctx: HandlerContext) {
+    const type_of_media = "event";
+
+    const url = listURL({ type_of_media });
+
     const props = extractRenderProps(req, ctx);
     const { lang } = props;
-    const { items } = await searchMynewsdesk({
-      q: "",
-      type_of_media: "event",
-    }) ?? {};
+
+    const r = await fetch(url);
+    const { items } = await r?.json() ?? { items: [] };
 
     const projects = items
+      .filter((x) => {
+        return true;
+      })
       ?.map(projectFromMynewsdesk({ lang }))
       .sort((a, b) => b.end.localeCompare(a.end));
-    projectYears;
 
     const grouped = groupIntoMap(
       projects,

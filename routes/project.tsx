@@ -2,8 +2,8 @@ import {
   defaultImage,
   fetchContacts,
   fetchImages,
-  fetchItem,
-  fetchItemBySlug,
+  getItem,
+  getItemBySlug,
   multiSearchMynewsdesk,
   newsFromMynewsdesk,
   projectMap,
@@ -43,7 +43,11 @@ export const handler: Handlers = {
     const { slug, lang, type } = ctx.params;
     langSignal.value = lang;
 
-    const item = await fetchItemBySlug(slug, "event");
+    const numid = Number(slug?.split("-").at(-1));
+    const item = (Number(numid) > 0)
+      ? await getItem(numid, "event")
+      : await getItemBySlug(slug, "event");
+
     if (!item) {
       return ctx.renderNotFound();
     }

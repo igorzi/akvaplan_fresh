@@ -1,23 +1,54 @@
+// https://www.mynewsdesk.com/docs/webservice_pressroom
 import { detectDOIs } from "akvaplan_fresh/text/doi.ts";
 
 import { MynewsdeskItem } from "akvaplan_fresh/@interfaces/mynewsdesk.ts";
-import { slug as _slug } from "https://deno.land/x/slug/mod.ts";
+import { slug as _slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
+
+export const slug0 = "mynewsdesk_slug";
+export const id0 = "mynewsdesk_id";
+
+import { openKv } from "akvaplan_fresh/kv/mod.ts";
 
 const sortPublishedLatest = (a, b) =>
   b.published_at.datetime.localeCompare(a.published_at.datetime);
 
-// https://www.mynewsdesk.com/docs/webservice_pressroom#services_view
 export const base = "https://www.mynewsdesk.com";
 
 export const mynewsdesk_key: string = globalThis.Deno
   ? Deno.env.get("mynewsdesk_key") ?? ""
   : "";
 
-export const path = (action: string, unique_key = mynewsdesk_key) =>
+export const actionPath = (action: string, unique_key = mynewsdesk_key) =>
   `/services/pressroom/${action}/${unique_key}`;
 
 export const newsFilter = (item: MynewsdeskItem) =>
   ["news", "pressrelease"].includes(item.type_of_media);
+
+export const listURL = ({ type_of_media, offset, limit, sort }: {
+  type_of_media: string;
+  offset?: number;
+  limit?: number;
+  sort?: string;
+}) => {
+  const url = new URL(actionPath("list"), base);
+  const defaults = {
+    type_of_media: "news",
+    archived: "true",
+    format: "json",
+    strict: "true",
+    locale: "en",
+    sort: "published", // seems to return reverse ie last published first
+  };
+  for (
+    const [k, v] of new URLSearchParams(defaults)
+  ) {
+    url.searchParams.set(k, v);
+  }
+  url.searchParams.set("type_of_media", type_of_media);
+  url.searchParams.set("offset", String(offset ?? 0));
+  url.searchParams.set("limit", String(limit ?? 100));
+  return url;
+};
 
 // GET https://www.mynewsdesk.com/services/pressroom/search/unique_key?
 //   query=query&
@@ -34,7 +65,7 @@ export const searchURL = (
   { limit = 10, strict = true } = {},
 ) =>
   new URL(
-    path("search") +
+    actionPath("search") +
       `?format=json&type_of_media=${type_of_media}&strict=${strict}&limit=${limit}&query=${query}&sort=created`,
     base,
   );
@@ -52,39 +83,75 @@ export const itemURL = (
 ) =>
   `https://www.mynewsdesk.com/services/pressroom/view/${key}?format=json&item_id=${id}&type_of_media=${type_of_media}&strict=true`;
 
-export const fetchItemBySlug = async (
+export const getItemBySlug = async (
   slug: string,
   type_of_media = "news",
 ) => {
+  const kv = await openKv();
+  const key = [slug0, type_of_media, slug];
+  const { value, versionstamp } = await kv.get(key);
+  if (versionstamp) {
+    console.debug("getItemBySlug [KV]", key);
+    return value;
+  }
+
   const url = searchURL(slug, type_of_media);
+  console.debug("getItemBySlug (API)", url.href);
 
   const r = await fetch(url.href).catch((error) => {
     console.warn(
       `Mynewsdesk: Failed fetching ${
-        JSON.stringify({ id, slug, type_of_media, error })
+        JSON.stringify({ slug, type_of_media, error })
       }`,
     );
   });
   if (r?.ok) {
     const { search_result } = await r.json();
 
+    console.debug("Found", search_result?.items?.length, type_of_media);
+
     const { id } = search_result?.items?.find(({ url }) =>
       url.includes(slug)
     ) ??
       {};
     if (id) {
-      return fetchItem(id, type_of_media);
+      return getItem(id, type_of_media);
     } else if (!id && search_result?.items.length === 1) {
-      return fetchItem(search_result?.items.at(0).id, type_of_media);
+      return getItem(search_result?.items.at(0).id, type_of_media);
     }
   }
 };
 
-export const fetchItem = async (
+export const getItem = async (
+  id: number,
+  type_of_media: string,
+): Promise<MynewsdeskItem | undefined> => {
+  const _kv = getItemFromKv(id, type_of_media);
+  const _api = getItemFromMynewsdeskApi(id, type_of_media);
+  const item = await Promise.race([_kv, _api]);
+  return item;
+};
+
+export const getItemFromKv = async (
+  id: number,
+  type_of_media: string,
+): Promise<MynewsdeskItem | undefined> => {
+  const kv = await openKv();
+  const key = [id0, type_of_media, id];
+
+  const { value, versionstamp } = await kv.get<MynewsdeskItem>(key);
+  if (versionstamp) {
+    console.debug("getItem [KV]", key);
+    return value;
+  }
+};
+
+export const getItemFromMynewsdeskApi = async (
   id: number,
   type_of_media: string,
 ): Promise<MynewsdeskItem | undefined> => {
   const url = itemURL(id, type_of_media);
+  console.debug("getItem [API]", url);
   const r = await fetch(url);
   if (r.ok) {
     const { item: [item] } = await r.json();
@@ -93,7 +160,7 @@ export const fetchItem = async (
 };
 
 export const fetchContactEmail = async (item_id) => {
-  const contact_person = await fetchItem(item_id, "contact_person");
+  const contact_person = await getItem(item_id, "contact_person");
   const { email } = contact_person;
   const contact = email?.split("@")?.at(0);
   return contact;
@@ -128,16 +195,18 @@ export const fetchRelated = async (
   );
   const items = [];
   for await (const { item_id, type_of_media } of list) {
-    items.push(await fetchItem(item_id, type_of_media));
+    items.push(await getItem(item_id, type_of_media));
   }
   return items;
 };
 
 const preprocess = (s) =>
   s.replaceAll("<em>", "").replaceAll("</em>", "")
-    .replaceAll('"', "").replaceAll("å", "a").replaceAll("/", "-");
+    .replaceAll(/[:"\.!?]/g, "")
+    .replaceAll("å", "a")
+    .replaceAll("/", "-");
 
-const postprocess = (s) => s.replaceAll("-aa-", "-a-").replace(/[-]{2,}/g, "-");
+const postprocess = (s) => s.replace(/[-]{2,}/g, "-").replaceAll("'", "");
 
 // export const href = ({ header }) =>
 //   "/mynewsdesk-articles/" +
@@ -164,7 +233,8 @@ export const searchMynewsdesk = async (
   //throw `Mynewsdesk search failed`;
 };
 
-export const slug = ({ header }) => postprocess(_slug(preprocess(header)));
+export const slugify = ({ header, name }) =>
+  postprocess(_slug(preprocess(header ?? name)));
 
 // Get localized application URL for a news article
 //console.log("@todo Decide news URL structure for news vs press releases");
@@ -180,7 +250,7 @@ export const href = (
   } else if ("blog_post" === type_of_media) {
     page = "blog";
   }
-  return `/${lang}/${page}/${isodate}/${slug({ header })}`;
+  return `/${lang}/${page}/${isodate}/${slugify({ header })}`;
 };
 
 export const defaultThumbnail =
@@ -217,3 +287,14 @@ export const multiSearchMynewsdesk = async (
   }
   return [...result.values()].sort(sort);
 };
+
+export const total0 = new Map<string, number>([
+  ["news", 0],
+  ["pressrelease", 0],
+  ["image", 0],
+  ["blog_post", 0],
+  ["event", 0],
+  ["video", 0],
+  ["document", 0],
+  ["contact_person", 0],
+]);
