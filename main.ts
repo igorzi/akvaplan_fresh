@@ -11,8 +11,12 @@ import {
   RenderFunction,
   start,
 } from "$fresh/server.ts";
-import { base, mynewsdesk_key as key, path } from "./services/mynewsdesk.ts";
-import { syncMynewsdesk } from "./kv/jobs/sync_mynewsdesk.ts";
+import {
+  actionPath,
+  base,
+  mynewsdesk_key as key,
+} from "./services/mynewsdesk.ts";
+//import { sync } from "./kv/jobs/idx.ts";
 import manifest from "./fresh.gen.ts";
 
 const render: RenderFunction = (
@@ -26,7 +30,8 @@ const render: RenderFunction = (
   }
   freshRender();
 };
-//Deno.cron("sync mynewsdesk", `*/5 * * * *`, syncMynewsdesk);
-setInterval(syncMynewsdesk, 300_000, { key, base });
+//Deno.cron("sync mynewsdesk", `*/10 * * * *`, syncMynewsdesk);
+// const kv = await Deno.openKv();
+//setInterval(sync, 10 * 60_000, { mynewsdesk: { key, base }, kv });
 
 await start(manifest, { render, /*, plugins: [],*/ port: 7777 });
