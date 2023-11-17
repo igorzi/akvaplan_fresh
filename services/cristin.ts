@@ -8,7 +8,8 @@ export const cristinAkvaplanID = 6064;
 // beware 2 akvaplan: https://api.cristin.no/v2/institutions/?name=akvaplan
 // => https://api.cristin.no/v2/institutions/10507000 (Iceland)
 
-//projects => https://api.cristin.no/v2/projects?institution=6064
+// projects => https://api.cristin.no/v2/projects?institution=6064
+// projects with metadata: https://api.cristin.no/v2/projects?institution=akvaplan-niva&fields=all
 
 //projectURL = (id)=>
 //https://api.cristin.no/v2/projects/2650658
