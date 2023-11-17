@@ -22,7 +22,11 @@ export const MiniNewsCard = (
       style={newsItemStyle}
     >
       {type === "person" || !img
-        ? <ApnSym width="96" />
+        ? (
+          <span style={{ height: "96px" }}>
+            <ApnSym />
+          </span>
+        )
         : (
           <a href={href} target={/(f_|\.)pdf/.test(href) ? "_blank" : "_self"}>
             <img
