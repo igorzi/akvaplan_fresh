@@ -122,6 +122,7 @@ export const getItemBySlug = async (
   }
 };
 
+const whoWon = Symbol("item.race");
 export const getItem = async (
   id: number,
   type_of_media: string,
@@ -129,6 +130,8 @@ export const getItem = async (
   const _kv = getItemFromKv(id, type_of_media);
   const _api = getItemFromMynewsdeskApi(id, type_of_media);
   const item = await Promise.race([_kv, _api]);
+  //@ts-ignore next
+  console.debug("getItem", id, type_of_media, item[whoWon]);
   return item;
 };
 
@@ -141,7 +144,8 @@ export const getItemFromKv = async (
 
   const { value, versionstamp } = await kv.get<MynewsdeskItem>(key);
   if (versionstamp) {
-    console.debug("getItem [KV]", key);
+    //@ts-ignore next
+    value[whoWon] = "KV";
     return value;
   }
 };
@@ -151,10 +155,11 @@ export const getItemFromMynewsdeskApi = async (
   type_of_media: string,
 ): Promise<MynewsdeskItem | undefined> => {
   const url = itemURL(id, type_of_media);
-  console.debug("getItem [API]", url);
+  //console.debug("getItem [API]", url);
   const r = await fetch(url);
   if (r.ok) {
     const { item: [item] } = await r.json();
+    item[whoWon] = "API";
     return item;
   }
 };
