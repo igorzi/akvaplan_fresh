@@ -1,4 +1,4 @@
-const alta = {
+const alta: Office = {
   name: "Alta",
   addr: {
     post: "Markveien 38b, 9510 Alta",
@@ -8,7 +8,7 @@ const alta = {
   email: "alta@akvaplan.niva.no",
 };
 
-const bergen = {
+const bergen: Office = {
   name: "Bergen",
   email: "bergen@akvaplan.niva.no",
   tel: "+47 45 03 56 57",
@@ -18,7 +18,7 @@ const bergen = {
   },
 };
 
-const bodø = {
+const bodø: Office = {
   name: "Bodø",
   email: "apnbodo@akvaplan.niva.no",
   tel: "+47 77 75 03 00",
@@ -28,7 +28,7 @@ const bodø = {
   },
 };
 
-const oslo = {
+const oslo: Office = {
   name: "Oslo",
   email: "oslo@akvaplan.niva.no",
   tel: "+47 94 84 93 12",
@@ -38,7 +38,7 @@ const oslo = {
   },
 };
 
-const reykjavík = {
+const reykjavík: Office = {
   name: "Reykjavík",
   addr: {
     visit: "Akralind 4, 201 Kópavogur, Ísland",
@@ -51,7 +51,7 @@ const reykjavík = {
   links: { map: "https://goo.gl/maps/JYinWtgSLpqRcEXs6" },
 };
 
-const ski = {
+const ski: Office = {
   name: "Ski",
   addr: {
     visit: "Idrettsveien 6, 1400 Ski",
@@ -61,7 +61,7 @@ const ski = {
   email: "sense@akvaplan.niva.no",
 };
 
-const stord = {
+const stord: Office = {
   name: "Stord",
   addr: {
     visit: "Kunnskapshuset, Sæ 132, 5417 Stord",
@@ -71,7 +71,7 @@ const stord = {
   email: "sense@akvaplan.niva.no",
 };
 
-const trondheim = {
+const trondheim: Office = {
   name: "Trondheim",
   addr: {
     post: "Postboks 1268, Sluppen, 7462 Trondheim",
@@ -83,7 +83,7 @@ const trondheim = {
   links: {},
 };
 
-export const tromsø = {
+export const tromsø: Office = {
   name: "Tromsø",
   tel: "+47 77 75 03 00",
   email: "info@akvaplan.niva.no",
@@ -95,7 +95,21 @@ export const tromsø = {
   },
 };
 
-export const offices = new Map<string, Record<string, unknown>>([
+interface Addr {
+  post: string;
+  visit: string;
+}
+
+interface Office {
+  addr: Addr;
+  name: string;
+  tel: string;
+  email: string;
+  country?: string;
+  hq?: true | undefined;
+}
+
+export const offices = new Map<string, Office>([
   ["Alta", alta],
   ["Bergen", bergen],
   ["Bodø", bodø],
