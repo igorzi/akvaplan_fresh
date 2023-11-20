@@ -3,13 +3,12 @@ import markdownDocuments from "./documents.json" with { type: "json" };
 
 const toDocument = (d: MynewsdeskItem) => {
   const { document } = d;
-  const cloudinary = document.split("/").at(-1);
-  d.href = `/api/document/${cloudinary}`;
-
+  const id = document.split("/").at(-1);
+  d.href = `/api/document/${id}`;
   d.published = new Date(d.published_at.datetime);
   d.title = d?.summary ?? d?.document_name;
   d.thumb = d.document_thumbnail;
-  d.id = cloudinary;
+  d.id = id;
   return d;
 };
 
