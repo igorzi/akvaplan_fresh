@@ -1,4 +1,4 @@
-# Akvaplan-niva's environmental policy
+# Environmental policy
 
 Akvaplan-niva is a research and consulting organization dedicated to protecting
 the integrity of the environment and working to establish methods and strategies
@@ -7,8 +7,6 @@ for sustainable use of resources.
 We work both externally with our customers and collaborators, and internally
 through our procedures and strategies, to continually improve environmental
 considerations in how we work and what we produce.
-
-## Goals
 
 Akvaplan-niva's services and products shall as far as possible contribute to
 positive environmental effect and sustainable social development for industry
@@ -61,9 +59,15 @@ We will manage projects, so they have the least possible impact on the
 environment. This applies, for example, to the use of digital meeting places
 instead of physical travel, planning transport and field work to reduce
 emissions, and minimizing the purchase, shipping, and consumption of materials.
-Energy consumption To the extent possible, we shall reduce the energy and water
-consumption of our infrastructure and activities. Communication Our
-communication will mainly take place digitally, and we will use video
+
+## Energy consumption
+
+To the extent possible, we shall reduce the energy and water consumption of our
+infrastructure and activities.
+
+## Communication
+
+Our communication will mainly take place digitally, and we will use video
 conferencing for meeting activities where possible and appropriate.
 
 Updated: 16 November 2023

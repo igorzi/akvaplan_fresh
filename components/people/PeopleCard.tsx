@@ -69,7 +69,7 @@ export function PeopleCard(
         height="2rem"
         style={prior === true ? { filter: "grayscale(1)" } : {}}
       />{" "}
-      {person.prior === true && <span>{t("people.akvaplanist(prior)")}</span>}
+      {prior === true && <span>{t("people.akvaplanist(prior)")}</span>}
       <span class="people-position">
         {position?.[lang ?? "no"] ?? ""}
       </span>

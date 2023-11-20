@@ -19,6 +19,7 @@ export const ArticleSquare = (
     keywords,
     width,
     height,
+    maxWidth,
     type,
     target = "_self",
   },
@@ -28,6 +29,7 @@ export const ArticleSquare = (
     style={{
       fontSize: "var(--font-size-fluid-0,1rem)",
       wordBreak: "break-word",
+      maxWidth,
     }}
   >
     <a

@@ -21,6 +21,7 @@ const En = new Map([
   ["pubs", "/en/publications"],
   ["dcat", "/en/dcat"],
   ["documents", "/en/documents"],
+  ["document", "/en/document"],
   ["invoicing", "/en/invoice"],
   ["people", "/en/people"],
 ]);
@@ -43,15 +44,16 @@ const No = new Map([
 
   ["invoicing", "/no/faktura"],
   ["documents", "/no/dokumenter"],
+  ["document", "/no/dokument"],
   ["akvaplanists", "/no/folk"],
 ]);
 
-export const routes = (lang: string | StringSignal) =>
+export const routesForLang = (lang: string | StringSignal) =>
   lang === "en" || lang?.value === "en" ? En : No;
 
-const _tr = routes;
+const _tr = routesForLang;
 
-routes;
+routesForLang;
 export const buildNav = (lang: string | StringSignal) => [
   { href: _tr(lang).get("news"), text: t("nav.News") },
   { href: _tr(lang).get("services"), text: t("nav.Services") },
@@ -73,29 +75,34 @@ export const buildMobileNav = (lang: string | StringSignal) =>
 //   id
 //     ? `${routes(lang).get("akvaplanists")}/id/${id}/${family}/${given}`
 //     : `${routes(lang).get("akvaplanists")}/name/${family}/${given}`;
-export const peopleURL = ({ lang }) => `${routes(lang).get("akvaplanists")}`;
+export const peopleURL = ({ lang }) =>
+  `${routesForLang(lang).get("akvaplanists")}`;
 
 export const personURL = ({ id, given, family, email, lang }) =>
   id
-    ? `${routes(lang).get("akvaplanists")}/id/${id}/${family}/${given}`
-    : `${routes(lang).get("akvaplanists")}/name/${family}/${given}`;
+    ? `${routesForLang(lang).get("akvaplanists")}/id/${id}/${family}/${given}`
+    : `${routesForLang(lang).get("akvaplanists")}/name/${family}/${given}`;
 
 export const researchTopicURL = ({ topic, lang }) =>
-  `${routes(lang).get("research")}/${
+  `${routesForLang(lang).get("research")}/${
     lang === "en" || lang?.value == "en" ? "topic" : "tema"
   }/${topic}`;
 
 export const serviceGroupURL = ({ topic, lang }) =>
-  `${routes(lang).get("services")}/${
+  `${routesForLang(lang).get("services")}/${
     lang === "en" || lang?.value == "en" ? "topic" : "tema"
   }/${topic}`;
 
 export const pubsURL = ({ lang } = {}) =>
-  `${routes(lang || langSignal.value).get("pubs")}`;
+  `${routesForLang(lang || langSignal.value).get("pubs")}`;
 
-export const pubURL = ({ doi, lang }) => `${routes(lang).get("pubs")}/${doi}`;
+export const pubURL = ({ doi, lang }) =>
+  `${routesForLang(lang).get("pubs")}/${doi}`;
 
 // const projectURL = (title) =>
 //   title.toLowerCase().replaceAll(/\s/g, "-").split("-").at(0);
 export const projectURL = ({ lang, title }) =>
-  `${routes(lang).get("project")}/${slug(title)}`;
+  `${routesForLang(lang).get("project")}/${slug(title)}`;
+
+export const documentHref = ({ id, lang, title }) =>
+  `${routesForLang(lang).get("document")}/${slug(title)}-${id}`;

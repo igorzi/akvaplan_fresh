@@ -29,7 +29,7 @@ import {
 } from "akvaplan_fresh/components/mod.ts";
 
 import { PeopleCard as PersonCard } from "akvaplan_fresh/components/mod.ts";
-import { routes } from "../services/nav.ts";
+import { routesForLang } from "../services/nav.ts";
 
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { asset, Head } from "$fresh/runtime.ts";
@@ -133,9 +133,9 @@ export default function ProjectHome(
 
   const title = (
     <span>
-      <a href={routes(lang).get("projects")}>{t(`nav.Projects`)}</a>: {header}
+      <a href={routesForLang(lang).get("projects")}>{t(`nav.Projects`)}</a>:
       {" "}
-      ({projectYears(start_at, end_at)})
+      {header} ({projectYears(start_at, end_at)})
     </span>
   );
 
