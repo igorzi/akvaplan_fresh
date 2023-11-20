@@ -29,7 +29,7 @@ import {
   PeopleSearchForm,
 } from "akvaplan_fresh/components/mod.ts";
 
-import { routes } from "akvaplan_fresh/services/mod.ts";
+import { routesForLang } from "akvaplan_fresh/services/mod.ts";
 import { buildContainsFilter } from "akvaplan_fresh/search/filter.ts";
 import { lang, normalize, t } from "akvaplan_fresh/text/mod.ts";
 
@@ -351,7 +351,8 @@ export default function Akvaplanists(
                   <section style={_section}>
                     <AlbumHeader
                       text={t("pubs.Latest_peer_reviewed_research_articles")}
-                      href={routes(lang).get("pubs") + "?q=journal-article"}
+                      href={routesForLang(lang).get("pubs") +
+                        "?q=journal-article"}
                     />
                     <HScroll maxVisibleChildren={3.5}>
                       {grppubs.map(({ img, ...rest }) => ({ ...rest })).map(

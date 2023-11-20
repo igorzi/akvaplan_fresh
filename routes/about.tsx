@@ -1,6 +1,3 @@
-// console.log(
-//   "@todo About: add links to Faktureringsinformasjon, other office locations",
-// );
 import {
   Article,
   Card,
@@ -11,16 +8,15 @@ import {
 } from "akvaplan_fresh/components/mod.ts";
 
 import { lang, t } from "akvaplan_fresh/text/mod.ts";
-import {
-  findAkvaplanist,
-  offices,
-  routes,
-} from "akvaplan_fresh/services/mod.ts";
 
 import {
   akvaplan as apn,
   boardURL,
+  findAkvaplanist,
 } from "akvaplan_fresh/services/akvaplanist.ts";
+
+import { routesForLang } from "akvaplan_fresh/services/nav.ts";
+import { offices } from "akvaplan_fresh/services/offices.ts";
 
 import {
   type HandlerContext,
@@ -53,8 +49,9 @@ export const handler: Handlers = {
       ...apn,
       links: {
         board: boardURL(lang.value),
-        leaders: routes(lang.value).get("people") + "/management",
-        sectionleaders: routes(lang.value).get("people") + "/?q=seksjonsleder",
+        leaders: routesForLang(lang.value).get("people") + "/management",
+        sectionleaders: routesForLang(lang.value).get("people") +
+          "/?q=seksjonsleder",
       },
       admDir,
     };
@@ -145,50 +142,8 @@ export default (
             <Card>
               <menu>
                 <li>
-                  <a
-                    hreflang="no"
-                    href={t("policy.data.url")}
-                    target="_blank"
-                  >
-                    {t("policy.data")}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={t("policy.quality.url")}
-                    target="_blank"
-                  >
-                    {t("policy.quality")}
-                  </a>
-                </li>
-                <li>
-                  <a href={t("policy.terms.url")} target="_blank">
-                    {t("policy.terms")}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={t("policy.equality.url")}
-                    target="_blank"
-                  >
-                    {t("policy.equality")}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={t("policy.gender.url")}
-                    target="_blank"
-                  >
-                    {t("policy.gender")}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    hreflang="no"
-                    href={t("policy.openness.url")}
-                    target="_blank"
-                  >
-                    {t("policy.openness")}
+                  <a href={routesForLang(lang).get("documents")}>
+                    {t("nav.Documents")}
                   </a>
                 </li>
               </menu>
@@ -309,7 +264,7 @@ export default (
               ) => (
                 <li>
                   <a
-                    href={`${routes(lang).get("people")}/workplace/${
+                    href={`${routesForLang(lang).get("people")}/workplace/${
                       name.split(" ").at(0)
                     }`}
                   >
@@ -342,7 +297,7 @@ export default (
 
                 <dt>{t("about.Invoice")}</dt>
                 <dd>
-                  <a href={routes(lang).get("invoicing")}>
+                  <a href={routesForLang(lang).get("invoicing")}>
                     {t("about.Invoicing")}
                   </a>
                 </dd>

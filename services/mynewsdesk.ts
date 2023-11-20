@@ -7,6 +7,10 @@ import { slug as _slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 export const slug0 = "mynewsdesk_slug";
 export const id0 = "mynewsdesk_id";
 
+export const cloudinary0 = "mynewsdesk_cloudinary";
+
+export const MYNEWSDESK_MAX = 100;
+
 import { openKv } from "akvaplan_fresh/kv/mod.ts";
 
 const sortPublishedLatest = (a, b) =>
@@ -122,7 +126,7 @@ export const getItemBySlug = async (
   }
 };
 
-const whoWon = Symbol("item.race");
+const whoWon = Symbol("getItem promise race winner");
 export const getItem = async (
   id: number,
   type_of_media: string,
@@ -130,8 +134,11 @@ export const getItem = async (
   const _kv = getItemFromKv(id, type_of_media);
   const _api = getItemFromMynewsdeskApi(id, type_of_media);
   const item = await Promise.race([_kv, _api]);
-  //@ts-ignore next
-  console.debug("getItem", id, type_of_media, item[whoWon]);
+  if (item) {
+    //@ts-expect-error Debug symbol not in type MynewsdeskItem
+    console.debug("getItem", id, type_of_media, item[whoWon]);
+  }
+
   return item;
 };
 
@@ -293,7 +300,7 @@ export const multiSearchMynewsdesk = async (
   return [...result.values()].sort(sort);
 };
 
-export const total0 = new Map<string, number>([
+export const typeOfMediaCountMap = new Map<string, number>([
   ["news", 0],
   ["pressrelease", 0],
   ["image", 0],

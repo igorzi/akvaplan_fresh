@@ -19,7 +19,10 @@ import {
   PeopleCard as PersonCard,
 } from "akvaplan_fresh/components/mod.ts";
 
-import { researchTopicURL, routes } from "akvaplan_fresh/services/nav.ts";
+import {
+  researchTopicURL,
+  routesForLang,
+} from "akvaplan_fresh/services/nav.ts";
 
 import { groupIntoMap } from "akvaplan_fresh/grouping/mod.ts";
 
@@ -181,7 +184,7 @@ export default function TopicsOrTopic(
           <div>
             <AlbumHeader
               text={t(grp)}
-              href={routes(lang).get("news")}
+              href={routesForLang(lang).get("news")}
             />
             <HScroll maxVisibleChildren={5}>
               {arr.map(ArticleSquare)}

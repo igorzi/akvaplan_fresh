@@ -1,4 +1,4 @@
-# Akvaplan-nivas miljøpolitikk
+# Miljøpolitikk
 
 Akvaplan-niva er en forsknings- og rådgivningsorganisasjon som er dedikert til å
 beskytte miljøet og arbeide for å etablere metoder og strategier for bærekraftig

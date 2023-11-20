@@ -1,5 +1,5 @@
 /// <reference lib="deno.unstable" />
-export const db = Deno.env.has("deno_kv_database")
+export const db = globalThis?.Deno && Deno.env.has("deno_kv_database")
   ? Deno.env.get("deno_kv_database")
   : undefined;
 

@@ -5,7 +5,7 @@ import {
   latestProjects,
   newsFromProjects,
 } from "akvaplan_fresh/services/projects.ts";
-import { routes } from "akvaplan_fresh/services/nav.ts";
+import { routesForLang } from "akvaplan_fresh/services/nav.ts";
 import { getLangFromURL, lang, t } from "akvaplan_fresh/text/mod.ts";
 
 import {
@@ -126,7 +126,7 @@ export default function Home(
       <section style={_section}>
         <AlbumHeader
           text={t(`home.section.${lang}.articles`)}
-          href={routes(lang).get("news")}
+          href={routesForLang(lang).get("news")}
         />
         <HScroll scrollerId="hscroll-articles" maxVisibleChildren={maxVisNews}>
           {articles.map(ArticleSquare)}
@@ -136,7 +136,7 @@ export default function Home(
       <section style={_section}>
         <AlbumHeader
           text={t("home.section.articles_not_in_site_lang")}
-          href={routes(lang).get("news")}
+          href={routesForLang(lang).get("news")}
           _lang="en|no"
         />
         {
@@ -167,7 +167,7 @@ export default function Home(
       <section style={_section}>
         <AlbumHeader
           text={t("home.section.services")}
-          href={routes(lang).get("services")}
+          href={routesForLang(lang).get("services")}
         />
         <HScroll
           scrollerId="hscroll-services"
@@ -183,7 +183,7 @@ export default function Home(
       <section style={_section}>
         <AlbumHeader
           text={t("home.section.research")}
-          href={routes(lang).get("research")}
+          href={routesForLang(lang).get("research")}
         />
         <HScroll
           scrollerId="hscroll-topics"
