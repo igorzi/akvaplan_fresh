@@ -74,9 +74,6 @@ export const handler: Handlers = {
     const { search_result: { items } } = await r?.json() ?? [];
 
     const projects = items
-      .filter((x) => {
-        return true;
-      })
       ?.map(projectFromMynewsdesk({ lang }))
       .sort((a, b) => b.end.localeCompare(a.end));
 

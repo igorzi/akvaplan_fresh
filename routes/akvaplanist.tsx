@@ -345,38 +345,17 @@ export default function Akvaplanists(
           <h1>{t("pubs.Pubs")} ({numPubs})</h1>
 
           <div style={{ fontSize: "1rem" }}>
-            {[...pubsByYear].map(([grpkey, grppubs], i) =>
-              i < 0
-                ? (
-                  <section style={_section}>
-                    <AlbumHeader
-                      text={t("pubs.Latest_peer_reviewed_research_articles")}
-                      href={routesForLang(lang).get("pubs") +
-                        "?q=journal-article"}
-                    />
-                    <HScroll maxVisibleChildren={3.5}>
-                      {grppubs.map(({ img, ...rest }) => ({ ...rest })).map(
-                        ArticleSquare,
-                      )}
-                    </HScroll>
-                  </section>
-                )
-                : (
-                  <div>
-                    <h3
-                      title={`${t("pubs.Pubs")} ${
-                        t("pubs.in")
-                      } ${grpkey}: ${grppubs.length} `}
-                    >
-                      {grpkey}
-                    </h3>
-                    <NewsFilmStrip
-                      news={grppubs}
-                      lang={lang}
-                    />
-                  </div>
-                )
-            )}
+            {[...pubsByYear].map(([grpkey, grppubs], i) => (
+              <div>
+                <h3>
+                  {grpkey} ({grppubs.length})
+                </h3>
+                <NewsFilmStrip
+                  news={grppubs}
+                  lang={lang}
+                />
+              </div>
+            ))}
           </div>
           {person?.cristin && (
             <div>

@@ -2,16 +2,23 @@ import { searchMynewsdesk } from "akvaplan_fresh/services/mynewsdesk.ts";
 import markdownDocuments from "./documents.json" with { type: "json" };
 import { slug as slugify } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 
-const matchIdOrSlug = (md: { id: string; slug: string }, idOrSlug: string) =>
-  md.id === idOrSlug || slugify(md.slug) === slugify(idOrSlug);
+const matchIdOrSlug = (
+  md: DocumentMeta,
+  { id, slug }: { id?: string; slug?: string },
+) => id && md.id === id || slug && slugify(md.slug) === slugify(slug);
 
-export const findMarkdownDocument = (idOrSlug: string) =>
-  markdownDocuments.find((md) => matchIdOrSlug(md, idOrSlug));
+export interface DocumentMeta {
+  [name: string]: string;
+}
+
+export const findMarkdownDocument = (
+  { id, slug }: { id?: string; slug?: string },
+) =>
+  markdownDocuments.find((md: DocumentMeta) => matchIdOrSlug(md, { id, slug }));
 
 const toDocument = (d: MynewsdeskItem) => {
   const { document } = d;
   const id = document.split("/").at(-1);
-  d.href = `/api/document/${id}`;
   d.published = new Date(d.published_at.datetime);
   d.title = d?.summary ?? d?.document_name;
   d.thumb = d.document_thumbnail;

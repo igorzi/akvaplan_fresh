@@ -9,6 +9,7 @@ export const slug0 = "mynewsdesk_slug";
 export const id0 = "mynewsdesk_id";
 
 export const cloudinary0 = "mynewsdesk_cloudinary";
+export const cloudinary_slug0 = "mynewsdesk_cloudinary_slug";
 
 export const MYNEWSDESK_MAX = 100;
 
@@ -27,7 +28,7 @@ export const actionPath = (action: string, unique_key = mynewsdesk_key) =>
   `/services/pressroom/${action}/${unique_key}`;
 
 export const newsFilter = (item: MynewsdeskItem) =>
-  ["news", "pressrelease"].includes(item.type_of_media);
+  ["news", "pressrelease"].includes(item?.type_of_media);
 
 export const listURL = ({ type_of_media, offset, limit, sort }: {
   type_of_media: string;
