@@ -21,6 +21,7 @@ export const givenAliasMap = new Map(
     ["gnc", ["Guttorm Normann"]],
     ["asa", ["Sofia"]],
     ["svl", ["Sondre"]],
+    ["azi", ["Amanda Fern"]],
   ],
 );
 
