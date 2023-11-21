@@ -1,5 +1,12 @@
 import { searchMynewsdesk } from "akvaplan_fresh/services/mynewsdesk.ts";
 import markdownDocuments from "./documents.json" with { type: "json" };
+import { slug as slugify } from "https://deno.land/x/slug@v1.1.0/mod.ts";
+
+const matchIdOrSlug = (md: { id: string; slug: string }, idOrSlug: string) =>
+  md.id === idOrSlug || slugify(md.slug) === slugify(idOrSlug);
+
+export const findMarkdownDocument = (idOrSlug: string) =>
+  markdownDocuments.find((md) => matchIdOrSlug(md, idOrSlug));
 
 const toDocument = (d: MynewsdeskItem) => {
   const { document } = d;
