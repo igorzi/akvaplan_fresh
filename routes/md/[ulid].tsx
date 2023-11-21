@@ -26,13 +26,16 @@ export default async function MarkdownPage(req: Request, ctx: RouteContext) {
   // => redirect to http://localhost:7777/api/document/akx3emuhsqoeuq0yf8zj
 
   if (found) {
-    const url = new URL(found.source, href);
-    const response = await fetch(url);
-    if (!response?.ok) {
-      throw `Failed fetch: ${url.href} (status: ${response.status})`;
-    }
-    const { headers, status } = response;
-    const text = await response.text();
+    const url = new URL(import.meta.resolve(
+      "../../static" + found.source,
+    ));
+    const text = await Deno.readTextFile(url);
+    // const response = await fetch(url);
+    // if (!response?.ok) {
+    //   throw `Failed fetch: ${url.href} (status: ${response.status})`;
+    // }
+    // const { headers, status } = response;
+    // const text = await response.text();
 
     return (
       <Page>

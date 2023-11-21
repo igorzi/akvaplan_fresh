@@ -51,7 +51,7 @@ export const handler: Handlers = {
         board: boardURL(lang.value),
         leaders: routesForLang(lang.value).get("people") + "/management",
         sectionleaders: routesForLang(lang.value).get("people") +
-          "/?q=seksjonsleder",
+          "/unit?q=seksjonsleder",
       },
       admDir,
     };

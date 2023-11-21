@@ -36,7 +36,7 @@ export const projectYears = (start_at, end_at) =>
   `${year(start_at)} – ${year(end_at)}`;
 
 export const projectFilter = (item: MynewsdeskItem) =>
-  [type_of_media].includes(item.type_of_media) &&
+  [type_of_media].includes(item?.type_of_media) &&
   /project|prosjekt/.test(JSON.stringify(item));
 
 // lookup acronym from url?
