@@ -2,6 +2,7 @@
 import { detectDOIs } from "akvaplan_fresh/text/doi.ts";
 
 import { MynewsdeskItem } from "akvaplan_fresh/@interfaces/mynewsdesk.ts";
+
 import { slug as _slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 
 export const slug0 = "mynewsdesk_slug";

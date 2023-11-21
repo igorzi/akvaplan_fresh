@@ -1,41 +1,47 @@
-import markdownDocuments from "akvaplan_fresh/services/documents.json" with {
-  type: "json",
-};
+import { Article, Page } from "akvaplan_fresh/components/mod.ts";
 
-import { Page } from "akvaplan_fresh/components/page.tsx";
-import Article from "akvaplan_fresh/components/article/Article.tsx";
 import { marky } from "https://deno.land/x/marky@v1.1.7/mod.ts";
+
 import type { RouteConfig, RouteContext } from "$fresh/server.ts";
+import { findMarkdownDocument } from "akvaplan_fresh/services/documents.ts";
 
 export const config: RouteConfig = {
   routeOverride: "/:lang(no|en)/:type(document|dokument)/:slug",
 };
 
-const style = `h2, p {
+const style = `h2 {
   margin-top: 1.5rem;
   margin-bottom: 0.2rem;
-`;
+}
+p {
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+}`;
+
+export const cloudinaryProxy = async (req: Request, ctx: RouteContext) => {
+  const { slug } = ctx.params;
+  const id = slug.split("-").at(-1) as string;
+  const url = new URL(
+    `https://resources.mynewsdesk.com/image/upload/${id}`,
+  );
+  const { body, headers, status, ok } = await fetch(url);
+  if (!ok) {
+    return ctx.renderNotFound();
+  }
+  return new Response(body, { status, headers });
+};
 
 export default async function MarkdownPage(req: Request, ctx: RouteContext) {
   const { slug } = ctx.params;
   const ulid = slug.split("-").at(-1) as string;
-
-  const found = markdownDocuments.find(({ id }) => id === ulid);
+  const found = findMarkdownDocument(ulid);
   const { href } = new URL(req.url);
-  //otherwise, check if has [cloudinar0,id] ?
-  // => redirect to http://localhost:7777/api/document/akx3emuhsqoeuq0yf8zj
 
   if (found) {
     const url = new URL(import.meta.resolve(
       "../../static" + found.source,
     ));
     const text = await Deno.readTextFile(url);
-    // const response = await fetch(url);
-    // if (!response?.ok) {
-    //   throw `Failed fetch: ${url.href} (status: ${response.status})`;
-    // }
-    // const { headers, status } = response;
-    // const text = await response.text();
 
     return (
       <Page>
@@ -49,12 +55,6 @@ export default async function MarkdownPage(req: Request, ctx: RouteContext) {
       </Page>
     );
   } else {
-    const headers = new Headers({
-      location: new URL(`/api/document/${ulid}`, href).href,
-    });
-    return new Response(null, {
-      status: 302,
-      headers,
-    });
+    return cloudinaryProxy(req, ctx);
   }
 }

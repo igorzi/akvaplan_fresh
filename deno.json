@@ -12,12 +12,10 @@
   "imports": {
     "akvaplan_fresh/": "./",
     "std/": "https://deno.land/std@0.199.0/",
-    "$fresh/": "https://deno.land/x/fresh@1.5.1/",
+    "$fresh/": "https://deno.land/x/fresh@1.5.4/",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
     "accept-language-parser": "https://esm.sh/v115/accept-language-parser@1.5.0",
-    "marked": "https://esm.sh/v115/marked@5.0.5",
-    "marked/": "https://esm.sh/v115/marked@5.0.5/",
     "open-props": "https://esm.sh/v115/open-props@1.5.9",
     "open-props/": "https://esm.sh/v115/open-props@1.5.9/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.2",

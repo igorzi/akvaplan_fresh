@@ -1,9 +1,9 @@
 import {
-  listURL,
   projectFromMynewsdesk,
   projectURL,
   projectYears,
   searchMynewsdesk,
+  searchURL,
 } from "akvaplan_fresh/services/mod.ts";
 
 import { groupIntoMap } from "akvaplan_fresh/grouping/mod.ts";
@@ -66,13 +66,12 @@ export const handler: Handlers = {
   async GET(req: Request, ctx: HandlerContext) {
     const type_of_media = "event";
 
-    const url = listURL({ type_of_media });
-
+    const url = searchURL("", type_of_media, { limit: 100, strict: true });
     const props = extractRenderProps(req, ctx);
     const { lang } = props;
 
     const r = await fetch(url);
-    const { items } = await r?.json() ?? { items: [] };
+    const { search_result: { items } } = await r?.json() ?? [];
 
     const projects = items
       .filter((x) => {
