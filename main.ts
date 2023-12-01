@@ -3,6 +3,8 @@
 /// <reference lib="dom.iterable" />
 /// <reference lib="dom.asynciterable" />
 /// <reference lib="deno.ns" />
+import { seed } from "./kv/jobs/seed.ts";
+Deno.cron("sync external data to kv", "*/30 * * * *", () => seed());
 
 import { getLangFromURL } from "./text/mod.ts";
 import {
