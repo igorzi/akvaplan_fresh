@@ -33,5 +33,5 @@ const render: RenderFunction = (
 //Deno.cron("sync mynewsdesk", `*/10 * * * *`, syncMynewsdesk);
 // const kv = await Deno.openKv();
 //setInterval(sync, 10 * 60_000, { mynewsdesk: { key, base }, kv });
-
+import "./cron.ts";
 await start(manifest, { render, /*, plugins: [],*/ port: 7777 });
